@@ -1,0 +1,207 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Source+Sans+Pro:wght@400;600&display=swap');
+
+/* Global and Root Styles */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevent body-level scrolling */
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header h1 {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 1rem; /* Adjust spacing as needed */
+}
+
+/* Admin Container Layout */
+.admin-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Prevent container-level scrolling */
+
+    background-color: #f4f4f4;
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+/* Typography Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', serif !important;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 280px;
+    background-color: #fff;
+    border-right: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    z-index: 1000; /* Ensure sidebar is above other elements */
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.logo {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    flex-grow: 1;
+    list-style-type: none;
+    padding: 1rem 0;
+    margin: 0;
+}
+
+.nav-item {
+    margin: 0.5rem 1rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: #6c757d;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.nav-link:hover {
+    background-color: #e9ecef;
+    color: #007bff;
+}
+
+.nav-link.active {
+    background-color: #e6f2ff; /* Soft blue active state */
+    color: #007bff;
+    font-weight: 600;
+}
+
+.nav-link i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent main content from scrolling */
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #e9ecef;
+    z-index: 100; /* Ensure header is above content */
+}
+
+.header h1 {
+    font-size: 2.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Content Wrapper with Smooth Transitions */
+.content-wrapper {
+    flex: 1;
+    background-color: #f4f4f4;
+    overflow-y: auto; /* Allow scrolling within content */
+    position: relative;
+}
+
+/* Router Outlet Transition */
+router-outlet {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Optional: Add a subtle fade transition between routes */
+router-outlet + * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+router-outlet + *:enter {
+    opacity: 0;
+}
+
+router-outlet + *:enter-active {
+    opacity: 1;
+}
+
+router-outlet + *:leave {
+    opacity: 1;
+}
+
+router-outlet + *:leave-active {
+    opacity: 0;
+}

@@ -1,0 +1,47 @@
+<!-- admin-layout.component.html -->
+<div class="admin-container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo-container">
+            <img src="assets/img/logo2.png" alt="Admin Logo" class="logo">
+        </div>
+      
+
+        <ul class="nav-menu">
+            <li class="nav-item" *ngFor="let item of navItems">
+                <a  routerLinkActive="active" class="nav-link">
+                    <i class="icon {{ item.icon }}"></i>
+                    <span>{{ item.label }}</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="admin-profile">
+                <img [src]="getArtistAvatarPlaceholder()" alt="Admin Avatar" class="profile-image">
+                <div class="profile-details">
+                    <span class="admin-email">{{userEmail}}</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <header class="header d-flex align-items-center justify-content-between">
+            <h1 class="d-flex align-items-center">
+                {{ pageTitle }}
+                <div class="nav-item ml-4" *ngIf="isLoggedIn">
+                    
+                    <button class="btn btn-outline-primary">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                </div>
+            </h1>
+        </header>
+        
+
+        <div class="content-wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
