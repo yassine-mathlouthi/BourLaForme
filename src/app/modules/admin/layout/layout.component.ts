@@ -7,6 +7,7 @@ interface NavItem {
   route: string;
   label: string;
   icon: string;
+  iconName:String
 }
 
 @Component({
@@ -24,16 +25,19 @@ export class LayoutComponent implements OnInit {
       route: '/admin/dashboard',
       label: 'Dashboard',
       icon: 'dashboard-icon',
+      iconName:'fa-solid fa-table-columns',
     },
     {
-      route: '/admin/orders',
-      label: 'Orders',
+      route: '/admin/subs',
+      label: 'Subscription',
       icon: 'orders-icon',
+      iconName:"fa-solid fa-coins"
     },
     {
       route: '/admin/stores',
       label: 'Stores',
       icon: 'stores-icon',
+      iconName:""
     },
   ];
 
