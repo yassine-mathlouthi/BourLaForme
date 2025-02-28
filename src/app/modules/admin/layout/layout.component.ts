@@ -34,10 +34,10 @@ export class LayoutComponent implements OnInit {
       iconName:"fa-solid fa-coins"
     },
     {
-      route: '/admin/stores',
-      label: 'Stores',
+      route: '/admin/courses',
+      label: 'Courses',
       icon: 'stores-icon',
-      iconName:""
+      iconName:"fa-solid fa-dumbbell"
     },
   ];
 
