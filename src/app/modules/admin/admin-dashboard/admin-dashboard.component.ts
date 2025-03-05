@@ -100,11 +100,11 @@ export class AdminDashboardComponent implements OnInit {
     responsive: true,
     maintainAspectRatio: false
   };
-
+  isBrowser!: boolean;
   constructor(
     private adminService: AdminService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) { }
+  ) {   this.isBrowser = isPlatformBrowser(platformId); }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {

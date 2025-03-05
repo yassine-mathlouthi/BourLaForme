@@ -31,13 +31,23 @@
         <header class="header d-flex align-items-center justify-content-between">
             <h1 class="d-flex align-items-center">
                 {{ pageTitle }}
-                <div class="nav-item ml-4" *ngIf="isLoggedIn">
-                    
-                    <button class="btn btn-outline-primary">
-                        <i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-                </div>
             </h1>
+            
+            <div class="d-flex align-items-center ml-auto">  
+                <div>
+                    <button class="btn ml-3 add-btn" (click)="openDialog()"> 
+                        <i class="fa-solid fa-circle-plus"></i> Add new course 
+                    </button>
+                </div>
+                
+                <div class="nav-item ml-3" *ngIf="isLoggedIn">
+                    <button class="btn btn-outline-primary">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
         </header>
+        
         
 
         <div class="content-wrapper">

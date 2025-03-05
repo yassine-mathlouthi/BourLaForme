@@ -1,0 +1,139 @@
+<div class="container box">
+    <h1 class="title">Add new Course</h1>
+    <mat-stepper [linear]="true" #stepper>
+        <!-- Step 1: Personal Info -->
+        <mat-step [stepControl]="firstFormGroup" label="Course Info">
+          <form [formGroup]="firstFormGroup">
+            <!-- Course Name -->
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="form-group mb-3" appearance="fill">
+                  <mat-label>Course Name</mat-label>
+                  <input matInput id="courseName" placeholder="Enter course name" formControlName="nomCourse">
+                  <mat-error *ngIf="firstFormGroup.get('nomCourse')?.invalid && firstFormGroup.get('nomCourse')?.touched">
+                    Course name is required and must be at least 3 characters.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+      
+            <!-- Instructor Name -->
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="form-group mb-3" appearance="fill">
+                  <mat-label>Instructor Name</mat-label>
+                  <input matInput id="instructorName" placeholder="Enter instructor's name" formControlName="instructorName">
+                  <mat-error *ngIf="firstFormGroup.get('instructorName')?.invalid && firstFormGroup.get('instructorName')?.touched">
+                    Instructor name is required and must be at least 3 characters.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+      
+            <!-- Duration -->
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="form-group mb-3" appearance="fill">
+                  <mat-label>Duration</mat-label>
+                  <input matInput id="duration" placeholder="e.g., 1 hour" formControlName="duration">
+                  <mat-error *ngIf="firstFormGroup.get('duration')?.invalid && firstFormGroup.get('duration')?.touched">
+                    Duration is required and must be specified.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+      
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+      
+        <!-- Step 2: Store Info -->
+        <mat-step [stepControl]="secondFormGroup" label="attendance details">
+          <form [formGroup]="secondFormGroup">
+            <!-- Level -->
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="form-group mb-3" appearance="fill">
+                    <mat-label>Level</mat-label>
+                    <mat-select formControlName="level">
+                      <mat-option value="Beginner">Beginner</mat-option>
+                      <mat-option value="Intermediate">Intermediate</mat-option>
+                      <mat-option value="Advanced">Advanced</mat-option>
+                    </mat-select>
+                    
+                  </mat-form-field>
+                  
+              </div>
+            </div>
+      
+            <!-- Schedule -->
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="form-group mb-3" appearance="fill">
+                  <mat-label>Schedule</mat-label>
+                  <input matInput id="schedule" placeholder="e.g., Mon/Wed/Fri, 6:00 PM" formControlName="schedule">
+                  <mat-error *ngIf="secondFormGroup.get('schedule')?.invalid && secondFormGroup.get('schedule')?.touched">
+                    Schedule is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+      
+            <!-- Price -->
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="form-group mb-3" appearance="fill">
+                  <mat-label>Price</mat-label>
+                  <input matInput type="number" id="coursePrice" placeholder="Enter course price" formControlName="prix">
+                  <mat-error *ngIf="secondFormGroup.get('prix')?.invalid && secondFormGroup.get('prix')?.touched">
+                    Price is required and must be a positive number.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+      
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+      
+        <!-- Step 3: Login Info -->
+        <mat-step [stepControl]="thirdFormGroup" label="Description">
+          <form [formGroup]="thirdFormGroup">
+            <!-- Course Image URL -->
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="form-group mb-3" appearance="fill">
+                  <mat-label>Course Image URL (Optional)</mat-label>
+                  <input matInput id="courseImage" placeholder="Enter course image URL" formControlName="imageProduit">
+                </mat-form-field>
+              </div>
+            </div>
+      
+            <!-- Description -->
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="form-group mb-3" appearance="fill">
+                  <mat-label>Description</mat-label>
+                  <textarea matInput id="courseDescription" rows="3" placeholder="Enter course description" formControlName="courseDescription"></textarea>
+                  <mat-error *ngIf="thirdFormGroup.get('courseDescription')?.invalid && thirdFormGroup.get('courseDescription')?.touched">
+                    Description is required and cannot exceed 500 characters.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+      
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-raised-button color="primary" (click)="onAddCourse()">Create Course</button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-stepper>
+</div>
+
+  

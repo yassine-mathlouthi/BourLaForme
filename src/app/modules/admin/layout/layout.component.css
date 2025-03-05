@@ -1,6 +1,53 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Source+Sans+Pro:wght@400;600&display=swap');
 
+.add-btn{
+    
+    border-radius: 12px;
+    border: #d8e6f5 1px solid;
+    background: #f2f2fa;
+    border-radius: 3px;
+    box-shadow: #eaeaff 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #1a1c3b;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 10px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+}
+.add-btn:hover{
+    translate: 0px -3px 8px ;
+    transition: 0.3s;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    color: #223380;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Global and Root Styles */
 html,
 body {

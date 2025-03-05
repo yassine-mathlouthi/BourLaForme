@@ -6,17 +6,20 @@ import { LayoutComponent } from './layout/layout.component';
 import { SubscriptionManagementComponent } from './subscription-management/subscription-management.component';
 
 const routes: Routes = [
-  {path: '', 
-  component: LayoutComponent,
-  children: [
-    { path: 'dashboard', component: AdminDashboardComponent},
-    { path: 'subs', component: SubscriptionManagementComponent},
-    { path: 'courses', component: CoursesManagementComponent},
-  ],}]
+  {
+    path: '', 
+    component: LayoutComponent,
+    children: [
+      { path: '', pathMatch: 'full', component: AdminDashboardComponent }, // Default route
+      { path: 'dashboard', component: AdminDashboardComponent },
+      { path: 'subs', component: SubscriptionManagementComponent },
+      { path: 'courses', component: CoursesManagementComponent },
+    ],
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class AdminRoutingModule { }
- 

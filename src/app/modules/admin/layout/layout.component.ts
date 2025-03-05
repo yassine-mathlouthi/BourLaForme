@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCourseComponent } from '../add-course/add-course.component';
 
 interface NavItem {
   route: string;
@@ -44,7 +46,7 @@ export class LayoutComponent implements OnInit {
   userEmail: string | null = null;
   isLoggedIn = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,public dialog: MatDialog) { }
 
   ngOnInit() {
     
@@ -77,4 +79,11 @@ export class LayoutComponent implements OnInit {
     // Default placeholder if email is not found
     return `https://ui-avatars.com/api/?name=NA&background=ffd966&color=fff`;
   }
+
+  openDialog(): void {
+    this.dialog.open(AddCourseComponent,{
+      width:'600px',
+    })
+  }
+
 }
