@@ -3,7 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { AddCourseComponent } from '../add-course/add-course.component';
+import { AddCourseComponent } from '../courses/add-course/add-course.component';
 
 interface NavItem {
   route: string;

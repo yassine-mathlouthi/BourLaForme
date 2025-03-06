@@ -35,18 +35,47 @@ body {
     font-size: 1rem;
     color: #666;
 }
-.custom-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
+.edit-btn{
+    border: #a4c7ec 1px solid;
+    background: #e3e3f8;
+}
+.delete-btn{
+    border: #f5a3a3 1px solid;
+    background: #f3d2d2;
+}
+.edit-btn , .delete-btn{
+    margin: 10px;
+    border-radius: 30px;
+    
+    border-radius: 3px;
+    box-shadow: #eaeaff 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #1a1c3b;
     cursor: pointer;
-    transition: background 0.3s ease;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 10px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
 }
-.custom-button:hover {
-    background: #0056b3;
+.delete-btn:hover{
+    color: #802d22;
 }
+.edit-btn:hover ,.delete-btn:hover{
+    translate: 0px -3px 8px ;
+    transition: 0.3s;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    
+}
+
+
 
 @keyframes pulse {
     0% {
