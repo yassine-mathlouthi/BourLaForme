@@ -44,7 +44,6 @@ const usershema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    match: [/^\d{8}$/, "Please provide a valid phone number with 8 digits"],
     required: false,
   },
   isValidated: {
