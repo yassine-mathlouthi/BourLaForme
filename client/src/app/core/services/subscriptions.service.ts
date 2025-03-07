@@ -15,4 +15,10 @@ export class SubscriptionsService {
   getSubscriptionTypes(): Observable<any> {
     return this.http.get(this.apiUrl+"/subscriptionTypes");
   }
+  getNewUsers(): Observable<any> {
+    return this.http.get(this.apiUrl+"/users/nonvalidated");
+  }
+  validateUser(userID: any,subsTypeId: any,date:any): Observable<any> {
+    return this.http.post(this.apiUrl+"/validateUser/"+userID+"/"+subsTypeId,date);
+  }
 }
