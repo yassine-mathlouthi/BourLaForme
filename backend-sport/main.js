@@ -6,6 +6,7 @@ const register=require('./Routes/authRoute/registerRoute')
 const login=require('./Routes/authRoute/loginRoute')
 const subscriptionRoute = require('./Routes/adminRoute/subscriptionTypeRoute');
 const validateUser = require('./Routes/adminRoute/validateUserRoute');
+const course = require('./Routes/adminRoute/courseRoute');
 
 
 
@@ -22,6 +23,7 @@ app.use('/api/pourlaforme/auth' , register)
 app.use('/api/pourlaforme/auth' , login)
 app.use('/api/pourlaforme/subscriptionTypes', subscriptionRoute);
 app.use('/api/pourlaforme/validateUser' , validateUser)
+app.use('/api/pourlaforme/course' , course)
 
 
 
