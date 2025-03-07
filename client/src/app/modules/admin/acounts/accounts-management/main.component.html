@@ -1,8 +1,11 @@
-<mat-drawer-container class="example-container" hasBackdrop="True">
+<div class="container-fluid body">
+  <mat-drawer-container class="example-container" hasBackdrop="True">
     <mat-drawer class="drawer" #drawer mode="over">
       <div *ngIf="selectedUser">
-        <div class="card-header">
+        <div class="card-header ">
+          <div class="d-flex align-items-center mx-auto">
           <mat-icon color="primary">person</mat-icon> User Info
+        </div>
         </div>
         <div class="card-body">
           <p><mat-icon >badge</mat-icon> <strong>Name:</strong> {{ selectedUser.name }}</p>
@@ -21,7 +24,7 @@
         </div>
         
         <div class="card-footer">
-          <button mat-raised-button class="  d-flex align-items-center mx-auto mb-3">
+          <button mat-raised-button class="  d-flex align-items-center mx-auto">
             <mat-icon>check_circle</mat-icon> Confirm
           </button>
           <!-- <button mat-raised-button class="btn btn-outline-danger d-flex align-items-center mx-auto" (click)="drawer.close()">
@@ -88,3 +91,4 @@
     </mat-drawer-content>
   </mat-drawer-container>
   
+</div>
