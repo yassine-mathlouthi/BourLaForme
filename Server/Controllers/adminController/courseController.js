@@ -6,6 +6,8 @@ const { BadRequestError, NotFoundError } = require("../../Errors");
 // Ajouter un cours
 const addCourse = async (req, res) => {
   try {
+    console.log(req.file); // Ajout du log pour vérifier l'image reçue
+
     const {
       name,
       description,
@@ -15,7 +17,6 @@ const addCourse = async (req, res) => {
       schedule,
       level,
       price,
-      image,
     } = req.body;
     if (
       !name ||
@@ -25,10 +26,14 @@ const addCourse = async (req, res) => {
       !description ||
       !duration ||
       !coachName ||
-      !schedule ||
-      !image
+      !schedule 
     ) {
       throw new BadRequestError("Les champs obligatoires ne sont pas remplis");
+    }
+
+    const image = req.file ? req.file.filename : null;
+    if (!image) {
+      throw new BadRequestError("L'image est requise");
     }
 
     const newCourse = new Course({
