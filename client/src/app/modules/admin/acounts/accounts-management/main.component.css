@@ -4,14 +4,17 @@
 
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
+   
     box-sizing: border-box;
     font-family: 'Source Sans Pro', sans-serif !important;
 }
 mat-icon {
     font-family: 'Material Icons' !important;
 }   
+p{
+    margin: 0;
+    padding: 0;
+}
 /* Global Styles */
 .body {
     background-color: #f8f9fa;

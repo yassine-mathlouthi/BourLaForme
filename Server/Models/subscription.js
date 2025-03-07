@@ -5,6 +5,12 @@ const subscriptionSchema = new mongoose.Schema({
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },  // L'adhérent lié
+  status: {
+    type: String,
+    enum: ['active', 'expired'],
+    required: true,
+    default: 'active'  // Default is "active"
+  }
 });
 
 module.exports = mongoose.model('Subscription', subscriptionSchema);

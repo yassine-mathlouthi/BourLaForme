@@ -2,38 +2,52 @@
   <mat-drawer-container class="example-container" hasBackdrop="True">
     <mat-drawer class="drawer" #drawer mode="over">
       <div *ngIf="selectedUser">
-        <div class="card-header ">
+        <div class="card-header">
           <div class="d-flex align-items-center mx-auto">
-          <mat-icon color="primary">person</mat-icon> User Info
-        </div>
-        </div>
-        <div class="card-body">
-          <p><mat-icon >badge</mat-icon> <strong>Name:</strong> {{ selectedUser.name }}</p>
-          <p><mat-icon>email</mat-icon> <strong>Email:</strong> {{ selectedUser.email }}</p>
-          <p><mat-icon>call</mat-icon> <strong>Phone:</strong> {{ selectedUser.phone }}</p>
-          <p><mat-icon>verified</mat-icon> <strong>Validation:</strong> {{ selectedUser.validation }}</p>
-  
-          <div class="form-group">
-            <label><p><mat-icon>calendar_today</mat-icon> <strong>Subscription Start Date</strong></p></label>
-            <mat-form-field appearance="outline" class="full-width">
-              <input matInput [matDatepicker]="picker" (dateChange)="updateSubscriptionDate($event)">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+            <mat-icon color="primary">person</mat-icon> User Info
           </div>
         </div>
-        
+        <div class="card-body">
+          <p><mat-icon>badge</mat-icon> <strong>Name:</strong> {{ selectedUser.name }}</p>
+          <div class="form-group">
+            <label><p><mat-icon>subscriptions</mat-icon> <strong>Subscription Type</strong></p></label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-select [(value)]="selectedSubscriptionType">
+                <mat-option value="Basic">Basic</mat-option>
+                <mat-option value="Premium">Premium</mat-option>
+                <mat-option value="Enterprise">Enterprise</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <label><p><mat-icon>calendar_today</mat-icon> <strong>Start Date</strong></p></label>
+            <mat-form-field appearance="outline" class="full-width">
+              <input matInput [matDatepicker]="startPicker" (dateChange)="updateSubscriptionDate($event, 'start')">
+              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+              <mat-datepicker #startPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+    
+          <div class="form-group">
+            <label><p><mat-icon>calendar_today</mat-icon> <strong>End Date</strong></p></label>
+            <mat-form-field appearance="outline" class="full-width">
+              <input matInput [matDatepicker]="endPicker" (dateChange)="updateSubscriptionDate($event, 'end')">
+              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+              <mat-datepicker #endPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+    
+          
+        </div>
+    
         <div class="card-footer">
-          <button mat-raised-button class="  d-flex align-items-center mx-auto">
+          <button mat-raised-button class="d-flex align-items-center mx-auto" (click)="confirmSubscription()">
             <mat-icon>check_circle</mat-icon> Confirm
           </button>
-          <!-- <button mat-raised-button class="btn btn-outline-danger d-flex align-items-center mx-auto" (click)="drawer.close()">
-            <mat-icon>close</mat-icon> Close
-          </button> -->
-          
         </div>
       </div>
     </mat-drawer>
+    
   
     <mat-drawer-content>
       <div class="container box">

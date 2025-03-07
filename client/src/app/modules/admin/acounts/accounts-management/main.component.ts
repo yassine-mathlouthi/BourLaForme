@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit,OnInit, Component, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,6 +12,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NgModel } from '@angular/forms';
+import { SubscriptionsService } from '../../../../core/services/subscriptions.service';
 
 @Component({
   selector: 'app-main',
@@ -19,16 +21,36 @@ import { MatNativeDateModule } from '@angular/material/core';
   imports: [
     MatIconModule, MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule,
     MatTableModule, MatPaginatorModule, CommonModule, MatOptionModule, MatSortModule,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent implements AfterViewInit {
+export class MainComponent implements AfterViewInit,OnInit {
+
+  constructor(private _subsService:SubscriptionsService){}
+  ngOnInit(): void {
+    this._subsService.getSubscriptionTypes().subscribe(
+      (response) => {
+        console.log('Subscription Types:', response);
+      },
+      (error) => {
+        console.error('Error fetching subscription types:', error);
+      }
+    );
+  }
+  
+  
+
+
+
+
   displayedColumns: string[] = ['email', 'name', 'Phone', 'validation'];
   dataSource = new MatTableDataSource<User>(USER_DATA);
   selectedUser: User | null = null;
   subscriptionStartDate: Date | null = null;
+  subscriptionEndDate: Date | null = null;
+  selectedSubscriptionType: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -58,10 +80,28 @@ export class MainComponent implements AfterViewInit {
   openDrawer(user: User) {
     this.selectedUser = user;
   }
-  updateSubscriptionDate(event: any) {
-    this.subscriptionStartDate = event.value;
+
+  updateSubscriptionDate(event: any, type: string) {
+    if (type === 'start') {
+      this.subscriptionStartDate = event.value;
+    } else if (type === 'end') {
+      this.subscriptionEndDate = event.value;
+    }
   }
-  
+
+  confirmSubscription() {
+    if (this.selectedUser && this.selectedSubscriptionType && this.subscriptionStartDate && this.subscriptionEndDate) {
+      const subscriptionData = {
+        user: this.selectedUser,
+        subscriptionType: this.selectedSubscriptionType,
+        startDate: this.subscriptionStartDate,
+        endDate: this.subscriptionEndDate
+      };
+      console.log(JSON.stringify(subscriptionData));
+    } else {
+      console.log('Please fill in all fields');
+    }
+  }
 }
 
 export interface User {
