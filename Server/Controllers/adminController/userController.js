@@ -1,4 +1,6 @@
 const User = require("../../Models/user");
+const Subscription = require("../../Models/subscription");
+const SubscriptionType = require("../../Models/subscriptionType");
 
 // Get all validated users
 const getValidatedUsers = async (req, res) => {
