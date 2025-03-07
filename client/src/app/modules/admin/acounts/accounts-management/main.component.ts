@@ -14,11 +14,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgModel } from '@angular/forms';
 import { SubscriptionsService } from '../../../../core/services/subscriptions.service';
+import { subscriptionService } from '../../services/subscription.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-main',
   standalone: true,
   imports: [
+    HttpClientModule,
     MatIconModule, MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule,
     MatTableModule, MatPaginatorModule, CommonModule, MatOptionModule, MatSortModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,

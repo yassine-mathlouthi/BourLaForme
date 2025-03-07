@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -46,6 +47,8 @@ export interface OrderItem {
   providedIn: 'root'
 })
 export class subscriptionService {
+  constructor(private http: HttpClient) { }
+
   private orders: Order[] = [
     {
       idCommande: 1,
@@ -85,7 +88,6 @@ export class subscriptionService {
     }
   ];
 
-  constructor() { }
 
   getAllOrders(): Observable<Order[]> {
     return of(this.orders);
@@ -98,5 +100,8 @@ export class subscriptionService {
 
   getOrderStatus(orderId: number): Observable<string> {
     return of('PENDING');
+  }
+  getSubscriptionTypes(): Observable<any> {
+    return this.http.get("http://localhost:3000/api/pourlaforme/subscriptionTypes/subscriptionTypes");
   }
 }
