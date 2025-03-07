@@ -1,4 +1,7 @@
 /* Dialog Title */
+*{
+  margin-top: 5px;
+}
 .title {
     text-align: center;          /* Center the text */
     font-size: 2rem;           /* Increase the font size */

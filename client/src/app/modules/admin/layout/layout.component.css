@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Source+Sans+Pro:wght@400;600&display=swap');
 
 .add-btn{
-    
+    font-family: 'Lora', serif;
     border-radius: 12px;
     border: #d8e6f5 1px solid;
     background: #f2f2fa;

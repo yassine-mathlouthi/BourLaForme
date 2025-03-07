@@ -36,6 +36,13 @@ export class LayoutComponent implements OnInit {
       iconName:"fa-solid fa-coins"
     },
     {
+      route: '/admin/accounts',
+      label: 'Accounts validation',
+      icon: 'orders-icon',
+      iconName:"fa-solid fa-users"
+      
+    },
+    {
       route: '/admin/courses',
       label: 'Courses',
       icon: 'stores-icon',
