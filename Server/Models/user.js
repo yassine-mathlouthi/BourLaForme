@@ -43,6 +43,11 @@ const usershema = new mongoose.Schema({
       default: function () {
         return this.role !== 'adherent'; // Si ce n'est pas un adhérent, le compte est validé automatiquement
       },
+      phone: {
+        type: String,
+        match: [/^\d{8}$/, 'Please provide a valid phone number with 8 digits'],
+        required: false,
+      }
     }
     
     
