@@ -52,7 +52,7 @@ const addCourse = async (req, res) => {
 // Consulter tous les cours
 const getAllCourses = async (req, res) => {
   try {
-    const courses = await Course.find().populate("coach", "prenom nom");
+    const courses = await Course.find();
     res.status(200).json(courses);
   } catch (err) {
     res
