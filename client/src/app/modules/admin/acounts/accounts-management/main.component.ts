@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit,OnInit, Component, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,29 +9,65 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NgModel } from '@angular/forms';
+import { SubscriptionsService } from '../../../../core/services/subscriptions.service';
+import { subscriptionService } from '../../services/subscription.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-main',
   standalone: true,
   imports: [
+    HttpClientModule,
     MatIconModule, MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule,
     MatTableModule, MatPaginatorModule, CommonModule, MatOptionModule, MatSortModule,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent implements AfterViewInit {
-  displayedColumns: string[] = ['email', 'name', 'Phone', 'validation'];
-  dataSource = new MatTableDataSource<User>(USER_DATA);
+export class MainComponent implements AfterViewInit,OnInit {
+  USER_DATA:any[] =[]
+  dataSource = new MatTableDataSource<User>(this.USER_DATA);
+
+  constructor(private _subsService:SubscriptionsService,private snackBar:MatSnackBar){}
+
+  data : any
+  subscriptionType : any[] | undefined
+  displayedColumns: string[] = ['email', 'nom', 'prenom','validation','phone'];
+  
   selectedUser: User | null = null;
-  subscriptionStartDate: Date | null = null;
+  subscriptionStartDate?: Date ;
+  subscriptionEndDate: Date | null = null;
+  selectedSubscriptionType: { id: string; name: string } | null = null;
+
+  sortOptions = [{ value: 'email', viewValue: 'email' }];
+  selectedSortOption = "email";
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  users:any
+  ngOnInit(): void {
+    this._subsService.getSubscriptionTypes().subscribe(
+      (response) => {
+        this.data=response
+      },
+      (error) => {
+        console.error('Error fetching subscription types:', error);
+      }
+    );
+    this._subsService.getNewUsers().subscribe(
+      response=>{
+        this.USER_DATA = response.users;
+        this.dataSource.data = this.USER_DATA; 
+        console.log(this.dataSource.data)
+      }
+    )
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -45,8 +81,7 @@ export class MainComponent implements AfterViewInit {
     }
   }
 
-  sortOptions = [{ value: 'email', viewValue: 'email' }];
-  selectedSortOption = "email";
+
 
   onSortOptionChange() {
     if (this.sort) {
@@ -57,31 +92,102 @@ export class MainComponent implements AfterViewInit {
 
   openDrawer(user: User) {
     this.selectedUser = user;
+    console.log(this.selectedUser)
   }
-  updateSubscriptionDate(event: any) {
-    this.subscriptionStartDate = event.value;
+
+  updateSubscriptionDate(event: any, type: string) {
+    if (type === 'start') {
+      // Ensure the start date is a Date object
+      this.subscriptionStartDate = new Date(event.value);
+    
+      // Automatically set the end date based on the subscription type
+      if (this.selectedSubscriptionType!.name === 'Mensuel') {
+        this.subscriptionEndDate = this.addMonths(this.subscriptionStartDate!, 1); // 1 month for Mensuel
+      } else if (this.selectedSubscriptionType!.name === 'Annuel') {
+        this.subscriptionEndDate = this.addMonths(this.subscriptionStartDate!, 12); // 12 months for Annuel
+      } else if (this.selectedSubscriptionType!.name === 'Trimestriel') {
+        this.subscriptionEndDate = this.addMonths(this.subscriptionStartDate!, 3); // 3 months for Trimestriel
+      }
+    } 
+  }
+  
+  
+  
+  // Utility function to add months to a date
+  addMonths(date: Date, months: number): Date {
+    const result = new Date(date);
+    result.setMonth(result.getMonth() + months);
+    return result;
+  }
+  
+  @ViewChild('drawer') drawer!: MatDrawer;
+
+  confirmSubscription() {
+    if (this.selectedUser && this.selectedSubscriptionType && this.subscriptionStartDate) {
+      const subscriptionData = {
+        subscriptionType: this.selectedSubscriptionType.id, // Send only the ID
+        startDate: this.subscriptionStartDate,
+        endDate: this.subscriptionEndDate
+      };
+  
+      this._subsService.validateUser(this.selectedUser._id, this.selectedSubscriptionType.id, subscriptionData)
+        .subscribe(
+          (response) => {
+            console.log('Subscription confirmed:', response);
+            
+            // Show success message
+            this.snackBar.open('Subscription confirmed!', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+              panelClass: ['success-snackbar'] // Optional styling
+            });
+  
+            // Close the drawer
+            this.drawer.close();
+  
+            // Refresh the table data
+            this.refreshTable();
+          },
+          (error) => {
+            console.error('Error confirming subscription:', error);
+            this.snackBar.open('Failed to confirm subscription', 'Close', {
+              duration: 3000,
+              panelClass: ['error-snackbar']
+            });
+          }
+        );
+    } else {
+      this.snackBar.open('Please fill in all fields', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        panelClass: ['error-snackbar']
+      });
+    }
+  }
+  refreshTable() {
+    this._subsService.getNewUsers().subscribe(
+      (response) => {
+        this.USER_DATA = response.users;
+        this.dataSource.data = this.USER_DATA; 
+        console.log('Table refreshed:', this.USER_DATA);
+      },
+      (error) => {
+        console.error('Error refreshing table data:', error);
+      }
+    );
   }
   
 }
 
 export interface User {
-  name: string;
+  _id:string;
+  nom: string;
   email: string;
-  phone: string;
-  validation: string;
+  prenom: string;
 }
 
-const USER_DATA: User[] = [
-  { email: 'ahmed.benali@gmail.com', name: 'Ahmed Ben Ali', phone: '216 98 123 456', validation: 'Valid' },
-  { email: 'fatma.trabelsi@yahoo.com', name: 'Fatma Trabelsi', phone: '216 55 654 321', validation: 'Pending' },
-  { email: 'mohamed.said@outlook.com', name: 'Mohamed Saïd', phone: '216 97 222 333', validation: 'Valid' },
-  { email: 'karim.bouaziz@hotmail.com', name: 'Karim Bouaziz', phone: '216 50 333 444', validation: 'Rejected' },
-  { email: 'hiba.chahed@tnmail.com', name: 'Hiba Chahed', phone: '216 20 111 222', validation: 'Valid' },
-  { email: 'yassine.jebali@gmail.com', name: 'Yassine Jebali', phone: '216 53 987 654', validation: 'Pending' },
-  { email: 'leila.mrad@gmail.com', name: 'Leila Mrad', phone: '216 99 555 666', validation: 'Valid' },
-  { email: 'omar.haddad@live.com', name: 'Omar Haddad', phone: '216 21 444 555', validation: 'Pending' },
-  { email: 'nour.kacem@yahoo.fr', name: 'Nour Kacem', phone: '216 58 666 777', validation: 'Valid' },
-  { email: 'salim.gharsalli@gmail.com', name: 'Salim Gharsalli', phone: '216 90 888 999', validation: 'Rejected' },
-];
 
-export { USER_DATA };
+
+

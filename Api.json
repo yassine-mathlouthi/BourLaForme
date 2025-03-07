@@ -1,0 +1,20 @@
+http://localhost:3000/api/pourlaforme/auth/register
+
+{
+  "prenom": "dina",
+  "nom": "Curie",
+  "email": "fjo23ud@example.com",
+  "password": "MotDePasse123!",
+  "role": "coach",
+  "specialty": "Fitness",
+  "bio": "Coach certifié en fitness avec plus de 10 ans d'expérience."
+}
+
+
+http://localhost:3000/api/pourlaforme/subscriptionTypes
+{
+  "name": "Mensuel",
+  "duration": 30,
+  "price": 80,
+  "description": "hahah"
+}

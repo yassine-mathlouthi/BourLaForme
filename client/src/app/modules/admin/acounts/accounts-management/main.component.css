@@ -4,14 +4,20 @@
 
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
+   
     box-sizing: border-box;
-    font-family: 'Source Sans Pro', sans-serif !important;
+ 
+}
+td{
+       font-family: 'Source Sans Pro', sans-serif !important;
 }
 mat-icon {
     font-family: 'Material Icons' !important;
 }   
+p{
+    margin: 0;
+    padding: 0;
+}
 /* Global Styles */
 .body {
     background-color: #f8f9fa;
@@ -19,7 +25,19 @@ mat-icon {
     overflow: auto;
 }
 
-
+.no-data {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 1.2rem;
+  }
+  
+  .no-data mat-icon {
+    font-size: 48px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  
 /* Material Paginator */
 mat-paginator {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
@@ -29,13 +47,77 @@ mat-paginator {
 }
 
 /* Drawer Styles */
-.drawer {
-    width: 400px;
-    background-color: #f8f9fa;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+.example-container {
+
+    top: 0;
+    left: 0;
+    height: 100vh;
+
 }
 
+.mat-drawer-content {
+    width: 100%;
+    height: 100%;
+}
+
+.drawer {
+    width: 30vw !important; /* Full width */
+    height: 100vh !important; /* Full height */
+    max-width: none !important;
+}
+
+.order-section {
+    margin-bottom: 2rem;
+    margin-right: 30px;
+  }
+  
+  .order-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Admin Order Management Side Panel Styles */
+  .order-section {
+    background-color: #F9FAFB;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .order-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .t-headerside {
+    font-family: 'Lora', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  .input{
+    width: 100%;
+  }
+  .info-item{
+    padding: 20px;
+  }
+ 
+  .info-item .label {
+    color: #6B7280;
+    font-size: 0.875rem;
+  }
+  
+  .info-item.total {
+    border-top: 1px solid #E5E7EB;
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+  
 /* Card Header and Body Styles */
 .card-header {
     color: rgb(56, 55, 55);
@@ -45,6 +127,18 @@ mat-paginator {
     align-items: center;
     gap: 10px;
     padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+.card-body {
+    font-size: 1rem;
+    color: #555;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .card-body p {
@@ -52,17 +146,32 @@ mat-paginator {
     align-items: center;
     gap: 10px;
     font-size: 1rem;
-    color: #555;
-    padding: 5px 0;
 }
 
 .card-body mat-icon {
     font-size: 20px;
+    color: #2c3e50;
 }
 
-/* Card Footer */
 .card-footer {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 0 0 8px 8px;
+}
+
+.confirm-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #4CAF50;
+    color: white;
     padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
 
@@ -88,10 +197,37 @@ mat-paginator {
 }
 
 /* Table Styles */
+mat-header-row {
+    font-family: 'Lora', serif !important;
+    background-color: #f8f9fa;
+}
+
+mat-header-cell {
+    font-family: 'Lora', serif !important;
+    font-weight: 600;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.t-header {
+    font-family: 'Lora', serif !important;
+}
+mat-row:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+}
+
+mat-cell {
+    font-size: 14px;
+}
+
 .table {
     width: 100%;
-    padding: 10px;
     border-radius: 10px;
+    margin-bottom: 0.75rem;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 .mat-form-field {
