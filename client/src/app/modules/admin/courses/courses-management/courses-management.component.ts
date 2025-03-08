@@ -24,6 +24,7 @@ export class CoursesManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this._courses.getAllCourses().subscribe((r) => (this.coursesData = r));
+    console.log(this.coursesData)
   }
 
   openEditDialog(course: any): void {

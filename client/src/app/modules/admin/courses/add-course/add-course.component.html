@@ -120,12 +120,10 @@
         <!-- Course Image URL -->
         <div class="row">
           <div class="col">
-            <mat-form-field class="form-group mb-3" appearance="fill">
-              <mat-label>Course Image URL (Optional)</mat-label>
-              <input matInput id="image" placeholder="Enter course image URL" formControlName="image">
-            </mat-form-field>
+            <input type="file" id="image" placeholder="Choose course image" (change)="onFileSelected($event)" formControlName="image">
           </div>
         </div>
+        
 
         <!-- Description -->
         <div class="row">

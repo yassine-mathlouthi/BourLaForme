@@ -1,17 +1,17 @@
-
-    <div class="dashboard-container">
-      <section class="metrics-grid" aria-labelledby="dashboard-metrics-heading">
-        <div *ngFor="let course of coursesData" class="metric-card orders-card custom-card" role="status" aria-describedby="orders-description">
-          <img [src]="course.image" alt="{{course.name}}" class="img img-fluid">
-          <div class="custom-card-content">
-            <h3 class="custom-title">{{course.name}}</h3>
-            <p class="custom-description">{{course.description}}</p>
-            <p class="custom-coach"><strong>Coach:</strong> {{course.coachName}}</p>
-            <p class="custom-time"><strong>Time:</strong> {{ course.schedule | date: 'shortTime' }}</p>
-            <button class="edit-btn" (click)="openEditDialog(course)"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-            <button class="delete-btn" (click)="deleteCourse(course._id)"><i class="fa-solid fa-trash"></i> Delete</button>
-          </div>
+<div class="dashboard-container">
+    <section class="metrics-grid" aria-labelledby="dashboard-metrics-heading">
+      <div *ngFor="let course of coursesData" class="metric-card orders-card custom-card" role="status" aria-describedby="orders-description">
+        <!-- Corrected image source binding -->
+        <img [src]="'http://localhost:3000/uploads/' + course.image" alt="{{course.name}}" class="img img-fluid">
+        <div class="custom-card-content">
+          <h3 class="custom-title">{{course.name}}</h3>
+          <p class="custom-description">{{course.description}}</p>
+          <p class="custom-coach"><strong>Coach:</strong> {{course.coachName}}</p>
+          <p class="custom-time"><strong>Time:</strong> {{ course.schedule | date: 'shortTime' }}</p>
+          <button class="edit-btn" (click)="openEditDialog(course)"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+          <button class="delete-btn" (click)="deleteCourse(course._id)"><i class="fa-solid fa-trash"></i> Delete</button>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+  </div>
   

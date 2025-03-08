@@ -30,6 +30,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./add-course.component.css']
 })
 export class AddCourseComponent {
+  
   CourseForm: FormGroup;
   private _formBuilder = inject(FormBuilder);
 
@@ -60,37 +61,53 @@ export class AddCourseComponent {
     this.CourseForm = this.fb.group({
     });
   }
-
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      // Update the form control with the selected file
+      this.thirdFormGroup.patchValue({
+        image: file
+      });
+    }
+  }
   onAddCourse() {
     if (this.firstFormGroup.valid && this.secondFormGroup.valid && this.thirdFormGroup.valid) {
-      const courseData = {
-        name: this.firstFormGroup.value.name,
-        coachName: this.firstFormGroup.value.coachName,
-        duration: this.firstFormGroup.value.duration,
-        level: this.secondFormGroup.value.level,
-        price: this.secondFormGroup.value.price,
-        availableSeats: this.secondFormGroup.value.availableSeats,
-        schedule: this.thirdFormGroup.value.schedule,
-        image: this.thirdFormGroup.value.image,
-        description: this.thirdFormGroup.value.description,
-      };
+      const courseData = new FormData();
   
-      console.log("Submitting course data:", courseData);
-      
-      this._course.addCourse(courseData).subscribe(response => {
-        console.log("Course added successfully:", response);
-        this._snacBar.open('Course added successfully!', 'Close', { duration: 3000 });
+      // Append all form data to FormData
+      courseData.append('name', this.firstFormGroup.value.name!);
+      courseData.append('coachName', this.firstFormGroup.value.coachName!);
+      courseData.append('duration', this.firstFormGroup.value.duration!);
+      courseData.append('level', this.secondFormGroup.value.level!);
+      courseData.append('price', this.secondFormGroup.value.price!);
+      courseData.append('availableSeats', this.secondFormGroup.value.availableSeats!);
+      courseData.append('schedule', this.thirdFormGroup.value.schedule!);
+      courseData.append('description', this.thirdFormGroup.value.description!);
   
-        // Refresh the course list (Assuming you have a method like getCourses())
-   
-        // Close the dialog (If using MatDialog)
-        this.dialogRef.close();
-      });
+      // Ensure the image is a file and append it
+      const imageFile:any = this.thirdFormGroup.value.image;
+      if (imageFile) {
+        courseData.append('image', imageFile, imageFile.name);
+      }
   
+      // Make the API request
+      this._course.addCourse(courseData).subscribe(
+        (response) => {
+          console.log('Course added successfully:', response);
+          this._snacBar.open('Course added successfully!', 'Close', { duration: 3000 });
+          this.dialogRef.close();  // Close the dialog after success
+        },
+        (error) => {
+          console.error('Error adding course:', error);
+          this._snacBar.open('Error adding course. Please try again.', 'Close', { duration: 3000 });
+        }
+      );
     } else {
       this._snacBar.open('Please fill all required fields correctly!', 'Close', { duration: 3000 });
     }
   }
+  
+
   
   
 }
