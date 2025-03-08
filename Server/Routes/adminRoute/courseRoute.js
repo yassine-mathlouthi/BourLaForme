@@ -19,7 +19,7 @@ const upload = multer({storage: mystorage})
 
 router.post('/', upload.single('image'), addCourse);
 router.get('/', getAllCourses);
-router.put('/:id', updateCourse);
+router.put('/:id', upload.single('image'), updateCourse);
 router.delete('/:id', deleteCourse);
 
 module.exports = router;

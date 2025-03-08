@@ -67,26 +67,45 @@ const getAllCourses = async (req, res) => {
 };
 
 // Modifier un cours
+// Modifier un cours
 const updateCourse = async (req, res) => {
   try {
     const { id } = req.params;
-    const { coachName, name, description, duration, availableSeats, schedule } =
-      req.body;
+    const { coachName, name, description, duration, availableSeats, schedule, level, price } = req.body;
 
-    const updatedCourse = await Course.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
+    // Vérification de la présence du fichier image
+    let image = req.file ? req.file.filename : null;
+
+    // Recherche du cours par ID
+    const updatedCourse = await Course.findById(id);
     if (!updatedCourse) {
       throw new NotFoundError("Cours non trouvé");
     }
 
-    res
-      .status(200)
-      .json({ message: "Cours modifié avec succès", updatedCourse });
+    // Mise à jour des informations du cours
+    updatedCourse.name = name || updatedCourse.name;
+    updatedCourse.description = description || updatedCourse.description;
+    updatedCourse.duration = duration || updatedCourse.duration;
+    updatedCourse.availableSeats = availableSeats || updatedCourse.availableSeats;
+    updatedCourse.coachName = coachName || updatedCourse.coachName;
+    updatedCourse.schedule = schedule || updatedCourse.schedule;
+    updatedCourse.level = level || updatedCourse.level;
+    updatedCourse.price = price || updatedCourse.price;
+
+    // Si une nouvelle image est fournie, elle sera mise à jour
+    if (image) {
+      updatedCourse.image = image;
+    }
+
+    // Sauvegarder les changements
+    await updatedCourse.save();
+
+    res.status(200).json({ message: "Cours modifié avec succès", updatedCourse });
   } catch (err) {
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
+
 
 // Supprimer un cours
 const deleteCourse = async (req, res) => {
