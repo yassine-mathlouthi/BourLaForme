@@ -8,6 +8,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelect, MatSelectModule } from '@angular/material/select';  // Required for mat-select
 import { MatFormFieldModule } from '@angular/material/form-field';  // Required for mat-form-field
 import { MatInputModule } from '@angular/material/input';  // Required for matInput
+import { CoursesService } from '../../../../core/services/courses.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-course',
@@ -33,40 +35,62 @@ export class AddCourseComponent {
 
   firstFormGroup = this._formBuilder.group({
     
-    nomCourse: ['', [Validators.required, Validators.minLength(3)]],        // Course name
-    instructorName: ['', [Validators.required, Validators.minLength(3)]],   // Instructor name
+    name: ['', [Validators.required, Validators.minLength(3)]],        // Course name
+    coachName: ['', [Validators.required, Validators.minLength(3)]],   // Instructor name
     duration: ['', [Validators.required]],         // Course duration
   });
 
   secondFormGroup = this._formBuilder.group({
-    level: ['', [Validators.required]],                                      // Course level (e.g., Beginner, Intermediate, Advanced)
-    schedule: ['', [Validators.required, Validators.minLength(3)]],         // Course schedule (e.g., Mon/Wed/Fri, 6:00 PM)
-    prix: [null, [Validators.required, Validators.min(0)]],                  // Price
+    level: ['', [Validators.required]],                                      // Course level (e.g., Beginner, Intermediate, Advanced)       // Course schedule (e.g., Mon/Wed/Fri, 6:00 PM)
+    price: [null, [Validators.required, Validators.min(0)]], 
+    availableSeats: [null, [Validators.required, Validators.min(0)]],                  // Price
   });
 
   thirdFormGroup = this._formBuilder.group(
     {
-      imageProduit: [''],                                                      // Image URL
-      courseDescription: ['', [Validators.required, Validators.maxLength(500)]], // Description
+      schedule: ['', [Validators.required, Validators.minLength(3)]],   
+      image: [''],                                                      // Image URL
+      description: ['', [Validators.required, Validators.maxLength(500)]], // Description
     },
   );
 
   isLinear = false;
 
-  constructor(private fb: FormBuilder, private _snacBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, private _snacBar: MatSnackBar,private _course:CoursesService, private dialogRef: MatDialogRef<AddCourseComponent>) {
     this.CourseForm = this.fb.group({
     });
   }
 
   onAddCourse() {
-    if (this.CourseForm.valid) {
-      // Handle form submission logic here
-      console.log(this.CourseForm.value);
-      // Display a success message using SnackBar
-      this._snacBar.open('Course added successfully!', 'Close', { duration: 3000 });
+    if (this.firstFormGroup.valid && this.secondFormGroup.valid && this.thirdFormGroup.valid) {
+      const courseData = {
+        name: this.firstFormGroup.value.name,
+        coachName: this.firstFormGroup.value.coachName,
+        duration: this.firstFormGroup.value.duration,
+        level: this.secondFormGroup.value.level,
+        price: this.secondFormGroup.value.price,
+        availableSeats: this.secondFormGroup.value.availableSeats,
+        schedule: this.thirdFormGroup.value.schedule,
+        image: this.thirdFormGroup.value.image,
+        description: this.thirdFormGroup.value.description,
+      };
+  
+      console.log("Submitting course data:", courseData);
+      
+      this._course.addCourse(courseData).subscribe(response => {
+        console.log("Course added successfully:", response);
+        this._snacBar.open('Course added successfully!', 'Close', { duration: 3000 });
+  
+        // Refresh the course list (Assuming you have a method like getCourses())
+   
+        // Close the dialog (If using MatDialog)
+        this.dialogRef.close();
+      });
+  
     } else {
-      // Handle form validation error case
       this._snacBar.open('Please fill all required fields correctly!', 'Close', { duration: 3000 });
     }
   }
+  
+  
 }
