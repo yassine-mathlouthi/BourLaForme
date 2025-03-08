@@ -1,0 +1,85 @@
+<h1 mat-dialog-title class="title">Edit Course</h1>
+
+<div mat-dialog-content class="box">
+  <form [formGroup]="courseForm">
+    
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Course Name</mat-label>
+          <input matInput formControlName="name" class="" placeholder="Enter course name">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Instructor Name</mat-label>
+          <input matInput formControlName="coachName" class="full-width" placeholder="Enter instructor's name">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Duration</mat-label>
+          <input matInput formControlName="duration" class="full-width" placeholder="Duration">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Level</mat-label>
+          <input matInput formControlName="level" class="full-width" placeholder="Level">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Price</mat-label>
+          <input matInput formControlName="price" class="full-width" type="number" placeholder="Price">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Available Seats</mat-label>
+          <input matInput formControlName="availableSeats" class="full-width" type="number" placeholder="Available Seats">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Schedule</mat-label>
+          <input matInput formControlName="schedule" class="full-width" type="datetime-local">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Image URL</mat-label>
+          <input matInput formControlName="image" class="full-width" placeholder="Enter course image URL">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" class="full-width" placeholder="Enter course description"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div mat-dialog-actions class="mat-dialog-actions text-center">
+      <button mat-button class="custom-btn" (click)="onClose()">Cancel</button>
+      <button mat-raised-button color="primary" class="custom-btn" (click)="edit()">Save</button>
+    </div>
+    
+  </form>
+</div>
