@@ -17,6 +17,8 @@ app.use(
   })
 );
 
+app.use('/uploads', express.static('uploads'));
+
 app.use("/api/pourlaforme/auth", register);
 app.use("/api/pourlaforme/auth", login);
 app.use("/api/pourlaforme/subscriptionTypes", subscriptionRoute);

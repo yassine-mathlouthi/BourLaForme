@@ -58,13 +58,19 @@ const addCourse = async (req, res) => {
 const getAllCourses = async (req, res) => {
   try {
     const courses = await Course.find();
-    res.status(200).json(courses);
+
+    // Ajouter l'URL complète de l'image
+    const coursesWithImages = courses.map(course => ({
+      ...course._doc,
+      imageUrl: `${req.protocol}://${req.get("host")}/uploads/${course.image}`
+    }));
+
+    res.status(200).json(coursesWithImages);
   } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Erreur lors de la consultation", error: err.message });
+    res.status(500).json({ message: "Erreur lors de la consultation", error: err.message });
   }
 };
+
 
 // Modifier un cours
 // Modifier un cours
