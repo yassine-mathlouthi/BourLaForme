@@ -73,7 +73,6 @@ const getAllCourses = async (req, res) => {
 
 
 // Modifier un cours
-// Modifier un cours
 const updateCourse = async (req, res) => {
   try {
     const { id } = req.params;
