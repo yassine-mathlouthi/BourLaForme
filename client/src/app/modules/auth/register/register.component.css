@@ -1,0 +1,69 @@
+/* Container of the page */
+.container-fluid {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://thumbs.dreamstime.com/b/metal-dumbbell-gym-background-d-rendering-78457398.jpg'); /* Add the background image */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Card Container */
+  .card-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 50px; /* Add space from the top */
+    opacity: 0.9; /* Slight transparency to blend with the background */
+  }
+  
+  /* Logo Container */
+  .logo-container {
+    margin-bottom: 30px;
+  }
+  
+  /* Logo Style */
+  .logo {
+    max-width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Full width for form fields */
+  .full-width {
+    width: 100%;
+  }
+  
+  /* Button Styles */
+  .mt-3 {
+    margin-top: 15px;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .btn-prev, .btn-submit {
+    padding: 10px 20px;
+  }
+  
+  /* Styles for mobile devices */
+  @media (max-width: 768px) {
+    .card-container {
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .logo {
+      max-width: 120px; /* Smaller logo on mobile */
+    }
+  }
+  

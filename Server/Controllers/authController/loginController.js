@@ -38,6 +38,7 @@ const login = async (req, res) => {
       res.status(StatusCodes.OK).json({
         message: 'Authentification réussie ! Bienvenue !',
         token,
+        role: user.role,
       });
     } catch (error) {
       console.error('Erreur lors de la connexion :', error);

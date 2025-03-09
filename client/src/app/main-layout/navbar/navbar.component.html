@@ -11,16 +11,19 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="/admin/dashboard" >Dashbored Admin</a>
+              <a class="nav-link" routerLink="/admin/dashboard" >Admin Dashboard</a>
             </li>
             <!-- <li class="nav-item">
                 <a routerLink="/admin/dashboard" class="nav-link">Dashboard Coach</a>
               </li > -->
               <li class="nav-item" *ngIf="isLoggedIn" >
-                <a routerLink="/artisan/myspace" class="nav-link">My space</a>
+                <a routerLink="/adherent/myspace" class="nav-link">My space</a>
               </li >
             <li class="nav-item" *ngIf="!isLoggedIn" >
-              <a routerLink="/login" class="nav-link">Login/Create store</a>
+              <a routerLink="/login" class="nav-link">Login</a>
+            </li >
+            <li class="nav-item" *ngIf="!isLoggedIn" >
+              <a routerLink="/register" class="nav-link">Join Us !</a>
             </li >
             
             <li class="nav-item ml-4" *ngIf="isLoggedIn" >
