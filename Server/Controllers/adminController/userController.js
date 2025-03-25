@@ -14,7 +14,13 @@ const getValidatedUsers = async (req, res) => {
       user: { $in: users.map((u) => u._id) }
     })
       .populate({ path: "type", select: "name" }) // Récupérer le type d'abonnement
-      .select("user status");
+      .select("user status  startDate endDate");
+
+    // Fonction pour formater la date en format YYYY-MM-DD
+    const formatDate = (date) => {
+      if (!date) return null;
+      return date.toISOString().split('T')[0];  // Sélectionne la partie avant 'T' (date sans heure)
+    };
 
     // Associer chaque utilisateur avec son abonnement
     const formattedUsers = users.map(user => {
@@ -25,7 +31,9 @@ const getValidatedUsers = async (req, res) => {
         email: user.email,
         phone: user.phone,
         abonnementType: userSubscription?.type?.name || null,
-        abonnementStatus: userSubscription?.status || null
+        abonnementStatus: userSubscription?.status || null,
+        abonnementStartDate: formatDate(userSubscription?.startDate)  || null, 
+        abonnementEndDate: formatDate(userSubscription?.endDate) || null, 
       };
     });
 
