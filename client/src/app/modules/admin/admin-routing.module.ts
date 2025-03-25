@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './acounts/accounts-management/main.component';
+import { CoachesManagementComponent } from './acounts/coaches-management/coaches-management.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { CoursesManagementComponent } from './courses/courses-management/courses-management.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -13,9 +14,12 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', component: AdminDashboardComponent },
       { path: 'dashboard', component: AdminDashboardComponent  },
-      { path: 'subs', component: SubscriptionManagementComponent },
+      { path: 'Subscription', component: SubscriptionManagementComponent },
       { path: 'courses', component: CoursesManagementComponent },
       { path: 'accounts', component: MainComponent },
+      { path: 'coaches', component: CoachesManagementComponent },
+
+
 
     ],
   }

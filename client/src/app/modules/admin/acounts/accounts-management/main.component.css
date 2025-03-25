@@ -61,7 +61,7 @@ mat-paginator {
 }
 
 .drawer {
-    width: 30vw !important; /* Full width */
+    width: 500px !important; /* Full width */
     height: 100vh !important; /* Full height */
     max-width: none !important;
 }
