@@ -49,7 +49,7 @@ const usershema = new mongoose.Schema({
   isValidated: {
     type: Boolean,
     default: function () {
-      return this.role !== "adherent"; // Si ce n'est pas un adhérent, le compte est validé automatiquement
+      return this.role == "admin"; // Si ce n'est pas un adhérent ou coach, le compte est validé automatiquement
     },
   },
 });

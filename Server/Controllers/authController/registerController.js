@@ -22,6 +22,13 @@ const register = async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: "L'email est déjà utilisé." });
     }
+    // Si le rôle est coach, vérifier que specialty et bio sont fournis avant de créer l'utilisateur
+    if (role === "coach" && (!specialty || !bio)) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: "Spécialité et bio sont obligatoires pour un coach.",
+      });
+    }
+
     // Création d'un nouveau user
     const user = await User.create({
       prenom,
@@ -32,24 +39,14 @@ const register = async (req, res) => {
       phone,
     });
 
-    // Si le rôle est coach, nous créons également un profil dans PrivateCoach
+    // Si le rôle est coach, créer également un profil dans PrivateCoach
     if (role === "coach") {
-      if (!specialty || !bio) {
-        return res.status(StatusCodes.BAD_REQUEST).json({
-          message: "Spécialité et bio sont obligatoires pour un coach.",
-        });
-      }
-
-      // Création du profil de coach privé
-      const privateCoach = new PrivateCoach({
+      await PrivateCoach.create({
         user: user._id,
         specialty,
         bio,
       });
-
-      await privateCoach.save();
     }
-
     // Création du JWT
     const token = user.createJWT();
 
