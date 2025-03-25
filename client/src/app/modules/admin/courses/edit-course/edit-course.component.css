@@ -47,7 +47,7 @@ form .form-group {
     transition: all 0.3s ease;
 }
 .full-width{
-    width: 90%;
+    width: 100%;
 }
 .form-control:focus {
     border-color: #8d6b4b;
@@ -100,4 +100,43 @@ form .form-group {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.mat-dialog-actions {}
+.custom-file-input2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .custom-file-input2 input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 80%;
+    height: 40px;
+    cursor: pointer;
+  }
+  
+  .custom-file-input2 label {
+    background-color: #cee3fa;
+    color: rgb(48, 47, 47);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .custom-file-input2 label:hover {
+    background-color: #b3d2f3;
+  }
+  
+  #file-name {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+  }
+  

@@ -7,7 +7,8 @@
           <h3 class="custom-title">{{course.name}}</h3>
           <p class="custom-description">{{course.description}}</p>
           <p class="custom-coach"><strong>Coach:</strong> {{course.coachName}}</p>
-          <p class="custom-time"><strong>Time:</strong> {{ course.schedule | date: 'shortTime' }}</p>
+          <p class="custom-time"><strong>Time:</strong> {{ course.schedule | date: 'dd MMMM yyyy, sh:mm' }}</p>
+
           <button class="edit-btn" (click)="openEditDialog(course)"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
           <button class="delete-btn" (click)="deleteCourse(course._id)"><i class="fa-solid fa-trash"></i> Delete</button>
         </div>

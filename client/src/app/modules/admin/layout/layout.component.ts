@@ -29,12 +29,12 @@ export class LayoutComponent implements OnInit {
       icon: 'dashboard-icon',
       iconName:'fa-solid fa-table-columns',
     },
-    {
+    /* {
       route: '/admin/subs',
       label: 'Subscription',
       icon: 'orders-icon',
       iconName:"fa-solid fa-coins"
-    },
+    }, */
     {
       route: '/admin/accounts',
       label: 'Accounts validation',

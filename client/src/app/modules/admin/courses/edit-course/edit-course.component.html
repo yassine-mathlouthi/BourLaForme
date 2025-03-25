@@ -58,14 +58,20 @@
           <input matInput formControlName="schedule" class="full-width" type="datetime-local">
         </mat-form-field>
       </div>
+      
 
-      <div class="col-md-6 form-group">
-        <mat-form-field appearance="fill">
-          <mat-label>Image URL</mat-label>
-          <input matInput formControlName="image" class="full-width" placeholder="Enter course image URL">
-        </mat-form-field>
+      <div class="col-md-6 form-group ">
+        <div class="custom-file-input2">
+          <input type="file" id="image" (change)="onFileSelected($event)" formControlName="image">
+        <label for="image">📁 Choose Course Image</label>
+        <span id="file-name">No file chosen</span>
+        </div>
+        
       </div>
+      
+      
     </div>
+    
 
     <div class="row">
       <div class="col-md-12 form-group">

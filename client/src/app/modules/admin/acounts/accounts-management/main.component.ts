@@ -12,9 +12,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { NgModel } from '@angular/forms';
 import { SubscriptionsService } from '../../../../core/services/subscriptions.service';
-import { subscriptionService } from '../../services/subscription.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
