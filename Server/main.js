@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const Connect = require("./BD/connect");
+const mongoose = require('mongoose');
 require("dotenv").config();
 const register = require("./Routes/authRoute/registerRoute");
 const login = require("./Routes/authRoute/loginRoute");
@@ -10,6 +11,9 @@ const course = require("./Routes/adminRoute/courseRoute");
 const users = require("./Routes/adminRoute/userRoute");
 
 const app = express(); // Initialisation de l'application Express
+
+
+
 app.use(express.json()); // use :fonction utilise pour ajouter des middlewares / express.json():est une middleware qui fait parser le corp d'une requete http qui est de format json {(key,value)variable} et le rende disponibles dans req.body.
 app.use(
   cors({

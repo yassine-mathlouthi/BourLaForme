@@ -12,7 +12,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', pathMatch: 'full', component: AdminDashboardComponent },
-      { path: 'dashboard', component: AdminDashboardComponent },
+      { path: 'dashboard', component: AdminDashboardComponent  },
       { path: 'subs', component: SubscriptionManagementComponent },
       { path: 'courses', component: CoursesManagementComponent },
       { path: 'accounts', component: MainComponent },
