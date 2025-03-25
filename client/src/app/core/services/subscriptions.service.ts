@@ -21,4 +21,7 @@ export class SubscriptionsService {
   validateUser(userID: any,subsTypeId: any,date:any): Observable<any> {
     return this.http.post(this.apiUrl+"/validateUser/"+userID+"/"+subsTypeId,date);
   }
+  getAllValidatedUsers(): Observable<any> {
+    return this.http.get(this.apiUrl+"/users/validated");
+  }
 }

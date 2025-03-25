@@ -29,23 +29,30 @@ export class LayoutComponent implements OnInit {
       icon: 'dashboard-icon',
       iconName:'fa-solid fa-table-columns',
     },
-    /* {
-      route: '/admin/subs',
+    
+    {
+      route: '/admin/Subscription',
       label: 'Subscription',
-      icon: 'orders-icon',
+      icon: 'subs-icon',
       iconName:"fa-solid fa-coins"
-    }, */
+    },
+    {
+      route: '/admin/coaches',
+      label: 'Coaches management',
+      icon: 'users-icon',
+      iconName:'fa-solid fa-users',
+    },
     {
       route: '/admin/accounts',
-      label: 'Accounts validation',
-      icon: 'orders-icon',
+      label: 'Accounts management',
+      icon: 'users-icon',
       iconName:"fa-solid fa-users"
       
     },
     {
       route: '/admin/courses',
       label: 'Courses',
-      icon: 'stores-icon',
+      icon: 'courses-icon',
       iconName:"fa-solid fa-dumbbell"
     },
   ];
