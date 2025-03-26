@@ -56,6 +56,7 @@ export class MainComponent implements AfterViewInit,OnInit {
     this._subsService.getSubscriptionTypes().subscribe(
       (response) => {
         this.data=response
+        console.log(this.data)
       },
       (error) => {
         console.error('Error fetching subscription types:', error);
@@ -180,6 +181,18 @@ export class MainComponent implements AfterViewInit,OnInit {
         console.error('Error refreshing table data:', error);
       }
     );
+  }
+  deleteUser(_id:any){
+    this._subsService.DeleteUser(_id).subscribe((r)=>{
+      console.log(r)
+      this.snackBar.open('Deleted!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        panelClass: ['success-snackbar'] // Optional styling
+      });
+      this.refreshTable();
+    })
   }
   
 }

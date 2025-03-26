@@ -18,3 +18,43 @@ http://localhost:3000/api/pourlaforme/subscriptionTypes
   "price": 80,
   "description": "hahah"
 }
+http://localhost:3000/api/pourlaforme/auth/register
+
+{
+  "prenom": "dina",
+  "nom": "Curie",
+  "email": "fjo23ud@example.com",
+  "password": "MotDePasse123!",
+  "role": "coach",
+  "specialty": "Fitness",
+  "bio": "Coach certifié en fitness avec plus de 10 ans d'expérience."
+}
+
+
+http://localhost:3000/api/pourlaforme/subscriptionTypes
+{
+  "name": "Mensuel",
+  "duration": 30,
+  "price": 80,
+  "description": "hahah"
+}
+
+http://localhost:3000/api/pourlaforme/validateUser/67ca14a3ec5b4c81d0679082/67c7771c5b329412f6a91654
+{
+  "startDate": "2025-03-10",
+  "endDate": "2025-06-10"
+}
+
+http://localhost:3000/api/pourlaforme/course
+
+{
+  "name": "Cours de Yoga",
+  "description": "Un cours pour améliorer votre flexibilité et votre bien-être.",
+  "duration": 60,
+  "availableSeats": 20,
+  "coachName": "67ca3d99dae89f4bedd2bf7e", 
+  "schedule": "2025-03-20T10:00:00Z",
+  "level": "Beginner",
+  "price": 30,
+  "image": "http://example.com/yoga.jpg"
+}

@@ -59,6 +59,15 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
         console.error('Error fetching subscription types:', error);
       }
     );
+    this._subsService.getSubscriptionTypes().subscribe(
+      (response) => {
+        this.data=response
+        console.log(this.data)
+      },
+      (error) => {
+        console.error('Error fetching subscription types:', error);
+      }
+    );
   }
   private _liveAnnouncer = inject(LiveAnnouncer);
 
@@ -122,15 +131,16 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
   
   @ViewChild('drawer') drawer!: MatDrawer;
 
-  confirmSubscription() {
+  confirmSubscription(id:any) {
     if (this.selectedUser && this.selectedSubscriptionType && this.subscriptionStartDate) {
       const subscriptionData = {
         subscriptionType: this.selectedSubscriptionType.id, // Send only the ID
         startDate: this.subscriptionStartDate,
         endDate: this.subscriptionEndDate
       };
+      console.log(this.selectedUser,'user')
   
-      this._subsService.validateUser(this.selectedUser._id, this.selectedSubscriptionType.id, subscriptionData)
+      this._subsService.ExtendSubscription(this.selectedUser.abonnementId,  subscriptionData)
         .subscribe(
           (response) => {
             console.log('Subscription confirmed:', response);
@@ -182,11 +192,12 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
 
 }
 export interface User {
-  _id: string;
+  id: string;
   nom: string;
   email: string;
   prenom: string;
   phone: string; 
+  abonnementId:string;
   abonnementStartDate: Date; 
   abonnementEndDate: Date; 
 }

@@ -24,4 +24,10 @@ export class SubscriptionsService {
   getAllValidatedUsers(): Observable<any> {
     return this.http.get(this.apiUrl+"/users/validated");
   }
+  DeleteUser(id:any):Observable<any> {
+    return this.http.delete(`${this.apiUrl}/users/deleteUser/${id}`);
+  }
+  ExtendSubscription(id:any,data:any):Observable<any> {
+    return this.http.put(`${this.apiUrl}/subscription/updateSubscription/${id}`,data);
+  }
 }
