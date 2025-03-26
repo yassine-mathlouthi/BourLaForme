@@ -53,7 +53,6 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
       (response) => {
         this.USER_DATA=response.users
         this.dataSource.data = this.USER_DATA; 
-        console.log(this.USER_DATA , 'heree')
       },
       (error) => {
         console.error('Error fetching subscription types:', error);
@@ -62,8 +61,8 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
     this._subsService.getSubscriptionTypes().subscribe(
       (response) => {
         this.data=response
-        console.log(this.data)
-      },
+/*         console.log(this.data)
+ */      },
       (error) => {
         console.error('Error fetching subscription types:', error);
       }
@@ -94,8 +93,8 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
 
   openDrawer(user: User) {
     this.selectedUser = user;
-    console.log(this.selectedUser)
-  }
+/*     console.log(this.selectedUser)
+ */  }
 
   updateSubscriptionDate(event: any, type: string) {
     if (type === 'start') {
@@ -138,12 +137,12 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
         startDate: this.subscriptionStartDate,
         endDate: this.subscriptionEndDate
       };
-      console.log(this.selectedUser,'user')
+      /* console.log(this.selectedUser,'user') */
   
       this._subsService.ExtendSubscription(this.selectedUser.abonnementId,  subscriptionData)
         .subscribe(
           (response) => {
-            console.log('Subscription confirmed:', response);
+            /* console.log('Subscription confirmed:', response); */
             
             // Show success message
             this.snackBar.open('Subscription confirmed!', 'Close', {
@@ -180,9 +179,7 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
     this._subsService.getAllValidatedUsers().subscribe(
       (response) => {
         this.USER_DATA = response.users;
-        console.log('2222',this.USER_DATA)
         this.dataSource.data = this.USER_DATA; 
-        console.log('Table refreshed:', this.USER_DATA);
       },
       (error) => {
         console.error('Error refreshing table data:', error);

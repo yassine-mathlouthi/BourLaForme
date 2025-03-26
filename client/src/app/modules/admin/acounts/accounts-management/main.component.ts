@@ -37,7 +37,7 @@ export class MainComponent implements AfterViewInit,OnInit {
 
   data : any
   subscriptionType : any[] | undefined
-  displayedColumns: string[] = ['email', 'nom', 'prenom','validation','phone'];
+  displayedColumns: string[] = ['email', 'nom', 'prenom','phone','validation'];
   
   selectedUser: User | null = null;
   subscriptionStartDate?: Date ;

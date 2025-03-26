@@ -7,8 +7,8 @@
         </div>
       
 
-        <ul class="nav-menu">
-            <li class="nav-item" *ngFor="let item of navItems">
+        <ul class="nav-menu mt-3">
+            <li class="nav-item " *ngFor="let item of navItems">
                 <a [routerLink]="item.route" routerLinkActive="active" class="nav-link">
                     <i class="icon {{ item.iconName }}"></i>
                     <span>{{ item.label }}</span>
