@@ -2,6 +2,8 @@ const User = require("../../Models/user");
 const Subscription = require("../../Models/subscription");
 const SubscriptionType = require("../../Models/subscriptionType");
 const PrivateCoach = require("../../Models/privateCoach");
+const { BadRequestError, UnauthenticatedError, InternalServerError, NotFoundError } = require('../../Errors');
+const { StatusCodes } = require('http-status-codes');
 
 // Get all validated adherents
 const getValidatedUsers = async (req, res) => {
@@ -129,7 +131,24 @@ const getValidatedCoachs = async (req, res) => {
   };
 
 
+  const deleteUser = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Vérifier si l'utilisateur existe
+      const user = await User.findById(id);
+      if (!user) {
+        throw new NotFoundError("Utilisateur non trouvé" );
+      }
+  
+      // Supprimer l'utilisateur
+      await User.findByIdAndDelete(id);
+  
+      res.status(200).json({ msg: "Utilisateur supprimé avec succès" });
+    } catch (error) {
+      res.status(500).json({ msg: "Erreur serveur", error });
+    }
+  };
 
 
-
-module.exports = { getValidatedUsers, getNonValidatedUsers, getNonValidatedCoachs, getValidatedCoachs };
+module.exports = { getValidatedUsers, getNonValidatedUsers, getNonValidatedCoachs, getValidatedCoachs, deleteUser };
