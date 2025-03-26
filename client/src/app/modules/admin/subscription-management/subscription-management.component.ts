@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Chart, ChartConfiguration } from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -186,6 +185,7 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
       }
     );
   }
+  
 
 }
 export interface User {

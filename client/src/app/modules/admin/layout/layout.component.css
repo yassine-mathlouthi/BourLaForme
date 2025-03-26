@@ -3,14 +3,14 @@
 
 /* Add Button Styles */
 .add-btn {
-    font-family: 'Lora', serif;
+    font-family: 'Source Sans Pro', sans-serif;
     border-radius: 12px;
     background: linear-gradient(135deg, #0c5eb6, #143350); /* Gradient for a modern look */
     color: #ffffff; /* White text for contrast */
     box-shadow: 0 4px 15px rgba(8, 77, 151, 0.3); /* Softer shadow with a blue tint */
     box-sizing: border-box;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 600;
     line-height: 24px;
     opacity: 1;
@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Sidebar Styles */
 .sidebar {
-    width: 280px;
+    width: 250px;
     background: linear-gradient(180deg, #3E3E3E, #13465a); /* Gradient for depth */
     border-right: 1px solid #444e4d; /* Teal accent for the border */
     display: flex;
@@ -169,9 +169,16 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid #4b6462; /* Teal border */
     z-index: 1000;
 }
+.btn-logout{
+    font-family: 'Source Sans Pro', sans-serif;
+    color: rgb(227, 227, 233);
+    font-weight: 400;
+
+}
 
 .header h1 {
-    font-size: 2rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.5rem;
     font-weight: 600;
     color: #ffffff; /* White for contrast */
     margin: 0;
@@ -186,7 +193,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 40px;
     height: 40px;
     background-size: contain;
-    margin-right: 0.5rem;
+    margin-right: 0.1rem;
 }
 
 .header-right {
