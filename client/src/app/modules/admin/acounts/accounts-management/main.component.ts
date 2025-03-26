@@ -15,6 +15,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { SubscriptionsService } from '../../../../core/services/subscriptions.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CoachesService } from '../../../../core/services/coaches.service';
 
 @Component({
   selector: 'app-main',
@@ -49,6 +50,8 @@ export class MainComponent implements AfterViewInit,OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   users:any
+  coachesData:any
+
   ngOnInit(): void {
     this._subsService.getSubscriptionTypes().subscribe(
       (response) => {
@@ -64,7 +67,9 @@ export class MainComponent implements AfterViewInit,OnInit {
         this.dataSource.data = this.USER_DATA; 
         console.log(this.dataSource.data)
       }
-    )
+    );
+    
+    
   }
 
   ngAfterViewInit() {
