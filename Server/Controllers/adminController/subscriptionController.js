@@ -35,10 +35,10 @@ const updateSubscription = async (req, res) => {
       // Sauvegarder les modifications
       await subscription.save();
   
-      res.status(200).json({ msg: "Subscription updated successfully", subscription });
+      res.status(200).json({ msg: "Subscription updated successfully"});
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ msg: "Server error", error });
+        console.error("Erreur lors de la mise à jour de l'abonnement :", error);
+        res.status(500).json({ msg: "Server error", error });
     }
   };
 
