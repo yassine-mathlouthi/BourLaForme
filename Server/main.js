@@ -5,10 +5,11 @@ const mongoose = require('mongoose');
 require("dotenv").config();
 const register = require("./Routes/authRoute/registerRoute");
 const login = require("./Routes/authRoute/loginRoute");
-const subscriptionRoute = require("./Routes/adminRoute/subscriptionTypeRoute");
+const subscriptionTypeRoute = require("./Routes/adminRoute/subscriptionTypeRoute");
 const validateUser = require("./Routes/adminRoute/validateUserRoute");
 const course = require("./Routes/adminRoute/courseRoute");
 const users = require("./Routes/adminRoute/userRoute");
+const subscription = require("./Routes/adminRoute/subscriptionRoute");
 
 const app = express(); // Initialisation de l'application Express
 
@@ -25,10 +26,12 @@ app.use('/uploads', express.static('uploads'));
 
 app.use("/api/pourlaforme/auth", register);
 app.use("/api/pourlaforme/auth", login);
-app.use("/api/pourlaforme/subscriptionTypes", subscriptionRoute);
+app.use("/api/pourlaforme/subscriptionTypes", subscriptionTypeRoute);
 app.use("/api/pourlaforme/validateUser", validateUser);
 app.use("/api/pourlaforme/course", course);
 app.use("/api/pourlaforme/users", users);
+app.use("/api/pourlaforme/subscription", subscription);
+
 
 const port = 3000;
 const start = async () => {

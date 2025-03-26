@@ -27,10 +27,12 @@ const getValidatedUsers = async (req, res) => {
     const formattedUsers = users.map(user => {
       const userSubscription = subscriptions.find(sub => sub.user.toString() === user._id.toString());
       return {
+        id: user._id,
         prenom: user.prenom,
         nom: user.nom,
         email: user.email,
         phone: user.phone,
+        abonnementId: userSubscription?._id || null, // ID de l'abonnement
         abonnementType: userSubscription?.type?.name || null,
         abonnementStatus: userSubscription?.status || null,
         abonnementStartDate: formatDate(userSubscription?.startDate)  || null, 
@@ -44,6 +46,9 @@ const getValidatedUsers = async (req, res) => {
   }
   };
 
+
+
+
 // Get all non-validated adherents
 const getNonValidatedUsers = async (req, res) => {
     try {
@@ -54,6 +59,9 @@ const getNonValidatedUsers = async (req, res) => {
     }
   };
   
+
+
+
 // Get all non-validated coaches with their private coach information
 const getNonValidatedCoachs = async (req, res) => {
   try {
@@ -69,6 +77,7 @@ const getNonValidatedCoachs = async (req, res) => {
         
         // Retourner les données de l'utilisateur avec les informations du coach privé intégrées
         return {
+          id: user._id,
           prenom: user.prenom,
           nom: user.nom,
           email: user.email,
@@ -102,6 +111,7 @@ const getValidatedCoachs = async (req, res) => {
         
         // Retourner les données de l'utilisateur avec les informations du coach privé intégrées
         return {
+          id: user._id,
           prenom: user.prenom,
           nom: user.nom,
           email: user.email,
@@ -117,4 +127,9 @@ const getValidatedCoachs = async (req, res) => {
     res.status(500).json({ msg: 'Server Error', error });
   }
   };
+
+
+
+
+
 module.exports = { getValidatedUsers, getNonValidatedUsers, getNonValidatedCoachs, getValidatedCoachs };

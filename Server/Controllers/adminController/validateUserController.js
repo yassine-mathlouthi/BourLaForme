@@ -3,6 +3,8 @@ const Subscription = require('../../Models/subscription');
 const User = require('../../Models/user');
 const { StatusCodes } = require('http-status-codes');
 const { BadRequestError, UnauthenticatedError, InternalServerError, NotFoundError } = require('../../Errors');
+
+//validateAdherent
 validateUser = async (req, res) => {
     const { userId, subscriptionTypeId } = req.params;  // `subscriptionTypeId` est l'ID de l'abonnement sélectionné par l'admin
     const { startDate, endDate } = req.body; // Ajout des dates comme paramètres dans le body
@@ -22,12 +24,6 @@ validateUser = async (req, res) => {
           if (!subscriptionType) {
             throw new NotFoundError("Type d'abonnement non trouvé");
           }
-      
-    
-       
-    
-      
-    
       
     
         // Créer un abonnement pour l'adhérent validé en utilisant le type d'abonnement choisi
@@ -62,7 +58,7 @@ validateUser = async (req, res) => {
 
 };
 
-
+//validateCoach
 validateCoach = async (req, res) => {
   const { userId} = req.params;  
 
