@@ -1,0 +1,132 @@
+/* Import Fonts and Icons */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* General Reset */
+* {
+   
+    box-sizing: border-box;
+ 
+}
+.management-header{
+    width: 100%;
+}
+td{
+       font-family: 'Source Sans Pro', sans-serif !important;
+}
+mat-icon {
+    font-family: 'Material Icons' !important;
+}   
+p{
+    margin: 0;
+    padding: 0;
+}
+/* Global Styles */
+.body {
+    background-color: #f8f9fa;
+    padding: 20px;
+    overflow: auto;
+}
+
+.no-data {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 1.2rem;
+  }
+  
+  .no-data mat-icon {
+    font-size: 48px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  
+/* Material Paginator */
+mat-paginator {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* Drawer Styles */
+.example-container {
+
+    top: 0;
+    left: 0;
+    height: 100vh;
+
+}
+
+
+
+  .input{
+    width: 100%;
+  }
+
+
+
+.confirm-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+
+/* Delete Button */
+.delete-btn {
+    width: 10%;
+    margin-top: 20px;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(250, 185, 185);
+    border-radius: 5px;
+}
+
+/* Table Styles */
+mat-header-row {
+    font-family: 'Lora', serif !important;
+    background-color: #f8f9fa;
+}
+
+mat-header-cell {
+    font-family: 'Lora', serif !important;
+    font-weight: 600;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.t-header {
+    font-family: 'Lora', serif !important;
+}
+mat-row:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+}
+
+mat-cell {
+    font-size: 14px;
+}
+
+.table {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+
+

@@ -51,13 +51,14 @@
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
-        <div class="color-legend">
-          <div class="legend-item red-row"></div> <span>Not Active</span>
-          <div class="legend-item yellow-row"></div> <span>Expiring in 3 days</span>
-          <div class="legend-item green-row"></div> <span>Active</span>
-        </div>
+        
 
         <div class="mat-elevation-z8 table">
+          <div class="color-legend mt-3 ml-3">
+            <div class="legend-item red-row"></div> <span>Not Active</span>
+            <div class="legend-item yellow-row"></div> <span>Expiring in 3 days</span>
+            <div class="legend-item green-row"></div> <span>Active</span>
+          </div>
           <table class="container" mat-table [dataSource]="dataSource" matSort
             (matSortChange)="announceSortChange($event)" *ngIf="dataSource.data.length > 0; else noDataTemplate">
             <ng-container matColumnDef="nom">
