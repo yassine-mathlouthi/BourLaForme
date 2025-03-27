@@ -48,10 +48,8 @@ export class TarifManagementComponent implements OnInit {
     private dialog: MatDialog,
     private _subscriptionService: SubscriptionsService,
     private _snackBar: MatSnackBar,
-    private fb: FormBuilder,
-
+    private fb: FormBuilder
   ) {
-    // Initialize the FormGroup with empty values
     this.tarifFormGroup = this.fb.group({
       name: [''],
       duration: [''],
@@ -71,10 +69,7 @@ export class TarifManagementComponent implements OnInit {
   tarifFormGroup: FormGroup;
 
   ngOnInit(): void {
-    this._subscriptionService.getSubscriptionTypes().subscribe(r => {
-      this.Tarif = r;
-      this.dataSource.data = this.Tarif;
-    });
+    this.refreshTable(); // Load initial data
   }
 
   ngAfterViewInit() {
@@ -90,52 +85,40 @@ export class TarifManagementComponent implements OnInit {
     }
   }
 
+  // Fixed refreshTable method
   refreshTable() {
     this._subscriptionService.getSubscriptionTypes().subscribe(
-      (response) => {
-        this.Tarif = response.users;
-        this.dataSource.data = this.Tarif;
-        console.log(this.Tarif);
+      (response: Tarif[]) => { // Assuming response is an array of Tarif
+        this.Tarif = response; // Assign directly to Tarif array
+        this.dataSource.data = this.Tarif; // Update the dataSource
+        console.log('Table refreshed:', this.Tarif);
       },
       (error) => {
         console.error('Error fetching subscription types:', error);
+        this._snackBar.open('Failed to refresh table.', 'Close', { duration: 3000 });
       }
     );
   }
 
-  // Start editing a row
   startEdit(row: Tarif) {
     this.editingRowId = row._id;
-    // Populate the FormGroup with the row's data
     this.tarifFormGroup.setValue({
-      name: row.name || '', // Ensure a default empty string if null/undefined
+      name: row.name || '',
       duration: row.duration || 0,
       price: row.price || 0,
       description: row.description || ''
     });
   }
-  x=0
-  data:{
-      description: string;
-      duration: number;
-      name: string;
-      price: number;
-  }
-  // Save the edited row
-  | undefined
-  // Save the edited row
+
   saveEdit() {
-    console.log(this.tarifFormGroup.value)
     if (this.editingRowId) {
       const updatedRow = this.tarifFormGroup.value;
       const index = this.Tarif.findIndex(t => t._id === this.editingRowId);
       if (index !== -1) {
         this.Tarif[index] = { ...this.Tarif[index], ...updatedRow };
-        this.dataSource.data = [...this.Tarif]; // Refresh the table
+        this.dataSource.data = [...this.Tarif];
 
-        // Optionally, send the updated data to the server
-        
-        this._subscriptionService.UpdateTarif(this.editingRowId,this.tarifFormGroup.value).subscribe(
+        this._subscriptionService.UpdateTarif(this.editingRowId, this.tarifFormGroup.value).subscribe(
           () => {
             this._snackBar.open('Tarif updated successfully!', 'Close', { duration: 3000 });
           },
@@ -149,26 +132,35 @@ export class TarifManagementComponent implements OnInit {
     this.cancelEdit();
   }
 
-  // Cancel editing
   cancelEdit() {
     this.editingRowId = null;
-    this.tarifFormGroup.reset(); // Reset the form
+    this.tarifFormGroup.reset();
   }
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(AddTarifComponent, {
-      width: '500px',
-      
-      /* data: null */
+      width: '500px'
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this._subscriptionService.getSubscriptionTypes().subscribe((data: any[]) => {
-          this.Tarif = data;
-        });
-      }
+      
+        this.refreshTable(); // Refresh table after adding a new tarif
+      
     });
+  }
+
+  // Fixed onDeleteTarif method
+  onDeleteTarif(id: string) {
+    this._subscriptionService.DeleteTarif(id).subscribe(
+      () => {
+        this._snackBar.open('Tarif deleted successfully!', 'Close', { duration: 3000 });
+        this.refreshTable(); // Refresh table after deletion
+      },
+      (error) => {
+        console.error('Error deleting tarif:', error);
+        this._snackBar.open('Failed to delete tarif.', 'Close', { duration: 3000 });
+      }
+    );
   }
 }
 

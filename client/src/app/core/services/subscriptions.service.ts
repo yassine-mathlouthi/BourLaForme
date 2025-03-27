@@ -36,5 +36,8 @@ export class SubscriptionsService {
   AddTarif(data:any){
     return this.http.post(`${this.apiUrl}/subscriptionTypes`,data)
   }
+  DeleteTarif(id:any){
+    return this.http.delete(`${this.apiUrl}/subscriptionTypes/${id}`);
+  }
 
 }

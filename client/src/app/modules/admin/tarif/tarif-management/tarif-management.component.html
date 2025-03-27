@@ -87,7 +87,7 @@
                   <button mat-raised-button (click)="startEdit(element)">
                     <i class="fa-solid fa-pen-to-square"></i> Edit
                   </button>
-                  <button mat-stroked-button class="delete-btn">
+                  <button mat-stroked-button class="delete-btn" (click)="onDeleteTarif(element._id)">
                     <i class="fa-solid fa-trash"></i>
                   </button>
                 </ng-container>
