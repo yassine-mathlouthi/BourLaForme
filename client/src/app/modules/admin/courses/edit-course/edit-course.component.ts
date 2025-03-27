@@ -91,6 +91,7 @@ export class EditCourseComponent {
 
       this._coursesService.updateCourse(this.data._id, updatedCourse).subscribe(
         () => {
+          
           this._snackBar.open('Course updated successfully!', 'Close', { duration: 3000 });
           this.dialogRef.close(true); // Close dialog and pass success flag
         },

@@ -33,4 +33,8 @@ export class SubscriptionsService {
   UpdateTarif(id:any,data:any){
     return this.http.put(`${this.apiUrl}/subscriptionTypes/${id}`,data);
   }
+  AddTarif(data:any){
+    return this.http.post(`${this.apiUrl}/subscriptionTypes`,data)
+  }
+
 }

@@ -16,6 +16,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AddTarifComponent } from '../add-tarif/add-tarif.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tarif-management',
@@ -43,9 +45,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class TarifManagementComponent implements OnInit {
   constructor(
+    private dialog: MatDialog,
     private _subscriptionService: SubscriptionsService,
     private _snackBar: MatSnackBar,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+
   ) {
     // Initialize the FormGroup with empty values
     this.tarifFormGroup = this.fb.group({
@@ -149,6 +153,22 @@ export class TarifManagementComponent implements OnInit {
   cancelEdit() {
     this.editingRowId = null;
     this.tarifFormGroup.reset(); // Reset the form
+  }
+
+  openAddDialog(): void {
+    const dialogRef = this.dialog.open(AddTarifComponent, {
+      width: '500px',
+      
+      /* data: null */
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._subscriptionService.getSubscriptionTypes().subscribe((data: any[]) => {
+          this.Tarif = data;
+        });
+      }
+    });
   }
 }
 
