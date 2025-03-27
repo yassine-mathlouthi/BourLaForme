@@ -110,9 +110,18 @@ export class TarifManagementComponent implements OnInit {
       description: row.description || ''
     });
   }
-
+  x=0
+  data:{
+      description: string;
+      duration: number;
+      name: string;
+      price: number;
+  }
+  // Save the edited row
+  | undefined
   // Save the edited row
   saveEdit() {
+    console.log(this.tarifFormGroup.value)
     if (this.editingRowId) {
       const updatedRow = this.tarifFormGroup.value;
       const index = this.Tarif.findIndex(t => t._id === this.editingRowId);
@@ -121,7 +130,8 @@ export class TarifManagementComponent implements OnInit {
         this.dataSource.data = [...this.Tarif]; // Refresh the table
 
         // Optionally, send the updated data to the server
-        /* this._subscriptionService.updateSubscriptionType(this.Tarif[index]).subscribe(
+        
+        this._subscriptionService.UpdateTarif(this.editingRowId,this.tarifFormGroup.value).subscribe(
           () => {
             this._snackBar.open('Tarif updated successfully!', 'Close', { duration: 3000 });
           },
@@ -129,7 +139,7 @@ export class TarifManagementComponent implements OnInit {
             console.error('Error updating tarif:', error);
             this._snackBar.open('Failed to update tarif.', 'Close', { duration: 3000 });
           }
-        ); */
+        );
       }
     }
     this.cancelEdit();
