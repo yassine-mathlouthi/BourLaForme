@@ -43,8 +43,8 @@
                 <ng-container matColumnDef="validation">
                     <th mat-header-cell *matHeaderCellDef> </th>
                     <td mat-cell *matCellDef="let element">
-                        <button mat-raised-button cla (click)="validateCoach(element._id)">Validate</button>
-                        <button mat-stroked-button class="delete-btn">
+                        <button mat-raised-button cla (click)="validateCoach(element.id)">Validate</button>
+                        <button mat-stroked-button class="delete-btn" (click)="deleteUser(element.id)">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </td>

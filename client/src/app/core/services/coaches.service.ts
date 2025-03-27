@@ -13,12 +13,9 @@ export class CoachesService {
     return this.http.get(`${this.apiUrl}/users/nonvalidatedcoachs`);
   }
   ValidateCoach(id:any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/users/nonvalidatedcoachs/${id}`,1);
+    return this.http.put(`${this.apiUrl}/validateUser/${id}`,{});
   }
-
-
-
-
-
-
+  DeleteUser(id:any):Observable<any> {
+    return this.http.delete(`${this.apiUrl}/users/deleteUser/${id}`);
+  }
 }

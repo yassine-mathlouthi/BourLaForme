@@ -18,8 +18,6 @@ import { MatDialogRef } from '@angular/material/dialog';
     MatStepperModule,
     CommonModule,            // Import CommonModule
     ReactiveFormsModule,     // Import ReactiveFormsModule for forms
-    CommonModule,
-    ReactiveFormsModule,
     MatFormFieldModule,  // Add MatFormFieldModule here
     MatInputModule   ,
     MatButtonModule ,

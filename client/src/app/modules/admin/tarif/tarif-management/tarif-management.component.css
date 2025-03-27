@@ -79,7 +79,6 @@ mat-paginator {
     font-weight: bold;
 }
 
-
 /* Delete Button */
 .delete-btn {
     width: 10%;
@@ -125,7 +124,53 @@ mat-cell {
 }
 
 mat-form-field {
-    width: 100%;
+    width: 85%;
+    margin-right: 10px;
+}
+.Action-btn{
+    size: 10px;
+}
+.paginator{
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+.form-Fields{
+    height: 10px;
+}
+.btn{
+    font-family: 'Lora', serif !important;
+    font-weight: 600;
+}
+th{
+    font-weight: 600;
+}
+.add-btn {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, #0c5eb6, #143350) ; /* Gradient for a modern look */
+    color: #ffffff !important; /* White text for contrast */
+    box-shadow: 0 4px 15px rgba(8, 77, 151, 0.3); /* Softer shadow with a blue tint */
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    line-height: 24px !important;
+    opacity: 1 !important;
+    outline: 0 solid transparent !important;
+    padding: 10px 20px !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    touch-action: manipulation !important;
+    width: fit-content !important;
+    word-break: break-word !important;
+    border: 0 !important;
+    transition: all 0.3s ease !important;
+    padding-bottom: 33px !important;
+}
+
+.add-btn:hover {
+    transform: translateY(-3px); /* Subtle lift effect */
+    background: linear-gradient(135deg, #005bb5, #003f7f); /* Darker gradient on hover */
+    color: rgb(10, 27, 53);
 }
 
 

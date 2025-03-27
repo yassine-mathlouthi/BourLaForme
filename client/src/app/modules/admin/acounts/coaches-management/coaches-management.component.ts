@@ -12,7 +12,6 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { SubscriptionsService } from '../../../../core/services/subscriptions.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CoachesService } from '../../../../core/services/coaches.service';
@@ -68,8 +67,42 @@ export class CoachesManagementComponent implements AfterViewInit,OnInit {
     }
   }
   validateCoach(id:any){
-    this._coachesService.ValidateCoach(id).subscribe(r=>{console.log(r)})
+    this._coachesService.ValidateCoach(id).subscribe(r=>{
+      this.snackBar.open('confirmed!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        panelClass: ['success-snackbar'] // Optional styling
+      });
+      this.refreshTable();
+    })
 
+  }
+  refreshTable() {
+    this._coachesService.getNewCoaches().subscribe(
+      (response) => {
+        this.USER_DATA=response.users
+        this.dataSource.data = this.USER_DATA; 
+        console.log(this.USER_DATA)
+      },
+      (error) => {
+        console.error('Error fetching subscription types:', error);
+      }
+    );
+    
+
+  }
+  deleteUser(_id:any){
+    this._coachesService.DeleteUser(_id).subscribe((r)=>{
+      console.log(r)
+      this.snackBar.open('Deleted!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        panelClass: ['success-snackbar'] // Optional styling
+      });
+      this.refreshTable();
+    })
   }
   
 

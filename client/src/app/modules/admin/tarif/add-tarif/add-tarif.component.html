@@ -1,0 +1,63 @@
+<form [formGroup]="TarifFormGroup">
+    <div class="row">
+        <div class="col">
+            <h2 class="form-title">
+                 Add Tarif
+            </h2>
+        </div>
+    </div>
+    <!-- Course Name -->
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="form-group mb-3" appearance="fill">
+          <mat-label>Tarif Name</mat-label>
+          <input matInput id="name" placeholder="Enter Tarif name" formControlName="name">
+          <mat-error *ngIf="TarifFormGroup.get('name')?.invalid && TarifFormGroup.get('name')?.touched">
+            Name is required and must be at least 3 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="form-group mb-3" appearance="fill">
+          <mat-label>Price</mat-label>
+          <input matInput id="price" placeholder="Enter price $" formControlName="price">
+          <mat-error *ngIf="TarifFormGroup.get('price')?.invalid && TarifFormGroup.get('price')?.touched">
+            Price is required and must be at least 3 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Duration -->
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="form-group mb-3" appearance="fill">
+          <mat-label>Duration</mat-label>
+          <input matInput id="duration" placeholder="e.g., 1 hour" formControlName="duration">
+          <mat-error *ngIf="TarifFormGroup.get('duration')?.invalid && TarifFormGroup.get('duration')?.touched">
+            Duration is required and must be specified.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- Duration -->
+    <div class="row">
+        <div class="col">
+          <mat-form-field class="form-group mb-3" appearance="fill">
+            <mat-label>description</mat-label>
+            <input matInput id="description" placeholder="e.g., 1 hour" formControlName="description">
+            <mat-error *ngIf="TarifFormGroup.get('description')?.invalid && TarifFormGroup.get('description')?.touched">
+                Description is required and must be specified.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+    <div>
+      <button mat-button (click)="onAddTarif()"><i class="fa-solid fa-circle-plus"></i> ADD</button>
+    </div>
+  </form>

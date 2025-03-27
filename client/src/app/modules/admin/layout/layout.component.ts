@@ -55,6 +55,12 @@ export class LayoutComponent implements OnInit {
       icon: 'courses-icon',
       iconName:"fa-solid fa-dumbbell"
     },
+    {
+      route: '/admin/tarif',
+      label: 'Tarif',
+      icon: 'dashboard-icon',
+      iconName:'fa-solid fa-dollar-sign',
+    },
   ];
 
   userEmail: string | null = null;

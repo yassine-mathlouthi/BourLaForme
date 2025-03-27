@@ -1,0 +1,148 @@
+/* Import Fonts (if not already imported) */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+
+/* Form Container */
+form {
+    width: 100%;
+    margin: 0 auto; /* Center the form */
+    padding: 20px;
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
+}
+
+/* Row and Column Styling */
+.row {
+    margin-bottom: 10px; /* Space between rows */
+}
+
+.col {
+    padding: 0 10px; /* Add padding to columns for spacing */
+}
+
+/* Form Fields */
+mat-form-field.form-group {
+    width: 100%; /* Full width for form fields */
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+mat-form-field.form-group mat-label {
+    font-family: 'Lora', serif;
+    color: #2c3e50; /* Darker color for labels */
+    font-weight: 500;
+}
+
+mat-form-field.form-group input {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Customize Material Form Field Appearance */
+mat-form-field.appearance-fill {
+    background-color: #f8f9fa; /* Light background for the fill appearance */
+    border-radius: 8px;
+}
+
+mat-form-field.appearance-fill .mat-form-field-wrapper {
+    padding-bottom: 0; /* Reduce padding to align error messages */
+}
+
+mat-form-field.appearance-fill .mat-form-field-underline {
+    background-color: #00c4b4; /* Teal underline to match dashboard theme */
+}
+
+mat-form-field.appearance-fill .mat-form-field-ripple {
+    background-color: #00c4b4; /* Teal ripple effect */
+}
+
+mat-form-field.appearance-fill.mat-focused .mat-form-field-label {
+    color: #00c4b4; /* Teal label color when focused */
+}
+
+/* Error Messages */
+mat-error {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 12px;
+    color: #e74c3c; /* Red color for error messages */
+    margin-top: 4px;
+}
+
+/* Add Button */
+button[mat-button] {
+ 
+
+    display: block;
+    width: 100%;
+    max-width: 200px; /* Limit button width */
+    margin: 20px auto 0; /* Center the button with top margin */
+    background: linear-gradient(135deg, #3c5f85, #005bb5); /* Blue gradient to match dashboard */
+    color: #ffffff;
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 118, 245, 0.3);
+    transition: all 0.3s ease;
+}
+
+button[mat-button]:hover {
+    transform: translateY(-2px); /* Subtle lift effect on hover */
+    box-shadow: 0 6px 20px rgba(0, 118, 245, 0.5);
+    background: linear-gradient(135deg, #005bb5, #3c5f85); /* Darker gradient on hover */
+}
+
+button[mat-button]:disabled {
+    padding-bottom: 60px;
+    background: #cccccc;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    form {
+        padding: 15px;
+    }
+
+    mat-form-field.form-group input {
+        font-size: 14px; /* Smaller font size on mobile */
+    }
+
+    button[mat-button] {
+        padding-bottom: 30px;
+        max-width: 150px; /* Smaller button on mobile */
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+/* Form Title Styling */
+.form-title {
+    font-family: 'Lora', serif; /* Use the Lora font to match your dashboard */
+    font-size: 28px; /* Slightly larger font size for emphasis */
+    font-weight: 600; /* Bold weight for prominence */
+    color: #2c3e50; /* Dark color for contrast */
+    display: flex;
+    align-items: center; /* Align the icon and text vertically */
+    gap: 8px; /* Space between the icon and text */
+    position: relative; /* For the underline effect */
+    margin-bottom: 30px; /* Space below the title */
+    text-transform: capitalize; /* Capitalize the title */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .form-title {
+        font-size: 24px; /* Smaller font size on mobile */
+        margin-bottom: 20px;
+    }
+
+    .form-title .title-icon {
+        font-size: 24px; /* Smaller icon on mobile */
+    }
+
+    .form-title::after {
+        width: 50px; /* Slightly shorter underline on mobile */
+        bottom: -8px;
+    }
+}

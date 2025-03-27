@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Chart, ChartConfiguration } from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -53,8 +52,16 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
       (response) => {
         this.USER_DATA=response.users
         this.dataSource.data = this.USER_DATA; 
-        console.log(this.USER_DATA , 'heree')
       },
+      (error) => {
+        console.error('Error fetching subscription types:', error);
+      }
+    );
+    this._subsService.getSubscriptionTypes().subscribe(
+      (response) => {
+        this.data=response
+/*         console.log(this.data)
+ */      },
       (error) => {
         console.error('Error fetching subscription types:', error);
       }
@@ -85,8 +92,8 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
 
   openDrawer(user: User) {
     this.selectedUser = user;
-    console.log(this.selectedUser)
-  }
+/*     console.log(this.selectedUser)
+ */  }
 
   updateSubscriptionDate(event: any, type: string) {
     if (type === 'start') {
@@ -122,18 +129,19 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
   
   @ViewChild('drawer') drawer!: MatDrawer;
 
-  confirmSubscription() {
+  confirmSubscription(id:any) {
     if (this.selectedUser && this.selectedSubscriptionType && this.subscriptionStartDate) {
       const subscriptionData = {
         subscriptionType: this.selectedSubscriptionType.id, // Send only the ID
         startDate: this.subscriptionStartDate,
         endDate: this.subscriptionEndDate
       };
+      /* console.log(this.selectedUser,'user') */
   
-      this._subsService.validateUser(this.selectedUser._id, this.selectedSubscriptionType.id, subscriptionData)
+      this._subsService.ExtendSubscription(this.selectedUser.abonnementId,  subscriptionData)
         .subscribe(
           (response) => {
-            console.log('Subscription confirmed:', response);
+            /* console.log('Subscription confirmed:', response); */
             
             // Show success message
             this.snackBar.open('Subscription confirmed!', 'Close', {
@@ -170,23 +178,23 @@ export class SubscriptionManagementComponent implements OnInit, AfterViewInit {
     this._subsService.getAllValidatedUsers().subscribe(
       (response) => {
         this.USER_DATA = response.users;
-        console.log('2222',this.USER_DATA)
         this.dataSource.data = this.USER_DATA; 
-        console.log('Table refreshed:', this.USER_DATA);
       },
       (error) => {
         console.error('Error refreshing table data:', error);
       }
     );
   }
+  
 
 }
 export interface User {
-  _id: string;
+  id: string;
   nom: string;
   email: string;
   prenom: string;
   phone: string; 
+  abonnementId:string;
   abonnementStartDate: Date; 
   abonnementEndDate: Date; 
 }

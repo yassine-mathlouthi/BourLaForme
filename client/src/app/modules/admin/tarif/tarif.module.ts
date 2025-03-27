@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SubscriptionsRoutingModule } from './subscriptions-routing.module';
+import { TarifRoutingModule } from './tarif-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    SubscriptionsRoutingModule
+    TarifRoutingModule
   ]
 })
-export class SubscriptionsModule { }
+export class TarifModule { }
