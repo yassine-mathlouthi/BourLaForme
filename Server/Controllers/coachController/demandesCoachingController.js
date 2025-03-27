@@ -9,7 +9,7 @@ const getReservationsForCoach = async (req, res) => {
         const coachId = req.user.userId;
     
         // Récupérer toutes les réservations où le coach est assigné
-        const reservations = await Reservation.find({ coach: coachId })
+        const reservations = await Reservation.find({ coach: coachId , status: "pending"  })
           .populate("adherent", "prenom nom email phone") // Récupérer les infos de l'adhérent
           .sort({ date: 1, time: 1 }) // Trier par date et heure croissante
           .exec();
