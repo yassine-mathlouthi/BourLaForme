@@ -58,3 +58,23 @@ http://localhost:3000/api/pourlaforme/course
   "price": 30,
   "image": "http://example.com/yoga.jpg"
 }
+
+
+
+//les demandes de reservation du coach
+get http://localhost:3000/api/pourlaforme/demandesCoaching
+
+//reserves un coach
+post http://localhost:3000/api/pourlaforme/reservationCoach
+
+{
+  "coachId": "67e335fee4a817c46909a8cb",
+  "date": "2025-03-30",
+  "time": "13:30"
+}
+//accepter demande
+http://localhost:3000/api/pourlaforme/demandesCoaching/67e46371522a1c11396fc4b6
+Fida
+
+{"status": "accepted"
+}

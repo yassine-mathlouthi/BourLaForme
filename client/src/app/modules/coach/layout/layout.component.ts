@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { MatDialog } from '@angular/material/dialog';
-import { AddCourseComponent } from '../courses/add-course/add-course.component';
-import { MatButtonModule } from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
 
 interface NavItem {
   route: string;
@@ -19,49 +18,24 @@ interface NavItem {
   standalone: true,
   imports: [RouterModule,CommonModule, MatButtonModule, MatMenuModule],
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  styleUrl: './layout.component.css'
 })
-export class LayoutComponent implements OnInit {
+
+export class LayoutComponent implements OnInit{
   pageTitle: string = 'Dashboard';
 
   navItems: NavItem[] = [
     {
-      route: '/admin/dashboard',
+      route: '/coach/myspace',
       label: 'Dashboard',
       icon: 'dashboard-icon',
       iconName:'fa-solid fa-table-columns',
     },
-    
     {
-      route: '/admin/Subscription',
-      label: 'Subscription',
-      icon: 'subs-icon',
-      iconName:"fa-solid fa-coins"
-    },
-    {
-      route: '/admin/coaches',
-      label: 'Coaches management',
+      route: '/coach/users/management',
+      label: 'Clients management',
       icon: 'users-icon',
       iconName:'fa-solid fa-users',
-    },
-    {
-      route: '/admin/accounts',
-      label: 'Accounts management',
-      icon: 'users-icon',
-      iconName:"fa-solid fa-users"
-      
-    },
-    {
-      route: '/admin/courses',
-      label: 'Courses',
-      icon: 'courses-icon',
-      iconName:"fa-solid fa-dumbbell"
-    },
-    {
-      route: '/admin/tarif',
-      label: 'Tarif',
-      icon: 'dashboard-icon',
-      iconName:'fa-solid fa-dollar-sign',
     },
   ];
 
@@ -102,10 +76,5 @@ export class LayoutComponent implements OnInit {
     return `https://ui-avatars.com/api/?name=NA&background=ffd966&color=fff`;
   }
 
-  openDialog(): void {
-    this.dialog.open(AddCourseComponent,{
-      width:'600px',
-    })
-  }
 
 }
