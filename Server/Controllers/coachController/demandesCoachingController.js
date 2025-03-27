@@ -1,4 +1,4 @@
-const Reservation = require("../../Models/reservation");
+const Reservation = require("../../Models/reservationCoach");
 const { BadRequestError, NotFoundError } = require("../../Errors");
 
 
@@ -24,6 +24,7 @@ const getReservationsForCoach = async (req, res) => {
             phone: reservation.adherent.phone,
           },
           reservation: {
+            id: reservation._id, 
             date: reservation.date.toISOString().split("T")[0], // Format YYYY-MM-DD
             time: reservation.time,
           },

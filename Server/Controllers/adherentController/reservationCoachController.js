@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Reservation = require("../../Models/reservation");
+const Reservation = require("../../Models/reservationCoach");
 const { BadRequestError, NotFoundError } = require("../../Errors");
 
 
