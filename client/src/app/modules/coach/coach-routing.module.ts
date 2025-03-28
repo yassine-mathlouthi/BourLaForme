@@ -4,6 +4,7 @@ import { CoachDashboardComponent } from './coach-dashboard/coach-dashboard.compo
 import path from 'path';
 import { AdminDashboardComponent } from '../admin/admin-dashboard/admin-dashboard.component';
 import { LayoutComponent } from './layout/layout.component';
+import { ClientsManagementComponent } from './clients-management/clients-management.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,9 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: 'myspace', pathMatch: 'full', component: CoachDashboardComponent },
+      {
+        path: 'Planning', pathMatch: 'full', component: ClientsManagementComponent 
+      }
     ],}
 
 ];

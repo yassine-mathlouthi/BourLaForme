@@ -98,6 +98,7 @@ body {
     background: linear-gradient(to right, #f8f9fa 85%, rgba(255, 255, 255, 0.1));
     padding: 2.5rem 3rem;
     min-height: 100vh;
+    min-width: 100vh;
 }
 
 /* Elegant Metrics Grid */

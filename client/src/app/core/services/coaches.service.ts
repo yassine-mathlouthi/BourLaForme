@@ -20,10 +20,24 @@ export class CoachesService {
   }
   getAllCoachingDemandes():Observable<any> {
     const token = sessionStorage.getItem('token');
-    console.log('token : ',token)
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
     });
     return this.http.get(`${this.apiUrl}/demandesCoaching`, { headers });
   }
+  acceptCochingDemande(idReservation:any,status:any){
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
+    });
+    return this.http.put(`${this.apiUrl}/demandesCoaching/${idReservation}`,status, { headers });
+  }
+  getAllAcceptedReservationDemandes(){
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
+    });
+    return this.http.get(`${this.apiUrl}/demandesCoaching/AcceptedReservations`, { headers });
+  }
+  
 }

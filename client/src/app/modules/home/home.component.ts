@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../../main-layout/navbar/navbar.component';
 
 @Component({
@@ -8,6 +8,6 @@ import { NavbarComponent } from '../../main-layout/navbar/navbar.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
-
+export class HomeComponent  {
+  
 }
