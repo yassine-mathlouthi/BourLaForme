@@ -261,5 +261,13 @@
   opacity: 1;
   transform: translateY(0);
 }
+/* Style for the popular badge */
+
+
+/* Style for card hover effect */
+.card-hover:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
 
 
