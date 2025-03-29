@@ -156,7 +156,7 @@
         vos objectifs</p>
       <div class="row">
         <div class="col-md-4 mb-4" *ngFor="let course of data">
-          <div class="card card-hover " (click)="goToCourseDetail(course._id)">
+          <div class="card card-hover ">
             <!-- Dynamically bind the image URL -->
             <img [src]="course.imageUrl" class="card-img-top" alt="{{ course.name }}">
 
