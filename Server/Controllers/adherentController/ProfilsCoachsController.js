@@ -1,3 +1,6 @@
+const User = require("../../Models/user");
+const PrivateCoach = require("../../Models/privateCoach");
+
 
 
 // Récupérer tous les coachs avec leurs profils
@@ -29,9 +32,11 @@ const getAllCoachs = async (req, res) => {
         image: privateCoachMap[coach._id]?.image ? baseUrl + privateCoachMap[coach._id].image : null,
       }));
   
-      res.status(200).json({ success: true, coachs: formattedCoachs });
+      res.status(200).json({coachs: formattedCoachs });
     } catch (error) {
       res.status(500).json({ success: false, message: error.message });
     }
   };
   
+
+   module.exports = {getAllCoachs};
