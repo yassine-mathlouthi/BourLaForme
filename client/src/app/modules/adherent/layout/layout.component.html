@@ -1,0 +1,56 @@
+<!-- admin-layout.component.html -->
+<div class="admin-container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo-container">
+            <img src="assets/img/logo2.png" alt="Admin Logo" class="logo">
+        </div>
+        <ul class="nav-menu mt-3">
+            <li class="nav-item " *ngFor="let item of navItems">
+                <a [routerLink]="item.route" routerLinkActive="active" class="nav-link">
+                    <i class="icon {{ item.iconName }}"></i>
+                    <span>{{ item.label }}</span>
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="admin-profile">
+                <img [src]="getArtistAvatarPlaceholder()" alt="Admin Avatar" class="profile-image">
+                <div class="profile-details">
+                    <span class="admin-email">{{userEmail}}</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <header class="header d-flex align-items-center justify-content-between">
+            <h1 class="d-flex align-items-center">
+                {{ pageTitle }}
+            </h1>
+
+            <div class="d-flex align-items-center ml-auto">
+                <!-- <div>
+                    <button class="btn ml-3 add-btn" (click)="openDialog()">
+                        <i class="fa-solid fa-circle-plus"></i> Add course
+                    </button>
+                </div>
+ -->
+                <!-- <div class="nav-item ml-3" *ngIf="isLoggedIn">
+                    <button class="btn btn-logout">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                </div> -->
+                <button [matMenuTriggerFor]="menu" class=" btn-menu">
+                    <i class="fa-solid fa-gear gear"></i>
+                </button> <mat-menu #menu="matMenu">
+                    <button mat-menu-item class="btn-Menu"> <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout</button>
+                </mat-menu>
+            </div>
+        </header>
+        <div class="content-wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

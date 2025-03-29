@@ -27,9 +27,9 @@ export class HomeComponent implements OnInit {
     })
 
   }
-  goToCourseDetail(courseId:any){
+ /*  goToCourseDetail(courseId:any){
     this.router.navigate(['/course', courseId])
-  }
+  } */
 
   
 }
