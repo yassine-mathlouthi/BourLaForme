@@ -1,4 +1,4 @@
-body {
+.body {
     background-image: url("https://t3.ftcdn.net/jpg/04/29/35/62/360_F_429356296_CVQ5LkC6Pl55kUNLqLisVKgTw9vjyif1.jpg");
     /* Path to your image */
     background-size: cover;
@@ -30,7 +30,10 @@ body {
       
     
   }
-  
+  .img{
+    
+    width: 200px;
+  }
   .example-form {
     padding-top: 10%;
     min-width: 150px;
