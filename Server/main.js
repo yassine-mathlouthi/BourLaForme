@@ -15,6 +15,7 @@ const demandesCoaching = require("./Routes/coachRoute/demandesCoachingRoute");
 const reservationCourse = require("./Routes/adherentRoute/reservationCourseRoute");
 const profilsCoachs = require("./Routes/adherentRoute/profilsCoachsRoute");
 const followSubscription = require("./Routes/adherentRoute/followSubscriptionRoute");
+const CoachProfile = require("./Routes/coachRoute/profilRoute");
 
 const app = express(); // Initialisation de l'application Express
 
@@ -41,6 +42,7 @@ app.use("/api/pourlaforme/demandesCoaching", demandesCoaching);
 app.use("/api/pourlaforme/reservationCourse", reservationCourse);
 app.use("/api/pourlaforme/profilsCoachs", profilsCoachs);
 app.use("/api/pourlaforme/followSubscription", followSubscription);
+app.use("/api/pourlaforme/CoachProfile", CoachProfile);
 
 
 const port = 3000;
