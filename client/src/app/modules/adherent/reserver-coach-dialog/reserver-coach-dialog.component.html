@@ -1,0 +1,30 @@
+<div class="container box">
+    <h1 class="title">Book a Coach</h1>
+  
+    <form [formGroup]="bookingForm">
+      <!-- Date Selection -->
+      <mat-form-field class="form-group mb-3" appearance="fill">
+        <mat-label>Select Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="bookingForm.get('date')?.invalid && bookingForm.get('date')?.touched">
+          Date is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Time Selection -->
+      <mat-form-field class="form-group mb-3" appearance="fill">
+        <mat-label>Select Time</mat-label>
+        <input matInput type="time" formControlName="time">
+        <mat-error *ngIf="bookingForm.get('time')?.invalid && bookingForm.get('time')?.touched">
+          Time is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" (click)="onBookCoach()" [disabled]="bookingForm.invalid">
+        Confirm Reservation
+      </button>
+    </form>
+  </div>
+  

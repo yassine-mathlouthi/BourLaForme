@@ -28,21 +28,29 @@ export class LayoutComponent implements OnInit{
       route: '/adherent/myspace',
       label: 'Dashboard',
       icon: 'dashboard-icon',
-      iconName:'fa-solid fa-table-columns',
+      iconName: 'fa-solid fa-chart-line', // Represents progress tracking
     },
     {
       route: '/adherent/course',
       label: 'Courses',
-      icon: 'users-icon',
-      iconName:'fa-solid fa-users',
+      icon: 'dumbbell-icon',
+      iconName: 'fa-solid fa-dumbbell', // Represents fitness training
     },
     {
       route: '/adherent/MyCourse',
       label: 'My Courses',
-      icon: 'users-icon',
-      iconName:'fa-solid fa-users',
+      icon: 'clipboard-list-icon',
+      iconName: 'fa-solid fa-clipboard-list', // Represents enrolled workout plans
     },
-  ];
+    {
+      route: '/adherent/coaches',
+      label: 'Coaches List',
+      icon: 'user-coach-icon',
+      iconName: 'fa-solid fa-user-tie', // Represents gym trainers
+    },
+];
+
+
 
   userEmail: string | null = null;
   isLoggedIn = true;

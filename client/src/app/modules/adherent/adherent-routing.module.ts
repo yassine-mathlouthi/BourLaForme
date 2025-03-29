@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CoachesListComponent } from './coaches-list/coaches-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutComponent } from './layout/layout.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
@@ -12,6 +13,8 @@ const routes: Routes = [
       { path: 'myspace', pathMatch: 'full', component: DashboardComponent },
       { path: 'course', pathMatch: 'full', component: ReserverCourseComponent },
       { path: 'MyCourse', pathMatch: 'full', component: MyCoursesComponent },
+      { path: 'coaches', pathMatch: 'full', component: CoachesListComponent },
+
 
 
     ],}
