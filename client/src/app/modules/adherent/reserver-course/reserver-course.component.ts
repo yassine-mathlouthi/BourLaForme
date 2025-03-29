@@ -23,8 +23,16 @@ export class ReserverCourseComponent implements OnInit {
     })
 
   }
+  body:{
+    courseId:string
+  }={courseId:''}
   resrverCourse(courseId:any){
-    
+    console.log(courseId)
+    this.body.courseId=courseId
+    console.log(this.body,"json")
+    this._coursesService.reserverCour(this.body).subscribe(r=>{
+      console.log(r)
+    })
 
   }
 

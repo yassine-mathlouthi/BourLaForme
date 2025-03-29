@@ -36,6 +36,12 @@ export class LayoutComponent implements OnInit{
       icon: 'users-icon',
       iconName:'fa-solid fa-users',
     },
+    {
+      route: '/adherent/MyCourse',
+      label: 'My Courses',
+      icon: 'users-icon',
+      iconName:'fa-solid fa-users',
+    },
   ];
 
   userEmail: string | null = null;
