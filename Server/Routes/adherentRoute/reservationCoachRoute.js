@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { createReservation, getReservationsByAdherent, updateReservationDate, cancelReservation} = require("../../Controllers/adherentController/reservationCoachController");
+const { createReservation, getReservationsByAdherent, updateReservationDate, cancelReservation} = require("../../Controllers/adherentController/ReservationCoachController");
 const authMiddleware = require("../../Middleware/authentification");
 
 router.post("/", authMiddleware(), createReservation);
