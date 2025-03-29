@@ -23,6 +23,11 @@ const login = async (req, res) => {
         return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'email invalide' });
       }
   
+      // Vérification si le compte est validé
+      if (!user.isValidated) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Votre compte n est pas encore validé.' });
+    }
+
       // Vérification du mot de passe
       const isPasswordCorrect = await user.comparePassword(password);
       if (!isPasswordCorrect) {

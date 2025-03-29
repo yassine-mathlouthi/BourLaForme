@@ -11,19 +11,11 @@ const reservationCourseSchema = new mongoose.Schema({
     ref: "Course",
     required: true,
   },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  time: {
-    type: String,
-    required: true,
-  },
   status: {
     type: String,
-    enum: ["pending", "accepted", "rejected"],
-    default: "confirmed",
+    enum: ["accepted", "rejected"],
+    
   },
 });
 
-module.exports = mongoose.model("Reservation", reservationSchema);
+module.exports = mongoose.model("ReservationCourse", reservationCourseSchema);

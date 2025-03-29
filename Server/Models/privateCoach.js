@@ -18,6 +18,10 @@ const privateCoachSchema = new Schema({
     type: String,
     maxlength: [500, 'La bio est trop longue'],
   },
+  image: {
+    type: String, 
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('PrivateCoach', privateCoachSchema);

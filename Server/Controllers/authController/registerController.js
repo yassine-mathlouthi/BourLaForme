@@ -23,10 +23,12 @@ const register = async (req, res) => {
         .json({ message: "L'email est déjà utilisé." });
     }
     // Si le rôle est coach, vérifier que specialty et bio sont fournis avant de créer l'utilisateur
-    if (role === "coach" && (!specialty || !bio)) {
+    if (role === "coach" && (!specialty || !bio || !req.file)) {
       return res.status(StatusCodes.BAD_REQUEST).json({
-        message: "Spécialité et bio sont obligatoires pour un coach.",
+        message: "Spécialité, bio et image sont obligatoires pour un coach.",
       });
+
+
     }
 
     // Création d'un nouveau user
@@ -41,10 +43,12 @@ const register = async (req, res) => {
 
     // Si le rôle est coach, créer également un profil dans PrivateCoach
     if (role === "coach") {
+      const image = req.file ? req.file.filename : null;
       await PrivateCoach.create({
         user: user._id,
         specialty,
         bio,
+        image,
       });
     }
     // Création du JWT

@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Reservation = require("../../Models/reservationCoach");
+const PrivateCoach = require("../../Models/privateCoach"); // Ajoute cette ligne en haut de ton fichier
+
 const { BadRequestError, NotFoundError } = require("../../Errors");
 
 
@@ -48,21 +50,59 @@ const createReservation = async (req, res) => {
 const getReservationsByAdherent = async (req, res) => {
   try {
     const reservations = await Reservation.find({ adherent: req.user.userId })
-      .populate("coach", "prenom nom email phone")
+      .populate("coach", "prenom nom email phone") // Peupler l'info du coach depuis User
       .exec();
 
-        // Formater la date pour chaque réservation
-    const formattedReservations = reservations.map((reservation) => {
-      // Formater la date au format "YYYY-MM-DD"
-      const formattedDate = reservation.date.toISOString().split('T')[0];
+    // Construire l'URL complète pour les images
+    const baseUrl = `${req.protocol}://${req.get("host")}/uploads/`;
+
+    // Récupérer les IDs des coachs
+    const coachIds = reservations.map(reservation => reservation.coach?._id).filter(Boolean);
+    console.log("Coach IDs récupérés:", coachIds);
+
+    // Récupérer les profils PrivateCoach
+    const privateCoaches = await PrivateCoach.find({ user: { $in: coachIds } })
+      .select("user image bio specialty")
+      .lean();
+
+    if (privateCoaches.length === 0) {
+      console.warn("⚠ Aucun profil de coach trouvé dans PrivateCoach !");
+    }
+
+    // Créer un map des profils PrivateCoach
+    const privateCoachMap = {};
+    privateCoaches.forEach(coach => {
+      privateCoachMap[coach.user] = coach;
+    });
+
+    console.log("Profils PrivateCoach trouvés:", privateCoachMap);
+
+    // Transformer les données
+    const formattedReservations = reservations.map(reservation => {
+      const formattedDate = reservation.date.toISOString().split("T")[0];
+      let privateCoach = null;
+
+      try {
+        privateCoach = reservation.coach ? privateCoachMap[reservation.coach._id] : null;
+      } catch (error) {
+        console.error("Erreur lors de l'accès à privateCoachMap:", error);
+      }
 
       return {
         ...reservation.toObject(),
-        date: formattedDate, // Ajouter la date formatée
+        date: formattedDate,
+        coach: {
+          ...reservation.coach.toObject(),
+          image: privateCoach?.image ? baseUrl + privateCoach.image : null,
+          bio: privateCoach?.bio || null,
+          specialty: privateCoach?.specialty || null,
+        },
       };
     });
-    res.status(200).json({ reservations: formattedReservations  });
+
+    res.status(200).json({ reservations: formattedReservations });
   } catch (error) {
+    console.error("Erreur dans getReservationsByAdherent:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
@@ -105,6 +145,8 @@ const updateReservationDate = async (req, res) => {
    });
  }
 };
+
+
 
 //Annulation de réservation par l'adhérent.
 const cancelReservation = async (req, res) => {
