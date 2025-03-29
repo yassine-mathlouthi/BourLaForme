@@ -1,54 +1,74 @@
 <section class="py-5 bg-light">
-    <div class="container">
-      <h2 class="display-4 fw-bold text-center mb-3 section-title">Our Courses</h2>
-      <p class="lead text-center mb-5 feature-text">Varied programs tailored to all levels to help you achieve your goals</p>
-  
-      <!-- Conditionally render courses or no-courses message -->
-      <div *ngIf="data && data.length > 0; else noCourses">
-        <div class="row">
-          <div class="col-md-4 mb-4" *ngFor="let course of data">
-            <div class="card card-hover h-100 shadow-sm">
-              <img [src]="course.imageUrl" class="card-img-top img-fluid" alt="{{ course.name }}">
-              <div class="card-body d-flex flex-column">
-                <span class="badge position-absolute top-0 start-0 mt-2 ms-2" [ngClass]="{
-                  'bg-warning text-dark': course.level === 'Intermediate',
-                  'bg-success': course.level === 'Beginner',
-                  'bg-danger': course.level === 'Advanced'
-                }">
-                  {{ course.level }}
-                </span>
-                <span class="badge bg-light text-dark position-absolute top-0 end-0 mt-2 me-2">
-                  {{ course.price }}€ / session
-                </span>
-                <h5 class="card-title feature-title mt-5 mb-3">{{ course.name }}</h5>
-                <p class="card-text text-muted">{{ course.description }}</p>
-                <ul class="list-unstyled card-text mt-auto">
-                  <li><i class="fas fa-clock me-2"></i> {{ course.duration }} min</li>
-                  <li><i class="fas fa-calendar-alt me-2"></i> {{ course.schedule | date:'short' }}</li>
-                  <li><i class="fas fa-users me-2"></i> {{ course.availableSeats }} spots</li>
-                  <li><i class="fas fa-chalkboard-teacher me-2"></i> Coach: {{ course.coachName }}</li>
-                </ul>
-              </div>
-              <div class="card-footer bg-transparent border-0 text-center pb-3">
-                <button mat-raised-button class="btn btn-primary px-4">
-                  <i class="fas fa-calendar-check me-2"></i> Cancel
-                </button>
-              </div>
-            </div>
+  <div class="container">
+    <h2 class="display-4 fw-bold text-center mb-3 section-title">My Courses</h2>
+    <p class="lead text-center mb-5 feature-text">Your reserved programs to help you achieve your goals</p>
+
+    <div class="row">
+      <!-- Static Course 1 - Reserved -->
+      <div class="col-md-4 mb-4">
+        <div class="card card-hover h-100 shadow-sm">
+          <img src="https://static.wixstatic.com/media/7f5106_61de6d5be3744fbeb81ef97231a0d0cf~mv2.jpg/v1/fill/w_533,h_300,q_90,enc_avif,quality_auto/7f5106_61de6d5be3744fbeb81ef97231a0d0cf~mv2.jpg" class="card-img-top img-fluid" alt="Morning Yoga Flow">
+          <div class="card-body d-flex flex-column">
+            <span class="badge bg-success position-absolute top-0 start-0 mt-2 ms-2">Beginner</span>
+            <span class="badge bg-light text-dark position-absolute top-0 end-0 mt-2 me-2">45€ / session</span>
+            <h5 class="card-title feature-title mt-5 mb-3">Morning Yoga Flow</h5>
+            <p class="card-text text-muted">A gentle yoga class to start your day with energy and calm.</p>
+            <ul class="list-unstyled card-text mt-auto">
+              <li><i class="fas fa-clock me-2"></i> 60 min</li>
+              <li><i class="fas fa-calendar-alt me-2"></i> 03/30/2025</li>
+              <li><i class="fas fa-users me-2"></i> 8 spots remaining</li>
+              <li><i class="fas fa-chalkboard-teacher me-2"></i> Coach: Sarah Miller</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-transparent border-0 text-center pb-3">
+            
           </div>
         </div>
       </div>
-  
-      <!-- No Courses Booked Message -->
-      <ng-template #noCourses>
-        <div class="text-center py-5 no-courses-message">
-          <i class="fas fa-calendar-times display-1 text-muted mb-4"></i>
-          <h3 class="fw-bold text-dark mb-3">No Courses Booked</h3>
-          <p class="lead text-muted mb-4">It looks like you haven’t booked any courses yet. Explore our options and start your journey today!</p>
-          <button mat-raised-button class="btn btn-primary px-5" routerLink="adherent/course">
-            <i class="fas fa-search me-2"></i> Discover Courses
-          </button>
+
+      <!-- Static Course 2 - Reserved -->
+      <div class="col-md-4 mb-4">
+        <div class="card card-hover h-100 shadow-sm">
+          <img src="https://www.unc.edu/wp-content/uploads/2022/09/JEN_KaraHume_007-2-1200x675-1.jpg" class="card-img-top img-fluid" alt="HIIT Power Hour">
+          <div class="card-body d-flex flex-column">
+            <span class="badge bg-warning text-dark position-absolute top-0 start-0 mt-2 ms-2">Intermediate</span>
+            <span class="badge bg-light text-dark position-absolute top-0 end-0 mt-2 me-2">60€ / session</span>
+            <h5 class="card-title feature-title mt-5 mb-3">HIIT Power Hour</h5>
+            <p class="card-text text-muted">High-intensity interval training for maximum results.</p>
+            <ul class="list-unstyled card-text mt-auto">
+              <li><i class="fas fa-clock me-2"></i> 45 min</li>
+              <li><i class="fas fa-calendar-alt me-2"></i> 04/01/2025</li>
+              <li><i class="fas fa-users me-2"></i> 5 spots remaining</li>
+              <li><i class="fas fa-chalkboard-teacher me-2"></i> Coach: Mike Johnson</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-transparent border-0 text-center pb-3">
+            
+          </div>
         </div>
-      </ng-template>
+      </div>
+
+      <!-- Static Course 3 - Reserved -->
+      <div class="col-md-4 mb-4">
+        <div class="card card-hover h-100 shadow-sm">
+          <img src="https://corepilatesstudios.co.uk/wp-content/uploads/2024/05/Rhapsody-Road-Photography-Core-Kensington-Pilates-Studio-2-1-scaled.jpg" class="card-img-top img-fluid" alt="Core Pilates">
+          <div class="card-body d-flex flex-column">
+            <span class="badge bg-danger position-absolute top-0 start-0 mt-2 ms-2">Advanced</span>
+            <span class="badge bg-light text-dark position-absolute top-0 end-0 mt-2 me-2">55€ / session</span>
+            <h5 class="card-title feature-title mt-5 mb-3">Core Pilates</h5>
+            <p class="card-text text-muted">Advanced pilates focusing on core strength and flexibility.</p>
+            <ul class="list-unstyled card-text mt-auto">
+              <li><i class="fas fa-clock me-2"></i> 75 min</li>
+              <li><i class="fas fa-calendar-alt me-2"></i> 04/03/2025</li>
+              <li><i class="fas fa-users me-2"></i> 3 spots remaining</li>
+              <li><i class="fas fa-chalkboard-teacher me-2"></i> Coach: Emily Davis</li>
+            </ul>
+          </div>
+          <div class="card-footer bg-transparent border-0 text-center pb-3">
+            
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>

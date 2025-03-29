@@ -1,1 +1,66 @@
-<p>dashboard works!</p>
+<!-- subscription.component.html -->
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Subscription Dashboard</h1>
+    <div class="status-indicator active">Active Subscription</div>
+  </header>
+
+  <div class="dashboard-grid">
+    <!-- Subscription Info Card -->
+    <div class="card info-card">
+      <h3>Subscription Overview</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Plan</span>
+          <span class="value">Mensuel</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Duration</span>
+          <span class="value">30 days</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Start</span>
+          <span class="value">2025-03-10</span>
+        </div>
+        <div class="info-item">
+          <span class="label">End</span>
+          <span class="value">2025-04-10</span>
+        </div>
+        <div class="info-item">
+          <span class="label">ID</span>
+          <span class="value">67e6f463e22ee58b309a4ee8</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Remaining Days Chart -->
+    <div class="card chart-card">
+      <h3>Time Remaining</h3>
+      <div class="chart-container">
+        <canvas id="remainingChart"></canvas>
+        <div class="chart-center">
+          <span class="remaining-days">11</span>
+          <span class="remaining-label">Days Left</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usage Progress -->
+    <div class="card progress-card">
+      <h3>Usage Progress</h3>
+      <div class="progress-container">
+        <canvas id="progressChart"></canvas>
+        <div class="progress-info">
+          <span class="progress-value">63%</span>
+          <span class="progress-label">Usage Complete</span>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+
+  <footer class="dashboard-footer">
+    <span>Last Updated: March 29, 2025</span>
+  </footer>
+</div>

@@ -1,0 +1,114 @@
+/* Section Title */
+.section-title {
+    color: #34495e; /* Slightly lighter blue-gray for a softer look */
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 2px; /* Increased spacing for emphasis */
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 2.25rem; /* Slightly smaller for balance */
+}
+
+/* Feature Text */
+.feature-text {
+    color: #95a5a6; /* Lighter gray for better contrast */
+    font-size: 1rem; /* Slightly smaller for hierarchy */
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.6; /* Added for readability */
+}
+
+/* Card Styling */
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 12px; /* Slightly smaller radius for a modern touch */
+    overflow: hidden;
+    max-width: 300px; /* Adjusted to a more compact size */
+    margin: 0 auto; /* Center within column */
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Subtle shadow by default */
+}
+
+.card-hover:hover {
+    transform: translateY(-10px); /* Slightly larger lift for emphasis */
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.card-img-top {
+    height: 150px; /* Slightly smaller for proportion */
+    object-fit: cover;
+    border-top-left-radius: 12px; /* Match card radius */
+    border-top-right-radius: 12px;
+}
+
+.card-title {
+    font-size: 1.2rem; /* Adjusted for balance */
+    color: #34495e; /* Matching section title color */
+    font-weight: 600;
+    letter-spacing: 0.8px; /* Increased for clarity */
+}
+
+.card-text {
+    font-size: 0.9rem; /* Slightly larger for readability */
+    line-height: 1.6; /* Improved readability */
+    color: #6c8290; /* Softer gray-blue */
+}
+
+/* Badge Styling */
+.badge {
+    font-size: 0.7rem; /* Slightly smaller for subtlety */
+    border-radius: 10px; /* Adjusted to match overall rounding */
+    font-weight: 600; /* Bolder for emphasis */
+    padding: 4px 10px; /* Adjusted padding */
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #34495e; /* Matching the darker theme */
+    border-color: #34495e;
+    border-radius: 25px; /* More rounded for a modern feel */
+    padding: 7px 16px; /* Slightly smaller */
+    font-weight: 500;
+    font-size: 0.85rem; /* Smaller for proportion */
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Added shadow transition */
+}
+
+.btn-primary:hover {
+    background-color: #22313f; /* Darker shade for hover */
+    border-color: #22313f;
+    transform: scale(1.08); /* Slightly larger scale for effect */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Added shadow on hover */
+}
+
+/* Outline Button Styling (for Edit Time) */
+.btn-outline-primary {
+    color: #34495e;
+    border-color: #34495e;
+    border-radius: 25px;
+    padding: 7px 16px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #eef2f7; /* Light gray background on hover */
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon Spacing */
+.list-unstyled li i {
+    color: #34495e; /* Matching primary color */
+    font-size: 0.85rem; /* Slightly smaller */
+    margin-right: 8px; /* Increased for better spacing */
+}
+
+/* Ensure cards are equal height and centered */
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: stretch; /* Ensures cards stretch to equal height */
+}
