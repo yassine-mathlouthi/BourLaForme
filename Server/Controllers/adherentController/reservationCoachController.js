@@ -122,6 +122,10 @@ const updateReservationDate = async (req, res) => {
     }
 
     
+    // Vérifie si le statut est "pending"
+    if (reservation.status !== "pending") {
+      throw new BadRequestError("La réservation ne peut être modifiée que si elle est en attente (pending)");
+    }
 
     
     // Si le date est fourni, on met à jour la date 
@@ -157,6 +161,11 @@ const cancelReservation = async (req, res) => {
     const reservation = await Reservation.findById(reservationId);
     if (!reservation) {
       throw new NotFoundError("Réservation non trouvée");
+    }
+
+    // Vérifie si le statut est "pending"
+    if (reservation.status !== "pending") {
+      throw new BadRequestError("La réservation ne peut être supprimée que si elle est en attente (pending)");
     }
 
     // Suppression de la réservation
