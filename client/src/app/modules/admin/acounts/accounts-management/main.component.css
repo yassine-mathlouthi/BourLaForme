@@ -201,7 +201,10 @@ mat-header-row {
     font-family: 'Lora', serif !important;
     background-color: #f8f9fa;
 }
+th{
+    font-weight: 600;
 
+}
 mat-header-cell {
     font-family: 'Lora', serif !important;
     font-weight: 600;

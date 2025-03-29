@@ -12,7 +12,10 @@
 td {
   font-family: 'Source Sans Pro', sans-serif !important;
 }
+th{
+  font-weight: 600;
 
+}
 mat-icon {
   font-family: 'Material Icons' !important;
 }

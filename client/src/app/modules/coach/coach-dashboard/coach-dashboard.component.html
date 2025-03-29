@@ -58,26 +58,20 @@
 
                 <!-- Actions Column -->
                 <ng-container matColumnDef="validation">
-                    <th mat-header-cell *matHeaderCellDef> </th>
-                    <td mat-cell *matCellDef="let element">
-                        <button mat-raised-button >
-                            <i class="fa-solid fa-pen-to-square"></i> Validate
+                    <th mat-header-cell *matHeaderCellDef class="t-header"> Actions </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <button mat-raised-button (click)="acceptReservationDemande(element.reservation.id)" >
+                            Accept
                         </button>
-                        <button mat-stroked-button class="delete-btn" >
-                            <i class="fa-solid fa-trash"></i>
+                        <button mat-stroked-button class="delete-btn" (click)="deleteReservationDemande(element.reservation.id)">
+                             Reject
                         </button>
                     </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-
-
-
             </table>
-
-
             <!-- No Data Template -->
             <ng-template #noDataTemplate>
                 <div class="no-data">
@@ -85,14 +79,9 @@
                     <p>No users available.</p>
                 </div>
             </ng-template>
-
-
-
         </div>
         <div class="paginator">
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
-
-
     </div>
 </div>

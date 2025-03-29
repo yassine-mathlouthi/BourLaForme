@@ -88,6 +88,27 @@ export class CoachDashboardComponent implements OnInit {
       }
     );
   }
+  body: { status: string } = { status: '' }; 
+  acceptReservationDemande(id:any){
+    this.body.status="accepted"
+    this._coachService.acceptCochingDemande(id,this.body).subscribe((r)=>{
+      this._snackBar.open('Reservation accepted successfully!', 'Close', { duration: 3000 }); this.refreshTable();  console.log(r)   },(error)=>{
+        console.log(error)
+        this._snackBar.open('Failed!', 'Close', { duration: 3000 });
+      }
+    )
+    
+
+  }
+  deleteReservationDemande(id:any){
+    this.body.status="rejected"
+    this._coachService.acceptCochingDemande(id,this.body).subscribe((r)=>{
+      this._snackBar.open('Reservation accepted successfully!', 'Close', { duration: 3000 }); this.refreshTable(); console.log(r)   },(error)=>{
+        console.log(error)
+        this._snackBar.open('Failed!', 'Close', { duration: 3000 });
+      }
+    )
+  }
 
 
 }
