@@ -32,6 +32,12 @@ export class LayoutComponent implements OnInit{
       iconName:'fa-solid fa-table-columns',
     },
     {
+      route: '/coach/Profile',
+      label: 'Profile',
+      icon: 'dashboard-icon',
+      iconName:'fa-solid fa-table-columns',
+    },
+    {
       route: '/coach/Planning',
       label: 'Clients management',
       icon: 'users-icon',
