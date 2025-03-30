@@ -28,20 +28,20 @@ export class LayoutComponent implements OnInit{
     {
       route: '/coach/myspace',
       label: 'Dashboard',
-      icon: 'dashboard-icon',
-      iconName:'fa-solid fa-table-columns',
+      icon: 'dashboard-icon', // Keeping this class for styling consistency
+      iconName: 'fa-solid fa-house', // Changed to house icon for "home/dashboard"
     },
     {
       route: '/coach/Profile',
-      label: 'Profile',
-      icon: 'dashboard-icon',
-      iconName:'fa-solid fa-table-columns',
+      label: 'My Profile', // Added "My" for personal touch
+      icon: 'profile-icon', // Updated class to be more specific
+      iconName: 'fa-solid fa-user', // Changed to user icon for profile
     },
     {
       route: '/coach/Planning',
-      label: 'Clients management',
-      icon: 'users-icon',
-      iconName:'fa-solid fa-users',
+      label: 'Client Management', // "Client" singular for clarity, capitalized "Management"
+      icon: 'clients-icon', // Updated class to reflect clients
+      iconName: 'fa-solid fa-user-group', // Changed to user-group for multiple clients
     },
   ];
 

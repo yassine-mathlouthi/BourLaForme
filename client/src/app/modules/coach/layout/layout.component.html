@@ -41,9 +41,27 @@
                         <i class="fa-solid fa-right-from-bracket"></i> Logout
                     </button>
                 </div> -->
+                <div class="notification-container">
+                    <button class="btn-menu">
+                        <i class="fa-solid fa-bell notification-icon"></i>
+                        <span class="notification-badge">1</span>
+                    </button>
+                    
+                    <div class="notification-dropdown">
+                        <div class="notification-item">
+                            <i class="fa-solid fa-user-plus notification-item-icon"></i>
+                            <span class="notification-text">Ahmed Moussa has requested you for private coaching on April 5th, 2025 at 3:00 PM.</span>
+                        </div>
+                        <div class="notification-item">
+                            <i class="fa-solid fa-user-plus notification-item-icon"></i>
+                            <span class="notification-text">Yassine has requested you for private coaching on April 5th, 2025 at 3:00 PM.</span>
+                        </div>
+                    </div>
+                </div>
                 <button [matMenuTriggerFor]="menu" class=" btn-menu">
-                    <i class="fa-solid fa-gear gear"></i>
-                </button> <mat-menu #menu="matMenu">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+                 <mat-menu #menu="matMenu">
                     <button mat-menu-item class="btn-Menu"> <i class="fa-solid fa-right-from-bracket"></i>
                         Logout</button>
                 </mat-menu>
