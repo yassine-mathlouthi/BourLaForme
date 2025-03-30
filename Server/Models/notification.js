@@ -11,7 +11,11 @@ const notificationSchema = new mongoose.Schema({
     enum: ['abonnement_expire'],
     required: true,
   },
-  isRead: {
+  isReadAdherent: {
+    type: Boolean,
+    default: false,
+  },
+  isReadAdmin: {
     type: Boolean,
     default: false,
   },
