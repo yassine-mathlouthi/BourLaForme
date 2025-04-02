@@ -48,7 +48,7 @@ const addCourse = async (req, res) => {
       image,
     });
     await newCourse.save();
-    res.status(201).json({ message: "Cours ajouté avec succès", newCourse });
+    res.status(201).json({ message: "Cours ajouté avec succès"});
   } catch (err) {
     res.status(err.statusCode || 500).json({ message: err.message });
   }
@@ -105,7 +105,7 @@ const updateCourse = async (req, res) => {
     // Sauvegarder les changements
     await updatedCourse.save();
 
-    res.status(200).json({ message: "Cours modifié avec succès", updatedCourse });
+    res.status(200).json({ message: "Cours modifié avec succès" });
   } catch (err) {
     res.status(err.statusCode || 500).json({ message: err.message });
   }

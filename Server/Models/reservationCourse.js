@@ -13,9 +13,16 @@ const reservationCourseSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["accepted", "rejected"],
+    enum: ["accepted"],
+    default: 'accepted',
+    required: true
     
   },
 });
+
+
+// Indexation
+reservationCourseSchema.index({ userId: 1, courseId: 1 }); // Pour vérifier les doublons
+reservationCourseSchema.index({ userId: 1, createdAt: -1 }); // Pour filtre et tri par utilisateur
 
 module.exports = mongoose.model("ReservationCourse", reservationCourseSchema);

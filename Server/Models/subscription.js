@@ -13,5 +13,8 @@ const subscriptionSchema = new mongoose.Schema({
   }
 });
 
+// Indexation
+subscriptionSchema.index({ user: 1 }); // Pour les filtres par utilisateur
+
 module.exports = mongoose.model('Subscription', subscriptionSchema);
  

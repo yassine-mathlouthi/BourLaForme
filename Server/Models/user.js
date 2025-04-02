@@ -56,7 +56,8 @@ const usershema = new mongoose.Schema({
 
 // Ajout de l'index
 usershema.index({ isValidated: 1 });
-
+// Indexation
+usershema.index({ isValidated: 1, role: 1 }); // Index composé pour filtres combinés
 
 usershema.pre("save", async function () {
   const salt = await bcrypt.genSalt(10);

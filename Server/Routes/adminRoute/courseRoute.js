@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require("../../Middleware/authentification");
 const { addCourse, getAllCourses, updateCourse, deleteCourse } = require('../../Controllers/adminController/courseController');
 const multer = require('multer');
 
@@ -17,9 +18,9 @@ const mystorage = multer.diskStorage({
 
 const upload = multer({storage: mystorage})
 
-router.post('/', upload.single('image'), addCourse);
+router.post('/', upload.single('image'), authMiddleware(["admin"]), addCourse);
 router.get('/', getAllCourses);
-router.put('/:id', upload.single('image'), updateCourse);
-router.delete('/:id', deleteCourse);
+router.put('/:id', upload.single('image'), authMiddleware(["admin"]), updateCourse);
+router.delete('/:id', authMiddleware(["admin"]), deleteCourse);
 
 module.exports = router;

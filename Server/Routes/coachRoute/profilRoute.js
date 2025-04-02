@@ -20,8 +20,8 @@ const upload = multer({storage: mystorage})
 
 
 // Route pour que le coach consulte ses réservations
-router.get("/", authMiddleware(), getCoachProfile);
-router.put("/", upload.single('image'), authMiddleware(), updateCoachProfile);
+router.get("/", authMiddleware(["coach"]), getCoachProfile);
+router.put("/", upload.single('image'), authMiddleware(["coach"]), updateCoachProfile);
 
 
 module.exports = router;

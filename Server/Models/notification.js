@@ -25,4 +25,8 @@ const notificationSchema = new mongoose.Schema({
   },
 });
 
+// Indexation
+notificationSchema.index({ type: 1, createdAt: -1 }); // Pour filtre et tri
+notificationSchema.index({ user: 1, createdAt: -1 }); // Pour filtre par utilisateur et tri par date
+
 module.exports = mongoose.model('Notification', notificationSchema);

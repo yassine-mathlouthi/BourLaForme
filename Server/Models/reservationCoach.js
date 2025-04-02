@@ -29,4 +29,8 @@ const reservationSchema = new Schema({
   },
 });
 
+// Indexation
+reservationSchema.index({ coach: 1, status: 1, date: 1 }); // Index composé pour filtre et tri
+reservationSchema.index({ adherent: 1 });                  // Pour filtres par adhérent
+
 module.exports = mongoose.model("Reservation", reservationSchema);

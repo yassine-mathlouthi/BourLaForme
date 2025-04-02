@@ -23,6 +23,21 @@ const createReservation = async (req, res) => {
       // Commence une transaction dans la session
       // Toutes les opérations suivantes font partie de cette transaction
       
+
+        // Vérifier si l'utilisateur a déjà réservé ce cours
+      const existingReservation = await Reservation.findOne({
+        userId,
+        courseId
+      }).session(session);
+
+      if (existingReservation) {
+        await session.abortTransaction();
+        session.endSession();
+        throw new BadRequestError('Vous avez déjà réservé ce cours');
+      }
+
+
+      // Vérifier la disponibilité du cours et réserver une place
       const course = await Course.findOneAndUpdate(
         { 
           _id: courseId,                    // Recherche par ID du cours
@@ -57,52 +72,13 @@ const createReservation = async (req, res) => {
         }
   
         // Le cours existe mais pas de places disponibles
-        const rejectedReservation = new Reservation({
-          userId,                          
-          courseId,                       
-          status: 'rejected'             
-        });
-        
-  
-        await rejectedReservation.save({ session });
-        // Sauvegarde la réservation rejetée dans la transaction
-  
-        await session.commitTransaction();
-        // Valide la transaction avec la réservation rejetée
-        
+        await session.abortTransaction();
         session.endSession();
-        // Termine la session
-  
-        
-  
-        return res.status(201).json({
-          message: 'Réservation rejetée avec succès - plus de places disponibles',
-          
-        });
-        // Retourne une réponse réussie avec la réservation rejetée
+        throw new BadRequestError('Désolé, il n\'y a plus de places disponibles');
+    
       }
   
-      // Si on arrive ici, le cours a été trouvé et une place a été réservée
-      const existingReservation = await Reservation.findOne({
-        userId,
-        courseId
-      }).session(session);
-      // Vérifie si cet utilisateur a déjà réservé ce cours
-  
-      if (existingReservation) {
-        // L'utilisateur a déjà une réservation
-        await Course.findByIdAndUpdate(
-          courseId,
-          { $inc: { availableSeats: 1 } },    // Annule la décrémentation
-          { session }
-        );
-        // Remet la place qu'on avait prise
-        
-        await session.abortTransaction();     // Annule la transaction
-        session.endSession();                // Termine la session
-        throw new BadRequestError('Vous avez déjà réservé ce cours');
-        
-      }
+      
   
       // Crée la réservation acceptée
       const reservation = new Reservation({
