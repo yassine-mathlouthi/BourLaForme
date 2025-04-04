@@ -18,6 +18,8 @@ const followSubscription = require("./Routes/adherentRoute/followSubscriptionRou
 const CoachProfile = require("./Routes/coachRoute/profilRoute");
 const notificationUser = require("./Routes/adherentRoute/notificationRoute");
 const notificationUsers = require("./Routes/adminRoute/notificationRoute");
+const statistics = require("./Routes/adminRoute/statisticsRoute");
+
 const app = express(); // Initialisation de l'application Express
 const startCronJob = require('./Services/planification');
 
@@ -46,6 +48,7 @@ app.use("/api/pourlaforme/followSubscription", followSubscription);
 app.use("/api/pourlaforme/CoachProfile", CoachProfile);
 app.use("/api/pourlaforme/NotificationsForUser", notificationUser);
 app.use("/api/pourlaforme/NotificationsForAdmin", notificationUsers);
+app.use("/api/pourlaforme/statistics", statistics);
 
 
 const port = 3000;
