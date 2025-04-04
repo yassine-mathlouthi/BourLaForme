@@ -1,23 +1,30 @@
-<form id="editTimeForm">
-    <div class="mb-3">
-      <label for="coachName" class="form-label">Coach Name</label>
-      <input type="text" class="form-control" id="coachName" value="Sarah Miller" readonly>
-    </div>
-    <div class="mb-3">
-      <label for="sessionType" class="form-label">Session Type</label>
-      <input type="text" class="form-control" id="sessionType" value="Yoga Fundamentals" readonly>
-    </div>
-    <div class="mb-3">
-      <label for="sessionDate" class="form-label">Date</label>
-      <input type="date" class="form-control" id="sessionDate" value="2025-03-30" required>
-    </div>
-    <div class="mb-3">
-      <label for="sessionTime" class="form-label">Time</label>
-      <input type="time" class="form-control" id="sessionTime" value="10:00" required>
-    </div>
-    <div class="mb-3">
-      <label for="sessionLocation" class="form-label">Location</label>
-      <input type="text" class="form-control" id="sessionLocation" value="Studio A" readonly>
-    </div>
-    <button type="submit" class="btn btn-primary">Save Changes</button>
+<form [formGroup]="editForm" (ngSubmit)="onSave()" id="editTimeForm">
+  <div class="mb-3">
+    <label for="coachName" class="form-label">Coach Name</label>
+    <input type="text" class="form-control" id="coachName"
+           [value]="data.coach?.prenom + ' ' + data.coach?.nom" readonly>
+  </div>
+
+  <div class="mb-3">
+    <label for="sessionType" class="form-label">Session Type</label>
+    <input type="text" class="form-control" id="sessionType"
+           [value]="data.coach?.specialty" readonly>
+  </div>
+
+  <div class="mb-3">
+    <label for="sessionDate" class="form-label">Date</label>
+    <input type="date" class="form-control" id="sessionDate" formControlName="date" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="sessionTime" class="form-label">Time</label>
+    <input type="time" class="form-control" id="sessionTime" formControlName="time" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="sessionLocation" class="form-label">Location</label>
+    <input type="text" class="form-control" id="sessionLocation" value="Studio A" readonly>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save Changes</button>
 </form>
