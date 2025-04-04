@@ -50,10 +50,17 @@ export class LayoutComponent implements OnInit{
     },
     {
       route: '/adherent/Mycoaches',
-      label: 'Coaches List',
+      label: 'My Coaches',
       icon: 'user-coach-icon',
       iconName: 'fa-solid fa-user-tie', // Represents gym trainers
     },
+    {
+      route: '/adherent/IA-workout-generator',
+      label: 'IA workout generator',
+      icon: 'user-coach-icon',
+      iconName: 'fas fa-robot', // Represents gym trainers
+    },
+    
 ];
 
 

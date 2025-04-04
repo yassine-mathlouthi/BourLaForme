@@ -1,114 +1,150 @@
 <body>
-    <div class="container-fluid box">
-      <!-- Card Container -->
-      <div class="card-container">
-        <!-- Logo at the top -->
-        <div class="logo-container">
-          <img src="assets/img/logo2.png" alt="App Logo" class="img-fluid logo">
-        </div>
-  
-        <!-- Register Form Section -->
-        <mat-horizontal-stepper [linear]="isLinear" labelPosition="bottom">
-          <!-- First Step - User Information -->
-          <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
-              <ng-template matStepLabel>Personal Information</ng-template>
-  
-              <!-- First Name -->
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>First Name</mat-label>
-                <input matInput formControlName="firstName" required />
-                <mat-error *ngIf="firstFormGroup.controls['firstName'].hasError('required')">
-                  First Name is required
-                </mat-error>
-              </mat-form-field>
-  
-              <!-- Last Name -->
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Last Name</mat-label>
-                <input matInput formControlName="lastName" required />
-                <mat-error *ngIf="firstFormGroup.controls['lastName'].hasError('required')">
-                  Last Name is required
-                </mat-error>
-              </mat-form-field>
-  
-              <!-- Phone Number -->
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Phone Number</mat-label>
-                <input matInput formControlName="phoneNumber" required />
-                <mat-error *ngIf="firstFormGroup.controls['phoneNumber'].hasError('required')">
-                  Phone Number is required
-                </mat-error>
-              </mat-form-field>
-  
-              <div>
-                <button mat-raised-button matStepperNext class="btn-next">Next</button>
-              </div>
-            </form>
-          </mat-step>
-  
-          <!-- Second Step - Account Information -->
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
-              <ng-template matStepLabel>Account Information</ng-template>
-  
-              <!-- Email -->
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email" type="email" required />
-                <mat-error *ngIf="secondFormGroup.controls['email'].hasError('required')">
-                  Email is required
-                </mat-error>
-                <mat-error *ngIf="secondFormGroup.controls['email'].hasError('email')">
-                  Please enter a valid email
-                </mat-error>
-              </mat-form-field>
-  
-              <!-- Password -->
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Password</mat-label>
-                <input matInput formControlName="password" type="password" required />
-                <mat-error *ngIf="secondFormGroup.controls['password'].hasError('required')">
-                  Password is required
-                </mat-error>
-                <mat-error *ngIf="secondFormGroup.controls['password'].hasError('minlength')">
-                  Password must be at least 8 characters long
-                </mat-error>
-              </mat-form-field>
-  
-              <!-- Confirm Password -->
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Confirm Password</mat-label>
-                <input matInput formControlName="rePassword" type="password" required />
-                <mat-error *ngIf="secondFormGroup.controls['rePassword'].hasError('required')">
-                  Please confirm your password
-                </mat-error>
-                <mat-error *ngIf="passwordMatch">
-                  Passwords do not match
-                </mat-error>
-              </mat-form-field>
-  
-              <!-- Role -->
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Role</mat-label>
-                <mat-select formControlName="role" required>
-                  <mat-option value="adherent">Adherent</mat-option>
-                  <mat-option value="coach">Coach</mat-option>
-                  <mat-option value="admin">Admin</mat-option>
-                </mat-select>
-                <mat-error *ngIf="secondFormGroup.controls['role'].hasError('required')">
-                  Role is required
-                </mat-error>
-              </mat-form-field>
-  
-              <div class="form-actions">
-                <button mat-raised-button color="accent" matStepperPrevious class="btn-prev">Back</button>
-                <button mat-raised-button color="primary" (click)="registerUser()" class="btn-submit">Register</button>
-              </div>
-            </form>
-          </mat-step>
-        </mat-horizontal-stepper>
+  <div class="container-fluid box">
+    <!-- Card Container -->
+    <div class="card-container">
+      <!-- Logo at the top -->
+      <div class="logo-container">
+        <img src="assets/img/logo2.png" alt="App Logo" class="img-fluid logo">
       </div>
+
+      <!-- Register Form Section -->
+      <mat-horizontal-stepper [linear]="isLinear" labelPosition="bottom">
+        <!-- First Step - User Information -->
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Personal Information</ng-template>
+
+            <!-- First Name -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" required />
+              <mat-error *ngIf="firstFormGroup.controls['firstName'].hasError('required')">
+                First Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Last Name -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" required />
+              <mat-error *ngIf="firstFormGroup.controls['lastName'].hasError('required')">
+                Last Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Phone Number -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phoneNumber" required />
+              <mat-error *ngIf="firstFormGroup.controls['phoneNumber'].hasError('required')">
+                Phone Number is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Role -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Role</mat-label>
+              <mat-select formControlName="role" required>
+                <mat-option value="adherent">Adherent</mat-option>
+                <mat-option value="coach">Coach</mat-option>
+                <mat-option value="admin">Admin</mat-option>
+              </mat-select>
+              <mat-error *ngIf="firstFormGroup.controls['role'].hasError('required')">
+                Role is required
+              </mat-error>
+            </mat-form-field>
+
+            <div>
+              <button mat-raised-button matStepperNext class="btn-next">Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Second Step - Coach Profile (Bio, Speciality, Image) -->
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Profile Information</ng-template>
+
+            <!-- Bio -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Bio</mat-label>
+              <textarea matInput formControlName="bio" rows="4"></textarea>
+              <mat-hint>Tell us about yourself (optional)</mat-hint>
+            </mat-form-field>
+
+            <!-- Speciality -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Speciality</mat-label>
+              <input matInput formControlName="speciality" placeholder="e.g., Strength Training, Yoga" />
+              <mat-hint>Required for coaches</mat-hint>
+            </mat-form-field>
+
+            <!-- Image Upload -->
+            <div class="full-width image-upload">
+              <label for="imageUpload" class="image-label">Profile Image</label>
+              <input id="imageUpload" type="file" (change)="onImageSelected($event)" accept="image/*" #fileInput hidden />
+              <button mat-raised-button color="primary" class="upload-button" (click)="fileInput.click()">
+                <i class="fas fa-upload"></i> Choose Image
+              </button>
+              <span class="file-name" *ngIf="selectedImage">{{ selectedImage.name }}</span>
+              <mat-hint>Upload a profile picture (optional)</mat-hint>
+            </div>
+
+            <div class="form-actions">
+              <button mat-raised-button color="accent" matStepperPrevious class="btn-prev">Back</button>
+              <button mat-raised-button matStepperNext class="btn-next">Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Third Step - Account Information -->
+        <mat-step [stepControl]="thirdFormGroup">
+          <form [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>Account Information</ng-template>
+
+            <!-- Email -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" required />
+              <mat-error *ngIf="thirdFormGroup.controls['email'].hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="thirdFormGroup.controls['email'].hasError('email')">
+                Please enter a valid email
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Password</mat-label>
+              <input matInput formControlName="password" type="password" required />
+              <mat-error *ngIf="thirdFormGroup.controls['password'].hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="thirdFormGroup.controls['password'].hasError('minlength')">
+                Password must be at least 8 characters long
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Confirm Password -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput formControlName="rePassword" type="password" required />
+              <mat-error *ngIf="thirdFormGroup.controls['rePassword'].hasError('required')">
+                Please confirm your password
+              </mat-error>
+              <mat-error *ngIf="passwordMatch">
+                Passwords do not match
+              </mat-error>
+            </mat-form-field>
+
+            <div class="form-actions">
+              <button mat-raised-button color="accent" matStepperPrevious class="btn-prev">Back</button>
+              <button mat-raised-button color="primary" (click)="registerUser()" class="btn-submit">Register</button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
     </div>
-  </body>
-  
+  </div>
+</body>
