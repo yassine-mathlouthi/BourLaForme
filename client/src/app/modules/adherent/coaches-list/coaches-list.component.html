@@ -1,74 +1,39 @@
 <section class="py-5">
-    <div class="container">
-      <h2 class="display-4 fw-bold text-center mb-3 section-title text-center">Nos Coachs Experts</h2>
-      <p class="lead text-center mb-5 text-center mb-5 feature-text">Une équipe de professionnels passionnés prête à
-        vous accompagner dans votre transformation</p>
-      <div class="row">
-        <div class="col-md-3 mb-4">
-          <div class="card card-hover">
-            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&h=500&fit=crop"
-              class="card-img-top" alt="Jean Dupont">
-            <div class="card-body">
-              <span class="badge bg-primary position-absolute top-0 start-0 ">Musculation</span>
-              <h5 class="card-title feature-title feature-title mt-4">Jean Dupont</h5>
-              <p class="card-text feature-text">Expert en musculation avec 10 ans d'expérience</p>
-            </div>
-            <div class="card-footer bg-transparent border-0 text-center pb-3">
-                <button mat-raised-button class="btn btn-primary px-4" (click)="openDialog()" >
-                    <i class="fas fa-calendar-check me-2" ></i> Réserver
-                  </button>
-            </div>
+  <div class="container">
+    <h2 class="display-4 fw-bold text-center mb-3 section-title text-center">Nos Coachs Experts</h2>
+    <p class="lead text-center mb-5 text-center mb-5 feature-text">
+      Une équipe de professionnels passionnés prête à vous accompagner dans votre transformation
+    </p>
+
+    <div class="row" *ngIf="data && data.length > 0; else noData">
+      <div class="col-md-3 mb-4" *ngFor="let coach of data">
+        <div class="card card-hover">
+          <img [src]="coach.image" class="card-img-top" [alt]="coach.prenom + ' ' + coach.nom">
+          <div class="card-body">
+            <span class="badge bg-primary position-absolute top-0 start-0">
+              {{ coach.specialty }}
+            </span>
+            <h5 class="card-title feature-title feature-title mt-4">
+              {{ coach.prenom }} {{ coach.nom }}
+            </h5>
+            <p class="card-text feature-text">{{ coach.bio }}</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 text-center pb-3">
+            <button mat-raised-button class="btn btn-primary px-4" (click)="openDialog(coach)">
+              <i class="fas fa-calendar-check me-2"></i> Reserve
+            </button>
           </div>
         </div>
-        <div class="col-md-3 mb-4">
-          <div class="card card-hover">
-            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&h=500&fit=crop"
-              class="card-img-top" alt="Marie Laurent">
-            <div class="card-body">
-              <span class="badge bg-primary position-absolute top-0 start-0 ">Yoga</span>
-              <h5 class="card-title feature-title feature-title mt-4">Marie Laurent</h5>
-              <p class="card-text feature-text">Spécialiste en yoga et bien-être</p>
-              <div class="card-footer bg-transparent border-0 text-center pb-3">
-                <button mat-raised-button class="btn btn-primary px-4" (click)="openDialog()">
-                    <i class="fas fa-calendar-check me-2"></i> Réserver
-                  </button>
-            </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 mb-4">
-          <div class="card card-hover">
-            <img src="https://images.unsplash.com/photo-1597347343908-2937e7dcc560?w=500&h=500&fit=crop"
-              class="card-img-top" alt="Thomas Martin">
-            <div class="card-body">
-              <span class="badge bg-primary position-absolute top-0 start-0 ">CrossFit</span>
-              <h5 class="card-title feature-title feature-title mt-4">Thomas Martin</h5>
-              <p class="card-text feature-text">Champion national de CrossFit et fitness</p>
-            </div>
-            <div class="card-footer bg-transparent border-0 text-center pb-3">
-                <button mat-raised-button class="btn btn-primary px-4" (click)="openDialog()">
-                    <i class="fas fa-calendar-check me-2" ></i> Réserver
-                  </button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 mb-4">
-          <div class="card card-hover">
-            <img src="https://images.unsplash.com/photo-1550345332-09e3ac987658?w=500&h=500&fit=crop"
-              class="card-img-top" alt="Sophie Bernard">
-            <div class="card-body">
-              <span class="badge bg-primary position-absolute top-0 start-0 ">Fitness & Nutrition</span>
-              <h5 class="card-title feature-title feature-title mt-4">Sophie Bernard</h5>
-              <p class="card-text feature-text">Experte en nutrition sportive et fitness</p>
-            </div>
-            <div class="card-footer bg-transparent border-0 text-center pb-3">
-                <button mat-raised-button class="btn btn-primary px-4" (click)="openDialog()" >
-                    <i class="fas fa-calendar-check me-2" ></i> Réserver
-                  </button>
-            </div>
-          </div>
-        </div>
-        
       </div>
     </div>
-  </section>
+
+    <ng-template #noData>
+      <div class="text-center" *ngIf="data">
+        <p>No coaches found.</p>
+      </div>
+      <div class="text-center" *ngIf="!data">
+        <p>Loading coaches...</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

@@ -21,5 +21,4 @@ export class MyCoursesComponent implements OnInit {
       console.log(sessionStorage.getItem('token'))
     })
   }
-
 }
