@@ -69,7 +69,10 @@ export class LayoutComponent implements OnInit{
   userEmail: string | null = null;
   isLoggedIn = true;
 
-  constructor(private router: Router,public dialog: MatDialog,private _adherentService:AdherentService) { }
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private _adherentService:AdherentService) { }
   notifications:any
   ngOnInit() {
     this._adherentService.getNotifications().subscribe((r: any) => {
@@ -108,6 +111,10 @@ export class LayoutComponent implements OnInit{
     );
 
     this.pageTitle = routeTitle ? routeTitle.label : 'Admin Dashboard';
+  }
+  logout() {
+    sessionStorage.clear(); 
+    this.router.navigate(['/']);
   }
 }
 

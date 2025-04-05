@@ -53,5 +53,19 @@ export class CoachesService {
     });
     return this.http.post(`${this.apiUrl}/reservationCoach`,data, { headers });
   }
+  getProfileInfo(){
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
+    });
+    return this.http.get(`${this.apiUrl}/CoachProfile`, { headers })
+  }
+  updateProfile(body:any){
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
+    });
+    return this.http.put(`${this.apiUrl}/CoachProfile`,body, { headers })
+  }
   
 }

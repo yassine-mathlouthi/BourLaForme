@@ -60,7 +60,10 @@ export class LayoutComponent implements OnInit{
         this.updatePageTitle();
       });
   }
-
+  logout() {
+    sessionStorage.clear(); 
+    this.router.navigate(['/']);
+  }
   updatePageTitle() {
     const currentUrl = this.router.url;
     const routeTitle = this.navItems.find(

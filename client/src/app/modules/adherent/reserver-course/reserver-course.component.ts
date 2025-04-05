@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CoursesService } from '../../../core/services/courses.service';
-import { SubscriptionsService } from '../../../core/services/subscriptions.service';
+import { SubscriptionsService } from '../../../core/services/admin.service';
 
 @Component({
   selector: 'app-reserver-course',

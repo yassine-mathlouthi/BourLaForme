@@ -1,15 +1,26 @@
-import { Component, Inject } from '@angular/core';
+import {  Inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { CoachesService } from '../../../core/services/coaches.service';
+import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import 'chartjs-adapter-date-fns';
 import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common';
-import { CoachesService } from '../../../core/services/coaches.service';
-
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SubscriptionsService } from '../../../core/services/admin.service';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 @Component({
   selector: 'app-reserver-coach-dialog',
   standalone: true,
@@ -21,9 +32,15 @@ import { CoachesService } from '../../../core/services/coaches.service';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule,
-    MatDialogModule
-  ],
+    MatDialogModule,
+    MatIconModule,
+    MatSelectModule,
+ 
+    ],
+    providers: [  
+      MatDatepickerModule,
+      MatNativeDateModule 
+    ],
   templateUrl: './reserver-coach-dialog.component.html',
   styleUrl: './reserver-coach-dialog.component.css'
 })

@@ -55,4 +55,20 @@ export class SubscriptionsService {
   DeleteTarif(id: any): Observable<any> {
     return this.http.delete(`${this.apiUrl}/subscriptionTypes/${id}`, this.getAuthHeaders());
   }
+  getNotifications(){
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
+    });
+    return this.http.get(`${this.apiUrl}/NotificationsForAdmin`, { headers });
+  }
+  updateNotificationStatus(id:any){
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
+    });
+    console.log("hereee",token)
+    return this.http.put(`${this.apiUrl}/NotificationsForAdmin/${id}`,{}, { headers });
+  }
+
 }

@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
-import { SubscriptionsService } from '../../../../core/services/subscriptions.service';
+import { SubscriptionsService } from '../../../../core/services/admin.service';
 
 @Component({
   selector: 'app-add-tarif',

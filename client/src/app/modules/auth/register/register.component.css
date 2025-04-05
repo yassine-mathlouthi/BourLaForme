@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('https://thumbs.dreamstime.com/b/metal-dumbbell-gym-background-d-rendering-78457398.jpg'); /* Add the background image */
+    background-image: url('https://www.wallart.com/media/catalog/product/cache/871f459736130e239a3f5e6472128962/w/0/w03193-small.jpg'); /* Add the background image */
     background-size: cover;
     background-position: center;
   }
@@ -13,12 +13,11 @@
   .card-container {
     width: 100%;
     max-width: 500px;
-    padding: 40px;
+    padding: 10px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-top:0px; /* Add space from the top */
     opacity: 0.9; /* Slight transparency to blend with the background */
   }
   
@@ -29,7 +28,7 @@
   
   /* Logo Style */
   .logo {
-    max-width: 150px;
+    max-width: 110px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -49,7 +48,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   
   .btn-prev, .btn-submit {
