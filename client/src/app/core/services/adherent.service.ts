@@ -35,5 +35,20 @@ export class AdherentService {
     });
     return this.http.get(`${this.apiUrl}/followSubscription`, { headers });
   }
+  getNotifications(){
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
+    });
+    return this.http.get(`${this.apiUrl}/NotificationsForUser`, { headers });
+  }
+  updateNotificationStatus(id:any){
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
+    });
+    console.log("hereee",token)
+    return this.http.put(`${this.apiUrl}/NotificationsForUser/${id}`,{}, { headers });
+  }
   
 }

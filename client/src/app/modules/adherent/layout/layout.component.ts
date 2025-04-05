@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AdherentService } from '../../../core/services/adherent.service';
 
 interface NavItem {
   route: string;
@@ -68,11 +69,14 @@ export class LayoutComponent implements OnInit{
   userEmail: string | null = null;
   isLoggedIn = true;
 
-  constructor(private router: Router,public dialog: MatDialog) { }
-
+  constructor(private router: Router,public dialog: MatDialog,private _adherentService:AdherentService) { }
+  notifications:any
   ngOnInit() {
-    
-
+    this._adherentService.getNotifications().subscribe((r: any) => {
+      // Filter unread notifications based on the 'isReadAdherent' field
+      this.notifications = r.notifications.filter((notification: any) => !notification.isReadAdherent);
+      console.log(this.notifications); // Only unread notifications will be in the array
+    });
     // Update page title based on current route
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -80,6 +84,22 @@ export class LayoutComponent implements OnInit{
         this.updatePageTitle();
       });
   }
+  getNotificationText(type: string): string {
+    switch (type) {
+      case 'abonnement_expire':
+        return 'Your subscription has expired.';
+      case 'new_session':
+        return 'A new session has been added.';
+      default:
+        return 'You have a new notification.';
+    }
+  }
+  updateToRead(id:any){
+    this._adherentService.updateNotificationStatus(id).subscribe(r=>{
+      console.log(r)
+    })
+  }
+  
 
   updatePageTitle() {
     const currentUrl = this.router.url;
