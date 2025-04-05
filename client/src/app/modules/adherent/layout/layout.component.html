@@ -27,36 +27,39 @@
             </h1>
 
             <div class="d-flex align-items-center ml-auto">
-                <!-- <div>
-                    <button class="btn ml-3 add-btn" (click)="openDialog()">
-                        <i class="fa-solid fa-circle-plus"></i> Add course
+                <!-- Notifications Button -->
+                <button mat-icon-button [matMenuTriggerFor]="notificationMenu" (click)="updateToRead(notifications[0]._id)" class="btn-menu">
+                  <i class="fa-solid fa-bell notification-icon"></i>
+                  <span class="notification-badge" *ngIf="notifications.length > 0">
+                    {{ notifications.length }}
+                  </span>
+                </button>
+              
+                <!-- Notifications Menu -->
+                <mat-menu #notificationMenu="matMenu">
+                  <ng-container *ngIf="notifications.length > 0; else noNotif">
+                    <button mat-menu-item *ngFor="let notification of notifications">
+                      {{ getNotificationText(notification.type) }}
                     </button>
-                </div>
- -->
-                <!-- <div class="nav-item ml-3" *ngIf="isLoggedIn">
-                    <button class="btn btn-logout">
-                        <i class="fa-solid fa-right-from-bracket"></i> Logout
-                    </button>
-                </div> -->
-                <div class="notification-container">
-                    <button class="btn-menu">
-                        <i class="fa-solid fa-bell notification-icon"></i>
-                        <span class="notification-badge">1</span>
-                    </button>
-                    
-                    <div class="notification-dropdown">
-                        <div class="notification-item">
-                            <span class="notification-text">Your subscription has expired.</span>
-                        </div>
-                    </div>
-                </div>
-                <button [matMenuTriggerFor]="menu" class=" btn-menu">
-                    <i class="fa-solid fa-gear gear"></i>
-                </button> <mat-menu #menu="matMenu">
-                    <button mat-menu-item class="btn-Menu"> <i class="fa-solid fa-right-from-bracket"></i>
-                        Logout</button>
+                  </ng-container>
+                  <ng-template #noNotif>
+                    <button mat-menu-item disabled>No notifications</button>
+                  </ng-template>
                 </mat-menu>
-            </div>
+              
+                <!-- Settings Menu -->
+                <button mat-icon-button [matMenuTriggerFor]="menu" class="btn-menu">
+                  <i class="fa-solid fa-gear gear"></i>
+                </button>
+              
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item class="btn-Menu" (click)="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                  </button>
+                </mat-menu>
+              </div>
+              
+              
         </header>
         <div class="content-wrapper">
             <router-outlet></router-outlet>

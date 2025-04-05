@@ -5,13 +5,14 @@
     <!-- Date Selection -->
     <mat-form-field class="form-group mb-3" appearance="fill">
       <mat-label>Select Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="date">
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <input  matInput [matDatepicker]="picker" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="bookingForm.get('date')?.invalid && bookingForm.get('date')?.touched">
-        Date is required.
+        Date is required!.
       </mat-error>
     </mat-form-field>
+    
 
     <!-- Time Selection -->
     <mat-form-field class="form-group mb-3" appearance="fill">

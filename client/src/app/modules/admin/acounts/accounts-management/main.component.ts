@@ -12,7 +12,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { SubscriptionsService } from '../../../../core/services/subscriptions.service';
+import { SubscriptionsService } from '../../../../core/services/admin.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CoachesService } from '../../../../core/services/coaches.service';

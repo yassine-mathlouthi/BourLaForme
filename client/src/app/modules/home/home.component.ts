@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoachesService } from '../../core/services/coaches.service';
 import { CoursesService } from '../../core/services/courses.service';
-import { SubscriptionsService } from '../../core/services/subscriptions.service';
+import { SubscriptionsService } from '../../core/services/admin.service';
 import { NavbarComponent } from '../../main-layout/navbar/navbar.component';
 
 @Component({

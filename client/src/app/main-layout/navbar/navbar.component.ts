@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +11,20 @@ import { RouterModule } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  constructor(private router:Router){}
   isLoggedIn=false
-
+  logout() {
+    sessionStorage.clear(); 
+    this.router.navigate(['/']);
+    this.isLoggedIn=true
+  }
+  smoothScroll(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  }
 }

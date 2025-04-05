@@ -1,5 +1,5 @@
 .body {
-    background-image: url("https://t3.ftcdn.net/jpg/04/29/35/62/360_F_429356296_CVQ5LkC6Pl55kUNLqLisVKgTw9vjyif1.jpg");
+    background-image: url("https://www.wallart.com/media/catalog/product/cache/871f459736130e239a3f5e6472128962/w/0/w03193-small.jpg");
     /* Path to your image */
     background-size: cover;
     /* Cover the entire viewport */
@@ -18,7 +18,7 @@
   /* Optionally, you can set other styles for your content */
   .box {
     padding: 50px;
-    background-color: rgb(253, 253, 253);
+    background-color: rgba(240, 240, 240, 0.974);
     max-width: 600px;
     width: 100%;
     border-radius: 20px;

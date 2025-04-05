@@ -15,7 +15,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SubscriptionsService } from '../../../core/services/subscriptions.service';
+import { SubscriptionsService } from '../../../core/services/admin.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 @Component({
   selector: 'app-subscription-management',

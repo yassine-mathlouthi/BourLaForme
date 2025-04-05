@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddCourseComponent } from '../courses/add-course/add-course.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
+import { SubscriptionsService } from '../../../core/services/admin.service';
 
 interface NavItem {
   route: string;
@@ -68,11 +69,14 @@ export class LayoutComponent implements OnInit {
   userEmail: string | null = null;
   isLoggedIn = true;
 
-  constructor(private router: Router,public dialog: MatDialog) { }
-
+  constructor(private router: Router,public dialog: MatDialog,private _adminService : SubscriptionsService) { }
+  notifications:any
   ngOnInit() {
-    
-
+    this._adminService.getNotifications().subscribe((r: any) => {
+      // Filter unread notifications based on the 'isReadAdherent' field
+      this.notifications = r.notifications.filter((notification: any) => !notification.isReadAdherent);
+      console.log(this.notifications); // Only unread notifications will be in the array
+    });
     // Update page title based on current route
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -80,7 +84,6 @@ export class LayoutComponent implements OnInit {
         this.updatePageTitle();
       });
   }
-
   updatePageTitle() {
     const currentUrl = this.router.url;
     const routeTitle = this.navItems.find(
@@ -107,5 +110,25 @@ export class LayoutComponent implements OnInit {
       width:'600px',
     })
   }
+  logout() {
+    sessionStorage.clear(); 
+    this.router.navigate(['/']);
+  }
+  getNotificationText(type: string): string {
+    switch (type) {
+      case 'abonnement_expire':
+        return 'Your subscription has expired.';
+      case 'new_session':
+        return 'A new session has been added.';
+      default:
+        return 'You have a new notification.';
+    }
+  }
+  updateToRead(id:any){
+    this._adminService.updateNotificationStatus(id).subscribe((r: any)=>{
+      console.log(r)
+    })
+  }
+  
 
 }

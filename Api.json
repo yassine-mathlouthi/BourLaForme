@@ -81,3 +81,7 @@ Fida
 }
 accepted reservations
 http://localhost:3000/api/pourlaforme/demandesCoaching/AcceptedReservations
+
+
+all coaches
+http://localhost:3000/api/pourlaforme/profilsCoachs

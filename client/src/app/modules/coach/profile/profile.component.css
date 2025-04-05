@@ -1,6 +1,9 @@
 /* Profile Page Styling */
+*{
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
 body {
-    font-family: 'Roboto', sans-serif;
     background-color: #f4f7fa;
     margin: 0;
     padding: 0;
@@ -8,6 +11,7 @@ body {
 }
 
 .profile-container {
+    
     max-width: 900px;
     margin: 40px auto;
     background: #ffffff;
@@ -17,6 +21,7 @@ body {
 }
 
 .profile-header {
+
     background: linear-gradient(135deg, #34495e, #2c3e50);
     padding: 30px;
     color: #ffffff;
@@ -34,6 +39,7 @@ body {
 }
 
 .profile-name {
+    font-family: 'lora', sans-serif !important;
     font-size: 2rem;
     font-weight: 700;
     margin: 0;
@@ -56,6 +62,8 @@ body {
 }
 
 .section-title {
+    font-family: 'lora', sans-serif !important;
+
     font-size: 1.5rem;
     font-weight: 600;
     color: #34495e;
@@ -111,12 +119,12 @@ body {
     text-transform: uppercase;
     transition: background-color 0.3s ease, transform 0.2s ease;
     margin-top: 20px;
-}
-
-.btn-edit:hover {
+    z-index: 1000;
+  }
+  .btn-edit:hover {
     background-color: #2b9ed5;
     transform: scale(1.05);
-}
+  }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
