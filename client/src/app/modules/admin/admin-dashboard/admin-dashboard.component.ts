@@ -64,8 +64,8 @@ export class AdminDashboardComponent implements OnInit {
   revenueOverTime: any;
   ordersOverTime: any;
   storesOverTime: any;
-  totalStores: number | undefined;
-  totalOrders: number | undefined;
+  totalCoaches: number | undefined;
+  activeSubscriptions: number | undefined;
   totalRevenue: number | undefined;
   topSellingArtworks: any[] | undefined;
   customerDemographics: any;
@@ -83,6 +83,7 @@ export class AdminDashboardComponent implements OnInit {
   lineChartType: ChartType = 'line';
 
   revenueChartData: ChartDataset[] = [];
+  revenueMonthlyChartData: ChartDataset[] = [];
   ordersStoresChartData: ChartDataset[] = [];
 
   barChartData: ChartDataset[] = [];
@@ -101,17 +102,73 @@ export class AdminDashboardComponent implements OnInit {
     maintainAspectRatio: false
   };
   isBrowser!: boolean;
+  revenueChartLabels:any
+  revenueChartMonthlyLabels:any
+  revenueChartQuarterlyLabels:any
+  revenueQuarterlyChartData:any
+  
   constructor(
     private adminService: AdminService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {   this.isBrowser = isPlatformBrowser(platformId); }
-
+    data:any
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.adminService.getAnalyticsData().subscribe({
-        next: (data) => {
-          this.totalStores = data.totalStores;
-          this.totalOrders = data.totalOrders;
+    this.adminService.getCoachesNumber().subscribe(r=>{
+      this.totalCoaches = r.totalCoaches;
+    })  
+    this.adminService.getTotalActiveSubscriptions().subscribe(r=>{
+      this.activeSubscriptions = r.activeSubscriptions;
+    })  
+    this.adminService.getTotalRevenue().subscribe(r=>{
+      this.totalRevenue = r.data.totalRevenue;
+    }) 
+    this.adminService.getTotalRevenue().subscribe((res: any) => {
+      const revenueBreakdown = res.data;
+      this.revenueChartData = [
+        {
+          data: [
+            revenueBreakdown.totalRevenue,
+            revenueBreakdown.courseRevenue,
+            revenueBreakdown.subscriptionRevenue,
+            
+          ],
+          label: 'Revenue Breakdown',
+          backgroundColor: [
+            'rgba(59, 130, 246, 0.7)',   // course
+            'rgba(16, 185, 129, 0.7)',   // subscription
+            'rgba(234, 179, 8, 0.7)'     // total
+          ],
+          borderWidth: 1
+        }
+      ];
+    
+      this.revenueChartLabels = ['Course Revenue', 'Subscription Revenue', 'Total Revenue'];
+    });
+    this.adminService.getMonthlyRevenue().subscribe(res => {
+      const revenueBreakdown = res.monthlyRevenue;
+    
+      this.revenueMonthlyChartData = [
+        {
+          data: revenueBreakdown.map((item: any) => item.total),
+          label: 'Monthly Revenue',
+          backgroundColor: 'rgba(59, 130, 246, 0.7)', // single color for all bars
+          borderWidth: 1
+        }
+      ];
+    
+      this.revenueChartMonthlyLabels = revenueBreakdown.map((item: any) => item.month);
+    });
+    this.adminService.getMonthlyCourseReservations().subscribe(r=>{
+      console.log(r)
+    }) 
+    
+    
+    
+
+    
+    
+          /*
+          
           this.totalRevenue = data.totalRevenue;
           this.topSellingArtworks = data.topSellingArtworks;
           this.customerDemographics = data.customerDemographics;
@@ -122,14 +179,10 @@ export class AdminDashboardComponent implements OnInit {
 
           this.prepareCharts();
           this.calculateMonthlyChanges(data);
+          this.isLoading = false; */
+
           this.isLoading = false;
-        },
-        error: (error) => {
-          console.error('Analytics data fetch failed:', error);
-          this.isLoading = false;
-        }
-      });
-    }
+       
   }
 
   prepareCharts(): void {
@@ -166,7 +219,58 @@ export class AdminDashboardComponent implements OnInit {
 
   onTimePeriodChange(period: string): void {
     this.selectedTimePeriod = period;
-    const labels = this.revenueOverTime[this.selectedTimePeriod].map((item: any) =>
+    if(this.selectedTimePeriod === 'monthly'){
+      this.adminService.getMonthlyRevenue().subscribe(res => {
+        const revenueBreakdown = res.monthlyRevenue;
+      
+        this.revenueMonthlyChartData = [
+          {
+            data: revenueBreakdown.map((item: any) => item.total),
+            label: 'Monthly Revenue',
+            backgroundColor: 'rgba(59, 130, 246, 0.7)', // single color for all bars
+            borderWidth: 1
+          }
+        ];
+      
+        this.revenueChartMonthlyLabels = revenueBreakdown.map((item: any) => item.month);
+      });
+    }else if (this.selectedTimePeriod === 'quarterly'){
+      this.adminService.getQuarterlyRevenue().subscribe(res => {
+        console.log('here',res)
+        const revenueBreakdown = res.quarterlyRevenue;
+      
+        this.revenueMonthlyChartData = [
+          {
+            data: revenueBreakdown.map((item: any) => item.total),
+            label: 'Quarterly Revenue',
+            backgroundColor: 'rgba(59, 130, 246, 0.7)', // single color for all bars
+            borderWidth: 1
+          }
+        ];
+      
+        this.revenueChartMonthlyLabels = revenueBreakdown.map((item: any) => item.period);
+      });
+    }else{
+      this.adminService.getYearlyyRevenue().subscribe(res => {
+        console.log('here',res)
+        const revenueBreakdown = res.yearlyRevenue;
+      
+        this.revenueMonthlyChartData = [
+          {
+            data: revenueBreakdown.map((item: any) => item.total),
+            label: 'Yearly Revenue',
+            backgroundColor: 'rgba(59, 130, 246, 0.7)', // single color for all bars
+            borderWidth: 1
+          }
+        ];
+      
+        this.revenueChartMonthlyLabels = revenueBreakdown.map((item: any) => item.year);
+      });
+
+    }
+    
+    
+    /* const labels = this.revenueOverTime[this.selectedTimePeriod].map((item: any) =>
       this.selectedTimePeriod === 'monthly' ? item.month : (item.quarter || item.year)
     );
 
@@ -185,7 +289,7 @@ export class AdminDashboardComponent implements OnInit {
     this.ordersStoresChartData = [
       { data: ordersData, label: 'Orders', borderColor: 'rgba(102, 126, 234, 0.7)', fill: false },
       { data: storesData, label: 'Stores Added', borderColor: 'rgba(252, 165, 165, 0.7)', fill: false },
-    ];
+    ]; */
   }
 
   prepareBarChart(): void {

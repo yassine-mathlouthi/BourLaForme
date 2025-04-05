@@ -46,7 +46,7 @@
                     <div class="metric-content">
                         <h3>Active Subscriptions</h3>
                         <div class="metric-value" id="orders-value">
-                            {{ totalOrders }}
+                            {{ activeSubscriptions }}
                         </div>
                         <div class="metric-trend" [ngClass]="ordersChange.trend" id="subscriptions-description">
                             <span [attr.aria-label]="'Subscriptions ' + ordersChange.trend">
@@ -71,7 +71,7 @@
                     <div class="metric-content">
                         <h3>Total Coaches</h3>
                         <div class="metric-value" id="stores-value">
-                            {{ totalStores }}
+                            {{ totalCoaches }}
                         </div>
                         <div class="metric-trend" [ngClass]="storesChange.trend" id="coaches-description">
                             <span [attr.aria-label]="'Coaches ' + storesChange.trend">
@@ -107,14 +107,14 @@
                 <h2 id="charts-heading" class="sr-only">Performance Charts</h2>
     
                 <div class="chart-wrapper revenue-chart" aria-labelledby="revenue-chart-title">
-                    <h3 id="revenue-chart-title">Revenue Trends</h3>
-                    <canvas baseChart [datasets]="revenueChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
-                        [legend]="lineChartLegend" [type]="lineChartType" aria-label="Revenue Trends Chart"></canvas>
+                    <h3 id="revenue-chart-title">Revenue breakdown</h3>
+                    <canvas baseChart [datasets]="revenueChartData" [labels]="revenueChartLabels" [options]="lineChartOptions"
+                        [legend]="lineChartLegend" [type]="barChartType" aria-label="Revenue Trends Chart"></canvas>
                 </div>
     
                 <div class="chart-wrapper orders-stores-chart" aria-labelledby="subscriptions-coaches-chart-title">
-                    <h3 id="subscriptions-coaches-chart-title">Subscriptions & New Coaches</h3>
-                    <canvas baseChart [datasets]="ordersStoresChartData" [labels]="lineChartLabels"
+                    <h3 id="revenue-chart-title">Revenue Trends</h3>
+                    <canvas baseChart [datasets]="revenueMonthlyChartData" [labels]="revenueChartMonthlyLabels"
                         [options]="lineChartOptions" [legend]="lineChartLegend" [type]="lineChartType"
                         aria-label="Subscriptions and New Coaches Chart"></canvas>
                 </div>
