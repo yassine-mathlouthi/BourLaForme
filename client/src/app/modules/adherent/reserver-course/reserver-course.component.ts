@@ -35,11 +35,21 @@ export class ReserverCourseComponent implements OnInit {
     courseId: string
   } = { courseId: '' };
 
-  resrverCourse(courseId: any) {
-    console.log(courseId);
-    this.body.courseId = courseId;
-    console.log(this.body, "json");
-
+  resrverCourse(course: any) {
+    if (course.availableSeats === 0) {
+      this._snackBar.open('There are no seats available for this course!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+  
+    console.log(course._id);
+    this.body.courseId = course._id;
+    console.log(this.body, 'json');
+  
     this._coursesService.reserverCour(this.body).subscribe({
       next: (response) => {
         console.log(response);
@@ -51,15 +61,14 @@ export class ReserverCourseComponent implements OnInit {
       },
       error: (error) => {
         console.error(error);
-        {
-          this._snackBar.open('You have already reserved this course!', 'Close', {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            panelClass: ['error-snackbar']
-          });
-        }
+        this._snackBar.open('You have already reserved this course!', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar']
+        });
       }
     });
   }
+  
 }
