@@ -8,64 +8,55 @@ import { Observable } from 'rxjs';
 export class CoachesService {
   private apiUrl = 'http://localhost:3000/api/pourlaforme';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
+
+  // Centralized method for auth headers
+  private getAuthHeaders() {
+    const token = sessionStorage.getItem('token');
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+  }
+
   getNewCoaches(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/users/nonvalidatedcoachs`);
+    return this.http.get(`${this.apiUrl}/users/nonvalidatedcoachs`, this.getAuthHeaders());
   }
-  ValidateCoach(id:any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/validateUser/${id}`,{});
+
+  ValidateCoach(id: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/validateUser/${id}`, {}, this.getAuthHeaders());
   }
-  DeleteUser(id:any):Observable<any> {
-    return this.http.delete(`${this.apiUrl}/users/deleteUser/${id}`);
+
+  DeleteUser(id: any): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/users/deleteUser/${id}`, this.getAuthHeaders());
   }
-  getAllCoachingDemandes():Observable<any> {
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.get(`${this.apiUrl}/demandesCoaching`, { headers });
+
+  getAllCoachingDemandes(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/demandesCoaching`, this.getAuthHeaders());
   }
-  acceptCochingDemande(idReservation:any,status:any){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.put(`${this.apiUrl}/demandesCoaching/${idReservation}`,status, { headers });
+
+  acceptCochingDemande(idReservation: any, status: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/demandesCoaching/${idReservation}`, status, this.getAuthHeaders());
   }
-  getAllAcceptedReservationDemandes(){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.get(`${this.apiUrl}/demandesCoaching/AcceptedReservations`, { headers });
+
+  getAllAcceptedReservationDemandes(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/demandesCoaching/AcceptedReservations`, this.getAuthHeaders());
   }
-  getAllCoaches(){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.get(`${this.apiUrl}/profilsCoachs`, { headers });
+
+  getAllCoaches(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profilsCoachs`, this.getAuthHeaders());
   }
-  reservationCoach(data : any){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.post(`${this.apiUrl}/reservationCoach`,data, { headers });
+
+  reservationCoach(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reservationCoach`, data, this.getAuthHeaders());
   }
-  getProfileInfo(){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.get(`${this.apiUrl}/CoachProfile`, { headers })
+
+  getProfileInfo(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/CoachProfile`, this.getAuthHeaders());
   }
-  updateProfile(body:any){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.put(`${this.apiUrl}/CoachProfile`,body, { headers })
+
+  updateProfile(body: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/CoachProfile`, body, this.getAuthHeaders());
   }
-  
 }

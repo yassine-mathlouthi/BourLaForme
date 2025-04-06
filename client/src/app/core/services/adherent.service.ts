@@ -6,49 +6,41 @@ import { Injectable } from '@angular/core';
 })
 export class AdherentService {
   private apiUrl = 'http://localhost:3000/api/pourlaforme';
-  constructor(private http: HttpClient) { }
-  getMyBookedCoaches(){
+
+  constructor(private http: HttpClient) {}
+
+  // Centralized method for token headers
+  private getAuthHeaders() {
     const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.get(`${this.apiUrl}/reservationCoach`, { headers });
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
   }
-  cancelCoachReservation(id:any){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.delete(`${this.apiUrl}/reservationCoach/${id}`, { headers });
+
+  getMyBookedCoaches() {
+    return this.http.get(`${this.apiUrl}/reservationCoach`, this.getAuthHeaders());
   }
-  updateCoachReservation(id:any,updatedBooking:any){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.put(`${this.apiUrl}/reservationCoach/${id}`,updatedBooking, { headers });
+
+  cancelCoachReservation(id: any) {
+    return this.http.delete(`${this.apiUrl}/reservationCoach/${id}`, this.getAuthHeaders());
   }
-  getMySubscriptionDetails(){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.get(`${this.apiUrl}/followSubscription`, { headers });
+
+  updateCoachReservation(id: any, updatedBooking: any) {
+    return this.http.put(`${this.apiUrl}/reservationCoach/${id}`, updatedBooking, this.getAuthHeaders());
   }
-  getNotifications(){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    return this.http.get(`${this.apiUrl}/NotificationsForUser`, { headers });
+
+  getMySubscriptionDetails() {
+    return this.http.get(`${this.apiUrl}/followSubscription`, this.getAuthHeaders());
   }
-  updateNotificationStatus(id:any){
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Assuming Bearer token authentication
-    });
-    console.log("hereee",token)
-    return this.http.put(`${this.apiUrl}/NotificationsForUser/${id}`,{}, { headers });
+
+  getNotifications() {
+    return this.http.get(`${this.apiUrl}/NotificationsForUser`, this.getAuthHeaders());
   }
-  
+
+  updateNotificationStatus(id: any) {
+    console.log("hereee", sessionStorage.getItem('token'));
+    return this.http.put(`${this.apiUrl}/NotificationsForUser/${id}`, {}, this.getAuthHeaders());
+  }
 }

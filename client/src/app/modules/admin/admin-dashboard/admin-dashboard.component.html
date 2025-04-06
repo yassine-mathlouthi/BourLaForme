@@ -23,18 +23,6 @@
                         <div class="metric-value" id="revenue-value">
                             {{ totalRevenue | currency:'USD':'symbol':'1.0-0' }}
                         </div>
-                        <div class="metric-trend" [ngClass]="revenueChange.trend" id="revenue-description">
-                            <span [attr.aria-label]="'Revenue ' + revenueChange.trend">
-                                <ng-container [ngSwitch]="revenueChange.trend">
-                                    <ng-container *ngSwitchCase="'neutral'">
-                                        No significant change
-                                    </ng-container>
-                                    <ng-container *ngSwitchDefault>
-                                        {{ revenueChange.percentage | number:'1.1-1' }}% from last month
-                                    </ng-container>
-                                </ng-container>
-                            </span>
-                        </div>
                     </div>
                 </div>
     
@@ -46,20 +34,9 @@
                     <div class="metric-content">
                         <h3>Active Subscriptions</h3>
                         <div class="metric-value" id="orders-value">
-                            {{ totalOrders }}
+                            {{ activeSubscriptions }}
                         </div>
-                        <div class="metric-trend" [ngClass]="ordersChange.trend" id="subscriptions-description">
-                            <span [attr.aria-label]="'Subscriptions ' + ordersChange.trend">
-                                <ng-container [ngSwitch]="ordersChange.trend">
-                                    <ng-container *ngSwitchCase="'neutral'">
-                                        No significant change
-                                    </ng-container>
-                                    <ng-container *ngSwitchDefault>
-                                        {{ ordersChange.percentage | number:'1.1-1' }}% from last month
-                                    </ng-container>
-                                </ng-container>
-                            </span>
-                        </div>
+                        
                     </div>
                 </div>
     
@@ -71,20 +48,9 @@
                     <div class="metric-content">
                         <h3>Total Coaches</h3>
                         <div class="metric-value" id="stores-value">
-                            {{ totalStores }}
+                            {{ totalCoaches }}
                         </div>
-                        <div class="metric-trend" [ngClass]="storesChange.trend" id="coaches-description">
-                            <span [attr.aria-label]="'Coaches ' + storesChange.trend">
-                                <ng-container [ngSwitch]="storesChange.trend">
-                                    <ng-container *ngSwitchCase="'neutral'">
-                                        No significant change
-                                    </ng-container>
-                                    <ng-container *ngSwitchDefault>
-                                        {{ storesChange.percentage | number:'1.1-1' }}% from last month
-                                    </ng-container>
-                                </ng-container>
-                            </span>
-                        </div>
+                        
                     </div>
                 </div>
             </section>
@@ -107,14 +73,14 @@
                 <h2 id="charts-heading" class="sr-only">Performance Charts</h2>
     
                 <div class="chart-wrapper revenue-chart" aria-labelledby="revenue-chart-title">
-                    <h3 id="revenue-chart-title">Revenue Trends</h3>
-                    <canvas baseChart [datasets]="revenueChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
-                        [legend]="lineChartLegend" [type]="lineChartType" aria-label="Revenue Trends Chart"></canvas>
+                    <h3 id="revenue-chart-title">Revenue breakdown</h3>
+                    <canvas baseChart [datasets]="revenueChartData" [labels]="revenueChartLabels" [options]="lineChartOptions"
+                        [legend]="lineChartLegend" [type]="barChartType" aria-label="Revenue Trends Chart"></canvas>
                 </div>
     
                 <div class="chart-wrapper orders-stores-chart" aria-labelledby="subscriptions-coaches-chart-title">
-                    <h3 id="subscriptions-coaches-chart-title">Subscriptions & New Coaches</h3>
-                    <canvas baseChart [datasets]="ordersStoresChartData" [labels]="lineChartLabels"
+                    <h3 id="revenue-chart-title">Revenue Trends</h3>
+                    <canvas baseChart [datasets]="revenueMonthlyChartData" [labels]="revenueChartMonthlyLabels"
                         [options]="lineChartOptions" [legend]="lineChartLegend" [type]="lineChartType"
                         aria-label="Subscriptions and New Coaches Chart"></canvas>
                 </div>
@@ -125,16 +91,16 @@
                 <h2 id="insights-heading" class="sr-only">Business Insights</h2>
     
                 <div class="top-artworks-chart" aria-labelledby="top-programs-title">
-                    <h3 id="top-programs-title">Top Workout Programs</h3>
-                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                    <h3 id="revenue-chart-title">Monthly courses reservation</h3>
+                    <canvas baseChart [datasets]="CoursesChartData" [labels]="CoursesLabels" [options]="barChartOptions"
                         [legend]="barChartLegend" [type]="barChartType" aria-label="Top Workout Programs Chart"></canvas>
                 </div>
     
-                <div class="customer-demographics" aria-labelledby="demographics-title">
+                <!-- <div class="customer-demographics" aria-labelledby="demographics-title">
                     <h3 id="demographics-title">Member Demographics</h3>
                     <canvas baseChart [datasets]="pieChartData" [labels]="pieChartLabels" [options]="pieChartOptions"
                         [legend]="pieChartLegend" [type]="pieChartType" aria-label="Member Demographics Chart"></canvas>
-                </div>
+                </div> -->
             </section>
         </div>
     </body>
