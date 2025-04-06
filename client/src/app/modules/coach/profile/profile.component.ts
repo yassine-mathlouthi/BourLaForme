@@ -21,22 +21,18 @@ export class ProfileComponent implements OnInit {
   data:any
   ngOnInit() {
     this._coachService.getProfileInfo().subscribe((r:any)=>{
-      console.log(r)
       this.data=r.data
     })
     
   }
   editProfile(){
-    console.log(11)
     const dialogRef = this.dialog.open(EditProfileDialogueComponent, {
       width: '500px' ,
       data:this.data
     });
 
     dialogRef.afterClosed().subscribe((result:any) => {
-          
+          this.ngOnInit()
     });
   }
-  
-
 }
