@@ -55,10 +55,10 @@ export class AdminService {
   getMonthlyCourseReservations(): Observable<any> {
     return this.http.get(`${this.apiUrl}/statistics/MonthlyCourseReservations`, this.getAuthHeaders());
   }
-  getMonthlyQuarterlyCourseReservations(): Observable<any> {
+  getQuarterlyCourseReservations(): Observable<any> {
     return this.http.get(`${this.apiUrl}/statistics/QuarterlyCourseReservations`, this.getAuthHeaders());
   }
-  getMonthlyYearlyCourseReservations(): Observable<any> {
+  getYearlyCourseReservations(): Observable<any> {
     return this.http.get(`${this.apiUrl}/statistics/YearlyCourseReservations`, this.getAuthHeaders());
   }
   

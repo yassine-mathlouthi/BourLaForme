@@ -1,8 +1,5 @@
-/* Artistic Dashboard Styling */
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
-
-
 
 body {
     background-color: #f8f9fa;
@@ -11,66 +8,15 @@ body {
 
 .metric-trend.positive {
     color: #10b981;
-    /* green */
 }
 
 .metric-trend.negative {
     color: #ef4444;
-    /* red */
 }
 
 .metric-trend.neutral {
     color: #6b7280;
-    /* gray */
 }
-
-
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    font-family: 'Lora', serif;
-}
-
-.loading-spinner {
-    text-align: center;
-    animation: pulse 1.5s infinite;
-}
-
-.loading-spinner i {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.loading-spinner span {
-    display: block;
-    font-size: 1.25rem;
-    color: #2c3e50;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-
-
 
 .dashboard-container {
     background: linear-gradient(to right, #f8f9fa 85%, rgba(255, 255, 255, 0.1));
@@ -78,7 +24,6 @@ body {
     min-height: 100vh;
 }
 
-/* Elegant Metrics Grid */
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -105,6 +50,7 @@ body {
     left: 0;
     width: 100%;
     height: 5px;
+    background: linear-gradient(to right, #667eea, #764ba2);
 }
 
 .metric-card:hover {
@@ -113,18 +59,21 @@ body {
 }
 
 .metric-icon {
-    width: 90px;
-    height: 90px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 2rem;
+    margin-right: 1.5rem;
     box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
     font-size: 1.5rem;
-    /* Makes the icon larger */
 }
 
+.metric-icon:hover {
+    transition: 0.3s ease;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
 
 .metric-content h3 {
     font-family: 'Lora', serif;
@@ -153,19 +102,6 @@ body {
     font-weight: 500;
 }
 
-.metric-trend.positive {
-    color: #48bb78;
-}
-
-.metric-trend.negative {
-    color: #f56565;
-}
-
-.metric-trend.neutral {
-    color: #718096;
-}
-
-/* Time Period Selector with Modern Touch */
 .time-period-selector {
     display: flex;
     justify-content: center;
@@ -191,27 +127,19 @@ body {
     box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 }
 
-/* Chart Wrappers with Elegant Design */
-.charts-container,
-.insights-container {
+.time-period-selector button i {
+    transition: transform 0.3s ease;
+}
+
+.time-period-selector button:hover i {
+    transform: rotate(15deg);
+}
+
+.charts-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
     margin-bottom: 2.5rem;
-}
-
-#top-artworks-title,
-#orders-stores-chart-title,
-#revenue-chart-title,
-#demographics-title {
-    font-family: 'Lora', serif;
-    font-size: 1.2rem;
-}
-
-.top-artworks-chart canvas,
-.customer-demographics canvas {
-  flex-grow: 1;
-  max-height: 350px;
 }
 
 .chart-wrapper,
@@ -221,7 +149,6 @@ body {
     max-height: 600px;
     display: flex;
     flex-direction: column;
-
     background: #ffffff;
     border-radius: 20px;
     padding: 2.5rem;
@@ -253,86 +180,35 @@ body {
     font-weight: 600;
     letter-spacing: 1px;
     position: relative;
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
 }
 
-
-.chart-wrapper canvas {
+.chart-wrapper canvas,
+.top-artworks-chart canvas,
+.customer-demographics canvas {
     transition: all 0.3s ease;
+    flex-grow: 1;
+    max-height: 350px;
 }
 
 .chart-wrapper canvas:hover {
     transform: scale(1.02);
 }
 
-.time-period-selector button i {
-    transition: transform 0.3s ease;
-}
-
-.time-period-selector button:hover i {
-    transform: rotate(15deg);
-}
-
-/* Additional subtle animations and enhancements */
-@keyframes subtle-float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-
-
-/* Responsive Design */
 @media (max-width: 1200px) {
-
     .metrics-grid,
-    .charts-container,
-    .insights-container {
+    .charts-container {
         grid-template-columns: 1fr;
     }
-}
 
-/* Smooth Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-}
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* Additional Subtle Animations */
-@keyframes subtle-float {
-    0% {
-        transform: translateY(0);
+    .metric-card {
+        flex-direction: column;
+        text-align: center;
     }
 
-    50% {
-        transform: translateY(-10px);
-    }
-
-    100% {
-        transform: translateY(0);
+    .metric-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
     }
 }
