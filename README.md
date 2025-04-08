@@ -40,9 +40,6 @@ The platform provides features for **admins**, **coaches**, and **clients** (adh
 
 ---
 
-
----
-
 ## 🔐 User Roles
 
 | Role   | Account Validation | Subscription | Can Book Classes | Can Request Private Coaching |
@@ -65,3 +62,17 @@ The platform provides features for **admins**, **coaches**, and **clients** (adh
 cd backend
 npm install
 npm start
+
+### FrontEnd
+```bash
+cd frontend
+npm install
+ng serve
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+
+
+
