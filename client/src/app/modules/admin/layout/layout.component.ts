@@ -74,7 +74,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
     this._adminService.getNotifications().subscribe((r: any) => {
       // Filter unread notifications based on the 'isReadAdherent' field
-      this.notifications = r.notifications.filter((notification: any) => !notification.isReadAdherent);
+      this.notifications = r.notifications.filter((notification: any) => !notification.isReadAdmin);
       console.log(this.notifications); // Only unread notifications will be in the array
     });
     // Update page title based on current route
@@ -93,31 +93,25 @@ export class LayoutComponent implements OnInit {
     this.pageTitle = routeTitle ? routeTitle.label : 'Admin Dashboard';
   }
 
-  getArtistAvatarPlaceholder() {
-    // If the email exists, extract the first two letters from the local part of the email
-    if (this.userEmail) {
-      const namePart = this.userEmail.split('@')[0]; // Get the part before '@'
-      const initials = namePart.slice(0, 2).toUpperCase(); // Take the first two letters and convert to uppercase
-      return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=ffd966&color=fff`;
-    }
-
-    // Default placeholder if email is not found
-    return `https://ui-avatars.com/api/?name=NA&background=ffd966&color=fff`;
-  }
 
   openDialog(): void {
-    this.dialog.open(AddCourseComponent,{
-      width:'600px',
-    })
+    const dialogRef = this.dialog.open(AddCourseComponent, {
+      width: '600px',
+    });
+  
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload(); // This will refresh the entire page
+    });
   }
+  
   logout() {
     sessionStorage.clear(); 
     this.router.navigate(['/']);
   }
-  getNotificationText(type: string): string {
-    switch (type) {
+  getNotificationText(notification: any): string {
+    switch (notification.type) {
       case 'abonnement_expire':
-        return 'Your subscription has expired.';
+        return `${notification.user.prenom} ${notification.user.nom}'s subscription has expired.`;;
       case 'new_session':
         return 'A new session has been added.';
       default:

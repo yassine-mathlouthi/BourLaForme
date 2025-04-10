@@ -16,12 +16,12 @@
                 <!-- Revenue Metric Card -->
                 <div class="metric-card revenue-card" role="status" aria-describedby="revenue-description">
                     <div class="metric-icon" aria-hidden="true">
-                        <i class="fas fa-dollar-sign"></i>
+                        <strong style="font-size: 1.4rem; color: #2c3e50;">DT</strong>
                     </div>
                     <div class="metric-content">
                         <h3>Revenue</h3>
                         <div class="metric-value" id="revenue-value">
-                            {{ totalRevenue | currency:'USD':'symbol':'1.0-0' }}
+                            <span>{{ totalRevenue | number:'1.0-0' }}</span><span class="ms-1"> DT</span>
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                 <h2 id="insights-heading" class="sr-only">Business Insights</h2>
     
                 <div class="top-artworks-chart" aria-labelledby="top-programs-title">
-                    <h3 id="revenue-chart-title">Monthly courses reservation</h3>
+                    <h3 id="revenue-chart-title">Courses reservation</h3>
                     <canvas baseChart [datasets]="CoursesChartData" [labels]="CoursesLabels" [options]="barChartOptions"
                         [legend]="barChartLegend" [type]="barChartType" aria-label="Top Workout Programs Chart"></canvas>
                 </div>

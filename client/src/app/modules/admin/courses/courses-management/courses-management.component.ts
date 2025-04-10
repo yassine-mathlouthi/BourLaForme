@@ -34,12 +34,11 @@ export class CoursesManagementComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this._courses.getAllCourses().subscribe((data: any[]) => {
-          this.coursesData = data;
-        });
-      }
+      this.ngOnInit();
+      
     });
+    
+    
   }
 
   deleteCourse(courseid: any): void {

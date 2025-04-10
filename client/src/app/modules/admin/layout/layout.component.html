@@ -39,7 +39,7 @@
                 <mat-menu #notificationMenu="matMenu">
                   <ng-container *ngIf="notifications.length > 0; else noNotif">
                     <button mat-menu-item *ngFor="let notification of notifications">
-                      {{ getNotificationText(notification.type) }}
+                      {{ getNotificationText(notification) }}
                     </button>
                   </ng-container>
                   <ng-template #noNotif>
@@ -53,6 +53,9 @@
                 </button>
               
                 <mat-menu #menu="matMenu">
+                  <button mat-menu-item class="btn-Menu" (click)="openDialog()">
+                    <i class="fa-solid fa-plus"></i> Add Course 
+                  </button>
                   <button mat-menu-item class="btn-Menu" (click)="logout()">
                     <i class="fa-solid fa-right-from-bracket"></i> Logout
                   </button>

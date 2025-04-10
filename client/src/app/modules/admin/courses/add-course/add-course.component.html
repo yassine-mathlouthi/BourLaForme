@@ -73,7 +73,7 @@
           <div class="col">
             <mat-form-field class="form-group mb-3" appearance="fill">
               <mat-label>available Seats</mat-label>
-              <input matInput id="availableSeats" placeholder="e.g., 12" formControlName="availableSeats">
+              <input matInput id="availableSeats"  placeholder="e.g., 12" formControlName="availableSeats">
               <mat-error
                 *ngIf="secondFormGroup.get('availableSeats')?.invalid && secondFormGroup.get('availableSeats')?.touched">
                 availableSeats is required.
@@ -110,7 +110,7 @@
           <div class="col">
             <mat-form-field class="form-group mb-3" appearance="fill">
               <mat-label>Schedule</mat-label>
-              <input matInput id="schedule" placeholder="e.g., Mon/Wed/Fri, 6:00 PM" formControlName="schedule">
+              <input matInput id="schedule" type="datetime-local" placeholder="e.g., Mon/Wed/Fri, 6:00 PM" formControlName="schedule">
               <mat-error *ngIf="secondFormGroup.get('schedule')?.invalid && secondFormGroup.get('schedule')?.touched">
                 Schedule is required.
               </mat-error>
