@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CoachesListComponent } from './coaches-list/coaches-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { IAPlanWorkoutGeneratorComponent } from './ia-plan-workout-generator/ia-plan-workout-generator.component';
 import { LayoutComponent } from './layout/layout.component';
 import { MyCoachesComponent } from './my-coaches/my-coaches.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { ReserverCourseComponent } from './reserver-course/reserver-course.component';
+import { WorkoutRecommendationComponent } from './workout-recommendation/workout-recommendation.component';
 
 const routes: Routes = [
   {path: '', 
@@ -17,9 +17,7 @@ const routes: Routes = [
       { path: 'MyCourse', pathMatch: 'full', component: MyCoursesComponent },
       { path: 'coaches', pathMatch: 'full', component: CoachesListComponent },
       { path: 'Mycoaches', pathMatch: 'full', component: MyCoachesComponent },
-      { path: 'IA-workout-generator', pathMatch: 'full', component: IAPlanWorkoutGeneratorComponent },
-
-
+      { path: 'IA-workout-generator', pathMatch: 'full', component: WorkoutRecommendationComponent },
 
 
     ],}

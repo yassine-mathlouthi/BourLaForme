@@ -1,0 +1,128 @@
+<div class="container">
+    <h2>Workout Recommendation</h2>
+    <p>Fill in your details to get a personalized workout recommendation</p>
+  
+    <form [formGroup]="recommendationForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <!-- Personal Info -->
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" formControlName="Age">
+        </div>
+  
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="radio-group">
+            <label>
+              <input type="radio" formControlName="Gender" value="male"> Male
+            </label>
+            <label>
+              <input type="radio" formControlName="Gender" value="female"> Female
+            </label>
+          </div>
+        </div>
+  
+        <!-- Body Measurements -->
+        <div class="form-group">
+          <label for="weight">Weight (kg)</label>
+          <input type="number" id="weight" formControlName="Weight" step="0.1">
+        </div>
+  
+        <div class="form-group">
+          <label for="height">Height (cm)</label>
+          <input type="number" id="height" formControlName="Height">
+        </div>
+  
+        <div class="form-group">
+          <label for="fatPercentage">Body Fat Percentage</label>
+          <input type="number" id="fatPercentage" formControlName="Fat_Percentage" step="0.1">
+        </div>
+  
+        <div class="form-group">
+          <label for="bmi">BMI</label>
+          <input type="number" id="bmi" formControlName="BMI" step="0.1">
+        </div>
+  
+        <!-- Heart Rate Data -->
+        <div class="form-group">
+          <label for="maxBPM">Max Heart Rate (BPM)</label>
+          <input type="number" id="maxBPM" formControlName="Max_BPM">
+        </div>
+  
+        <div class="form-group">
+          <label for="avgBPM">Average Heart Rate (BPM)</label>
+          <input type="number" id="avgBPM" formControlName="Avg_BPM">
+        </div>
+  
+        <div class="form-group">
+          <label for="restingBPM">Resting Heart Rate (BPM)</label>
+          <input type="number" id="restingBPM" formControlName="Resting_BPM">
+        </div>
+  
+        <!-- Workout Data -->
+        <div class="form-group">
+          <label for="sessionDuration">Session Duration (minutes)</label>
+          <input type="number" id="sessionDuration" formControlName="Session_Duration">
+        </div>
+  
+        <div class="form-group">
+          <label for="caloriesBurned">Calories Burned</label>
+          <input type="number" id="caloriesBurned" formControlName="Calories_Burned">
+        </div>
+  
+        <div class="form-group">
+          <label for="waterIntake">Daily Water Intake (L)</label>
+          <input type="number" id="waterIntake" formControlName="Water_Intake" step="0.1">
+        </div>
+  
+        <div class="form-group">
+          <label for="workoutFrequency">Workout Frequency (days/week)</label>
+          <input type="number" id="workoutFrequency" formControlName="Workout_Frequency">
+        </div>
+  
+        <div class="form-group">
+          <label for="experienceLevel">Experience Level (1-10)</label>
+          <input type="number" id="experienceLevel" formControlName="Experience_Level" min="1" max="10">
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="recommendationForm.invalid || isLoading">
+        {{ isLoading ? 'Processing...' : 'Get Recommendation' }}
+      </button>
+    </form>
+  
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+  
+    <div *ngIf="recommendation !== null" class="result-container">
+      <h3>Recommended Workout:</h3>
+      <div class="workout-result">
+        {{ getWorkoutTypeName(recommendation) }}
+      </div>
+      <div class="workout-description">
+        <ng-container [ngSwitch]="recommendation">
+          <div *ngSwitchCase="0"> <!-- Cardio -->
+            <p>Cardio workouts are great for improving cardiovascular health and endurance.</p>
+            <p>Suggested exercises: Running, Cycling, Swimming, Rowing</p>
+          </div>
+          <div *ngSwitchCase="1"> <!-- Strength Training -->
+            <p>Strength training helps build muscle mass and increase metabolism.</p>
+            <p>Suggested exercises: Weight lifting, Bodyweight exercises, Resistance bands</p>
+          </div>
+          <div *ngSwitchCase="2"> <!-- HIIT -->
+            <p>High Intensity Interval Training burns calories efficiently and improves fitness.</p>
+            <p>Suggested exercises: Burpees, Jump squats, Mountain climbers</p>
+          </div>
+          <div *ngSwitchCase="3"> <!-- Yoga -->
+            <p>Yoga improves flexibility, balance, and mental well-being.</p>
+            <p>Suggested poses: Downward dog, Warrior poses, Tree pose</p>
+          </div>
+          <div *ngSwitchCase="4"> <!-- Pilates -->
+            <p>Pilates strengthens core muscles and improves posture.</p>
+            <p>Suggested exercises: The hundred, Roll-up, Single leg stretch</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>

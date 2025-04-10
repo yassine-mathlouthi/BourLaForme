@@ -1,0 +1,193 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: #f0f2f5;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .workout-container {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f7f8fa;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #13294C;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid #13294C;
+    padding-bottom: 5px;
+    color: #13294C;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    font-size: 1.4rem;
+    color: #13294C;
+    margin-bottom: 15px;
+  }
+  
+  .section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(19, 41, 76, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-label, label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #13294C;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  
+  .form-control, input[type="number"], input[type="radio"] {
+    width: 100%;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+    color: #333;
+    background: #fff;
+    border: 2px solid #ccd1d9;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-control:focus, input:focus {
+    border-color: #13294C;
+    outline: none;
+    box-shadow: 0 0 5px rgba(19, 41, 76, 0.3);
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  
+  .radio-group input {
+    width: auto;
+    margin-right: 5px;
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    background: #13294C;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(19, 41, 76, 0.2);
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background: #0f2039;
+    box-shadow: 0 6px 16px rgba(19, 41, 76, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  button:active {
+    background: #0c1a2e;
+    box-shadow: 0 2px 8px rgba(19, 41, 76, 0.2);
+    transform: translateY(0);
+  }
+  
+  button:disabled {
+    background: #718096;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .error-message {
+    color: #e53e3e;
+    padding: 10px;
+    background-color: #fed7d7;
+    border-left: 4px solid #e53e3e;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+  
+  .result-container {
+    margin-top: 30px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(19, 41, 76, 0.1);
+  }
+  
+  .workout-result {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #13294C;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #e6eef7;
+    border-radius: 6px;
+    text-align: center;
+  }
+  
+  .workout-description {
+    padding: 15px;
+    background: #f9fafc;
+    border-radius: 6px;
+    border-left: 3px solid #13294C;
+  }
+  
+  .workout-description p {
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
