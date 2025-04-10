@@ -51,10 +51,18 @@ export class EditCourseComponent {
     });
   }
 
-  // Convert ISO date string to datetime-local format (yyyy-MM-ddTHH:mm)
+  // Convert format (yyyy-MM-ddTHH:mm)
   private convertToLocalDate(isoDate: string): string {
     const date = new Date(isoDate);
-    return date.toISOString().slice(0, 16); // Format as yyyy-MM-ddTHH:mm
+    const pad = (n: number) => n.toString().padStart(2, '0');
+
+    const yyyy = date.getFullYear();
+    const MM = pad(date.getMonth() + 1);
+    const dd = pad(date.getDate());
+    const hh = pad(date.getHours());
+    const mm = pad(date.getMinutes());
+
+    return `${yyyy}-${MM}-${dd}T${hh}:${mm}`;
   }
 
   // Convert datetime-local back to ISO string when saving
