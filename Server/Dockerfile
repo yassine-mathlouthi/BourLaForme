@@ -16,7 +16,5 @@ WORKDIR /app
 COPY --from=build-backend /app /app
 # Expose the port your backend is listening on (e.g., 4000)
 EXPOSE 4000
-# Rebuild bcrypt module inside the container
 RUN npm rebuild bcrypt --build-from-source
-# Start the Node.js server
 CMD ["npm", "start"]
