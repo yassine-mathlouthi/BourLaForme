@@ -6,7 +6,7 @@ const { getValidatedUsers, getNonValidatedUsers, getNonValidatedCoachs, getValid
 router.get('/validated', authMiddleware(["admin"]), getValidatedUsers);
 router.get('/nonvalidated', authMiddleware(["admin"]), getNonValidatedUsers);
 router.get('/nonvalidatedcoachs', authMiddleware(["admin"]), getNonValidatedCoachs);
-router.get('/validatedcoachs', authMiddleware(["admin"]), getValidatedCoachs);
+router.get('/validatedcoachs', getValidatedCoachs);
 router.delete('/deleteUser/:id', authMiddleware(["admin"]), deleteUser);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 <section class="py-5 bg-light">
     <div class="container">
-      <h2 class="display-4 fw-bold text-center mb-3 section-title">Nos Cours</h2>
-      <p class="lead text-center mb-5 feature-text">Des programmes variés et adaptés à tous les niveaux pour atteindre vos objectifs</p>
+      <h2 class="display-4 fw-bold text-center mb-3 section-title">our courses</h2>
+      <p class="lead text-center mb-5 feature-text">Various programs tailored to all levels to help you achieve your goals</p>
       <div class="row">
         <div class="col-md-4 mb-4" *ngFor="let course of data">
           <div class="card card-hover h-100 shadow-sm">
@@ -15,7 +15,7 @@
                 {{ course.level }}
               </span>
               <span class="badge bg-light text-dark position-absolute top-0 end-0 mt-2 me-2">
-                {{ course.price }}€ / séance
+                {{ course.price }} DT / session
               </span>
               <h5 class="card-title feature-title mt-5 mb-3">{{ course.name }}</h5>
               <p class="card-text text-muted">{{ course.description }}</p>
