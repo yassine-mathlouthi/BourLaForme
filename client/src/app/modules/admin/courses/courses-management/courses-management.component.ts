@@ -37,6 +37,8 @@ export class CoursesManagementComponent implements OnInit {
       this.ngOnInit();
       
     });
+    
+    
   }
 
   deleteCourse(courseid: any): void {
