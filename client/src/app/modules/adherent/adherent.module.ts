@@ -9,16 +9,15 @@ import { AdherentRoutingModule } from './adherent-routing.module';
 
 
 @NgModule({
-  declarations: [
-    WorkoutRecommendationComponent
-  ],
+  
   imports: [
     CommonModule,
     AdherentRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule, 
+    WorkoutRecommendationComponent
   ],
-  exports: [WorkoutRecommendationComponent]
+  exports: []
 })
 export class AdherentModule { }

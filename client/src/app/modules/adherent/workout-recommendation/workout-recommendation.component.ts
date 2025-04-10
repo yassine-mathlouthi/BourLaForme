@@ -1,78 +1,98 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { WorkoutRecommendationService } from './../../../core/services/workout-recommendation.service';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { WorkoutRecommendationService } from '../../../core/services/workout-recommendation.service';
 
 @Component({
   selector: 'app-workout-recommendation',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule
+  ],
   templateUrl: './workout-recommendation.component.html',
-  styleUrls: ['./workout-recommendation.component.css']
+  styleUrl: './workout-recommendation.component.css'
 })
-export class WorkoutRecommendationComponent implements OnInit {
+export class WorkoutRecommendationComponent {
   recommendationForm: FormGroup;
-  recommendation: number | null = null;
   isLoading = false;
-  error: string | null = null;
+  recommendationResult: string | null = null;
 
-  workoutTypes = [
-    { id: 0, name: 'Cardio' },
-    { id: 1, name: 'Strength Training' },
-    { id: 2, name: 'HIIT' },
-    { id: 3, name: 'Yoga' },
-    { id: 4, name: 'Pilates' }
-  ];
+  // Mapping de type d’entraînement en texte lisible
+  workoutTypeMap: { [key: number]: string } = {
+    0: 'Cardio',
+    1: 'Force',
+    2: 'HIIT',
+    3: 'Yoga',
+    4: 'Pilates',
+    5: 'CrossFit'
+  };
 
   constructor(
     private fb: FormBuilder,
-    private workoutRecommendationService: WorkoutRecommendationService
+    private workoutService: WorkoutRecommendationService,
+    private _snackBar: MatSnackBar
   ) {
     this.recommendationForm = this.fb.group({
-      Age: ['', [Validators.required, Validators.min(15), Validators.max(100)]],
+      Age: [null, Validators.required],
       Gender: ['', Validators.required],
-      Weight: ['', [Validators.required, Validators.min(30), Validators.max(200)]],
-      Height: ['', [Validators.required, Validators.min(100), Validators.max(250)]],
-      Max_BPM: ['', [Validators.required, Validators.min(60), Validators.max(220)]],
-      Avg_BPM: ['', [Validators.required, Validators.min(60), Validators.max(220)]],
-      Resting_BPM: ['', [Validators.required, Validators.min(40), Validators.max(100)]],
-      Session_Duration: ['', [Validators.required, Validators.min(10), Validators.max(180)]],
-      Calories_Burned: ['', [Validators.required, Validators.min(50), Validators.max(1500)]],
-      Fat_Percentage: ['', [Validators.required, Validators.min(5), Validators.max(50)]],
-      Water_Intake: ['', [Validators.required, Validators.min(0.5), Validators.max(10)]],
-      Workout_Frequency: ['', [Validators.required, Validators.min(1), Validators.max(7)]],
-      Experience_Level: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
-      BMI: ['', [Validators.required, Validators.min(15), Validators.max(50)]]
+      Weight: [null, Validators.required],
+      Height: [null, Validators.required],
+      Max_BPM: [null, Validators.required],
+      Avg_BPM: [null, Validators.required],
+      Resting_BPM: [null, Validators.required],
+      Session_Duration: [null, Validators.required],
+      Calories_Burned: [null, Validators.required],
+      Fat_Percentage: [null, Validators.required],
+      Water_Intake: [null, Validators.required],
+      Workout_Frequency: [null, Validators.required],
+      Experience_Level: [null, Validators.required],
+      BMI: [null, Validators.required]
     });
   }
 
-  ngOnInit(): void {}
-
-
-  
-  onSubmit(): void {
-    if (this.recommendationForm.valid) {
-      this.isLoading = true;
-      this.error = null;
-      this.recommendation = null;
-
-      const formData = this.recommendationForm.value;
-      formData.Gender = formData.Gender.toLowerCase(); // Ensure consistent gender format
-
-      this.workoutRecommendationService.getRecommendation(formData).subscribe({
-        next: (response) => {
-          this.recommendation = response.recommended_workout_type;
-          this.isLoading = false;
-        },
-        error: (err) => {
-          this.error = 'Failed to get workout recommendation. Please try again.';
-          this.isLoading = false;
-          console.error('Error getting recommendation:', err);
-        }
+  onSubmit() {
+    if (this.recommendationForm.invalid) {
+      this._snackBar.open('Veuillez remplir tous les champs requis.', 'Fermer', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
       });
+      return;
     }
-  }
 
-  getWorkoutTypeName(id: number | null): string {
-    if (id === null) return 'No recommendation yet';
-    const type = this.workoutTypes.find(t => t.id === id);
-    return type ? type.name : 'Unknown';
+    this.isLoading = true;
+    const requestData = this.recommendationForm.value;
+
+    this.workoutService.getRecommendation(requestData).subscribe({
+      next: (res) => {
+        const typeCode = res.recommended_workout_type;
+        this.recommendationResult = this.workoutTypeMap[typeCode] || 'Type inconnu';
+        this._snackBar.open('Recommandation générée avec succès !', 'Fermer', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Erreur lors de la recommandation :', err);
+        this._snackBar.open('Erreur lors de la génération.', 'Fermer', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.isLoading = false;
+      }
+    });
   }
 }
