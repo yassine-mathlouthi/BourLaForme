@@ -81,7 +81,7 @@ export class AdminDashboardComponent implements OnInit {
           borderWidth: 1
         }
       ];
-      this.revenueChartLabels = ['Course Revenue', 'Subscription Revenue', 'Total Revenue'];
+      this.revenueChartLabels = ['Total Revenue','Course Revenue', 'Subscription Revenue', ];
     });
 
     this.loadMonthlyData();
