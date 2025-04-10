@@ -33,7 +33,22 @@ export class RegisterComponent implements OnInit {
     private route: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Dynamically update validators based on role selection
+    this.firstFormGroup.controls['role'].valueChanges.subscribe((role) => {
+      if (role === 'coach') {
+        this.secondFormGroup.controls['speciality'].setValidators([Validators.required]);
+        this.secondFormGroup.controls['bio'].setValidators([Validators.required]);
+      } else {
+        this.secondFormGroup.controls['speciality'].clearValidators();
+        this.secondFormGroup.controls['bio'].clearValidators();
+      }
+
+      // Update validity of the fields
+      this.secondFormGroup.controls['speciality'].updateValueAndValidity();
+      this.secondFormGroup.controls['bio'].updateValueAndValidity();
+    });
+  }
 
   private _formBuilder = inject(FormBuilder);
 
@@ -64,30 +79,31 @@ export class RegisterComponent implements OnInit {
   // Handle image selection
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    
+    if (input.files) {
+      this.selectedImage = input.files[0];
+    }
   }
 
   // Method to handle user registration
   registerUser() {
     const user = {
-      prenom: this.firstFormGroup.value.firstName,
-      nom: this.firstFormGroup.value.lastName,
-      phone: this.firstFormGroup.value.phoneNumber,
-      role: this.firstFormGroup.value.role,
-      bio: this.secondFormGroup.value.bio,
-      speciality: this.secondFormGroup.value.speciality,
-      image: this.selectedImage, // Pass the file directly
-      email: this.thirdFormGroup.value.email,
-      password: this.thirdFormGroup.value.password,
+      prenom: this.firstFormGroup.value.firstName || '',
+      nom: this.firstFormGroup.value.lastName || '',
+      phone: this.firstFormGroup.value.phoneNumber || '',
+      role: this.firstFormGroup.value.role || 'adherent',
+      bio: this.secondFormGroup.value.bio || '',
+      specialty: this.secondFormGroup.value.speciality || '', // Note: changed to 'specialty' to match backend
+      email: this.thirdFormGroup.value.email || '',
+      password: this.thirdFormGroup.value.password || '',
     };
-
-    // Regular expression for password strength
+  
+    console.log('Données envoyées:', user);
+  
+    // Password validation
     const passwordStrengthRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
     const password = this.thirdFormGroup.value.password ?? '';
     const rePassword = this.thirdFormGroup.value.rePassword ?? '';
-
-    // Password strength check
+  
     if (!passwordStrengthRegex.test(password)) {
       this.snackBar.open(
         'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
@@ -96,22 +112,37 @@ export class RegisterComponent implements OnInit {
       );
       return;
     }
-
-    // Password match check
+  
     if (password !== rePassword) {
       this.passwordMatch = 'Passwords do not match.';
       this.snackBar.open(this.passwordMatch, 'Close', { duration: 3000 });
       return;
     }
+  
+    // Create FormData
+    const formData = new FormData();
+    formData.append('prenom', this.firstFormGroup.value.firstName || '');
+    formData.append('nom', this.firstFormGroup.value.lastName || '');
+    formData.append('phone', this.firstFormGroup.value.phoneNumber || '');
+    formData.append('role', this.firstFormGroup.value.role || 'adherent');
+    formData.append('email', this.thirdFormGroup.value.email || '');
+    formData.append('password', this.thirdFormGroup.value.password || '');
 
-    // Additional validation: Speciality required for coaches
-    if (user.role === 'coach' && !user.speciality) {
-      this.snackBar.open('Speciality is required for coaches.', 'Close', { duration: 3000 });
-      return;
+    // Ajout des champs spécifiques au coach
+    if (this.firstFormGroup.value.role === 'coach') {
+        formData.append('specialty', this.secondFormGroup.value.speciality || '');
+        formData.append('bio', this.secondFormGroup.value.bio || '');
+        if (this.selectedImage) {
+            formData.append('image', this.selectedImage);
+        }
     }
-
-    // Call the service to register the user
-    this.authService.register(user).subscribe(
+  
+    // Debug: Log FormData contents
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+  
+    this.authService.register(formData).subscribe(
       (response: any) => {
         if (response) {
           this.snackBar.open('Account created successfully', 'Close', { duration: 3000, verticalPosition: 'top' });
@@ -126,5 +157,4 @@ export class RegisterComponent implements OnInit {
         });
       }
     );
-  }
-}
+  }}
