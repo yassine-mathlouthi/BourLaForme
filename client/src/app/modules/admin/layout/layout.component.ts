@@ -111,7 +111,7 @@ export class LayoutComponent implements OnInit {
   getNotificationText(type: string): string {
     switch (type) {
       case 'abonnement_expire':
-        return 'Your subscription has expired.';
+        return 'his/her subscription has expired.';
       case 'new_session':
         return 'A new session has been added.';
       default:

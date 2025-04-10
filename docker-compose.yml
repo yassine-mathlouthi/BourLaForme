@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    image: gym-app-backend2
+    container_name: gym-backend
+    ports:
+      - "3000:3000"  # Expose port 3000 for backend
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=3000  # Ensure your backend listens on port 3000
+    networks:
+      - gym-network
+
+  frontend:
+    image: gym-app
+    container_name: gym-frontend
+    ports:
+      - "8031:80"  # Frontend on port 8031
+    restart: always
+    networks:
+      - gym-network
+
+networks:
+  gym-network:
+    driver: bridge
