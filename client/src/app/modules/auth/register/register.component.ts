@@ -39,16 +39,22 @@ export class RegisterComponent implements OnInit {
       if (role === 'coach') {
         this.secondFormGroup.controls['speciality'].setValidators([Validators.required]);
         this.secondFormGroup.controls['bio'].setValidators([Validators.required]);
+        this.showCoachFields = true; // Show coach fields
       } else {
         this.secondFormGroup.controls['speciality'].clearValidators();
         this.secondFormGroup.controls['bio'].clearValidators();
+        this.showCoachFields = false; // Hide coach fields
       }
 
       // Update validity of the fields
       this.secondFormGroup.controls['speciality'].updateValueAndValidity();
       this.secondFormGroup.controls['bio'].updateValueAndValidity();
     });
-  }
+}
+
+// Add a property to control visibility
+showCoachFields = false;
+
 
   private _formBuilder = inject(FormBuilder);
 

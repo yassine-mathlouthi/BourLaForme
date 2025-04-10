@@ -74,7 +74,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
     this._adminService.getNotifications().subscribe((r: any) => {
       // Filter unread notifications based on the 'isReadAdherent' field
-      this.notifications = r.notifications.filter((notification: any) => !notification.isReadAdherent);
+      this.notifications = r.notifications.filter((notification: any) => !notification.isReadAdmin);
       console.log(this.notifications); // Only unread notifications will be in the array
     });
     // Update page title based on current route
@@ -108,8 +108,8 @@ export class LayoutComponent implements OnInit {
     sessionStorage.clear(); 
     this.router.navigate(['/']);
   }
-  getNotificationText(type: string): string {
-    switch (type) {
+  getNotificationText(notification: any): string {
+    switch (notification.type) {
       case 'abonnement_expire':
         return 'his/her subscription has expired.';
       case 'new_session':
