@@ -70,7 +70,7 @@
                 <mat-form-field appearance="fill" class="full-width">
                   <mat-label>Bio</mat-label>
                   <textarea matInput formControlName="bio" rows="4"></textarea>
-                  <mat-hint>Tell us about yourself (optional)</mat-hint>
+                  <mat-hint>Tell us about yourself</mat-hint>
                 </mat-form-field>
               </div>
 
@@ -86,12 +86,12 @@
               <!-- Image Upload -->
               <div class="full-width image-upload" *ngIf="firstFormGroup.value.role === 'coach'">
                 <label for="imageUpload" class="image-label">Profile Image</label>
-                <input id="imageUpload" type="file" (change)="onImageSelected($event)" accept="image/*" #fileInput hidden />
-                <button mat-raised-button color="primary" class="upload-button" (click)="fileInput.click()">
+                <input id="imageUpload" type="file" (change)="onImageSelected($event)" accept="image/*" #fileInput hidden  />
+                <button mat-raised-button color="primary" class="upload-button" (click)="fileInput.click()" >
                   <i class="fas fa-upload"></i> Choose Image
                 </button>
                 <span class="file-name" *ngIf="selectedImage">{{ selectedImage.name }}</span>
-                <mat-hint>Upload a profile picture (optional)</mat-hint>
+                <mat-hint>Upload a profile picture </mat-hint>
               </div>
 
               <div class="form-actions">
