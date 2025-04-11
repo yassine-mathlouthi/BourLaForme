@@ -1,20 +1,23 @@
 # Step 1: Use the official Node.js 20 image to build the backend
 FROM node:20 AS build-backend
-# Set the working directory inside the container
+
 WORKDIR /app
-# Copy the package.json and package-lock.json
+
 COPY package.json package-lock.json ./
-# Install the backend dependencies
 RUN npm install
-# Copy the entire backend source code
 COPY . .
-# Step 2: Create the final image to run the backend
+
+# Step 2: Final image
 FROM node:20
-# Set the working directory inside the container
+
 WORKDIR /app
-# Copy the installed node_modules and backend source code from the build stage
+
 COPY --from=build-backend /app /app
-# Expose the port your backend is listening on (e.g., 4000)
+
+# Copy .env explicitly into the final image (optional but safer)
+COPY .env .env
+
 EXPOSE 4000
 RUN npm rebuild bcrypt --build-from-source
+
 CMD ["npm", "start"]
