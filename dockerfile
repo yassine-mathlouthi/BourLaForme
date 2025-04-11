@@ -2,16 +2,16 @@
 FROM node:20 AS build-frontend
 WORKDIR /frontend
 COPY ./client/package.json ./client/package-lock.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 COPY ./client .
-RUN npm run build
+RUN npm run build --prod
 
 # Stage 2: Build the backend
 FROM node:20 AS build-backend
 WORKDIR /backend
-COPY ./server/package.json ./server/package-lock.json ./
+COPY ./Server/package.json ./Server/package-lock.json ./
 RUN npm install
-COPY ./server .
+COPY ./Server .
 
 # Stage 3: Combine both frontend and backend in a single image
 FROM node:20
