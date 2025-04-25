@@ -57,8 +57,16 @@ The platform provides features for **admins**, **coaches**, and **clients** (adh
 ---
 
 ## Screenshots
-
-> Add screenshots of the web application UI here (e.g., dashboard, booking page, admin panel, etc.)
+### Home page
+![hompe page](https://github.com/user-attachments/assets/c01f0c12-8587-42d6-b59a-e7dc78b0665b)
+### Admin dashboared
+![Admin_dashboared](https://github.com/user-attachments/assets/85a89eee-3422-4487-8d96-f74c35229bfa)
+### Client dashboared
+![client coachlist](https://github.com/user-attachments/assets/ca8baa33-abb7-4b89-8d29-4ad58adc0bb4)
+### Coach dashboared
+![coach notifacations](https://github.com/user-attachments/assets/ddd0d433-686f-40de-82da-fb598135a7e7)
+### Login
+![login](https://github.com/user-attachments/assets/4732ce57-017b-4568-bd20-b387ac7184f7)
 
 ---
 
